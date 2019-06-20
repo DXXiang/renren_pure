@@ -93,23 +93,49 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysql.version}</version>
 		</dependency>
-		<!-- oracle驱动 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <version>2.0.5.RELEASE</version>
+        </dependency>
 		<dependency>
-			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc6</artifactId>
-			<version>${oracle.version}</version>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.5</version>
+			<scope>compile</scope>
 		</dependency>
-		sqlserver驱动
 		<dependency>
-			<groupId>com.microsoft.sqlserver</groupId>
-			<artifactId>sqljdbc4</artifactId>
-			<version>${mssql.version}</version>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.5</version>
 		</dependency>
-		postgresql驱动
 		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-		</dependency> -->
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-autoconfigure</artifactId>
+			<version>2.0.5.RELEASE</version>
+		</dependency>
+		<!-- oracle驱动
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>${oracle.version}</version>
+        </dependency>
+        sqlserver驱动
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>sqljdbc4</artifactId>
+            <version>${mssql.version}</version>
+        </dependency>
+        postgresql驱动
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+        </dependency> -->
 	</dependencies>
 
 	<build>
@@ -123,41 +149,41 @@
 
 		<!-- Allow access to Spring milestones and snapshots -->
 	<!-- (you don't need this if you are using anything after 0.5.0.RELEASE) -->
-	<repositories>
-		<repository>
-			<id>sdses</id>
-   			<url>http://192.168.101.177:8081/nexus/content/repositories/sdses/</url>
-		</repository>
-		<repository>
-			<id>releases</id>
-   			<url>http://192.168.101.177:8081/nexus/content/repositories/releases/</url>
-		</repository>
-		<repository>
-			<id>thirdparty</id>
-   			<url>http://192.168.101.177:8081/nexus/content/repositories/thirdparty/</url>
-		</repository>
-		<repository>
-			<id>mcentral</id>
-   			<url>http://192.168.101.177:8081/nexus/content/repositories/mcentral/</url>
-		</repository>		
-	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<id>sdses</id>
-   			<url>http://192.168.101.177:8081/nexus/content/repositories/sdses/</url>
-		</pluginRepository>
-		<pluginRepository>
-			<id>releases</id>
-   			<url>http://192.168.101.177:8081/nexus/content/repositories/releases/</url>
-		</pluginRepository>
-		<pluginRepository>
-			<id>thirdparty</id>
-   			<url>http://192.168.101.177:8081/nexus/content/repositories/thirdparty/</url>
-		</pluginRepository>
-		<pluginRepository>
-			<id>mcentral</id>
-   			<url>http://192.168.101.177:8081/nexus/content/repositories/mcentral/</url>
-		</pluginRepository>
-	</pluginRepositories>
+<!--	<repositories>-->
+<!--		<repository>-->
+<!--			<id>sdses</id>-->
+<!--   			<url>http://192.168.101.177:8081/nexus/content/repositories/sdses/</url>-->
+<!--		</repository>-->
+<!--		<repository>-->
+<!--			<id>releases</id>-->
+<!--   			<url>http://192.168.101.177:8081/nexus/content/repositories/releases/</url>-->
+<!--		</repository>-->
+<!--		<repository>-->
+<!--			<id>thirdparty</id>-->
+<!--   			<url>http://192.168.101.177:8081/nexus/content/repositories/thirdparty/</url>-->
+<!--		</repository>-->
+<!--		<repository>-->
+<!--			<id>mcentral</id>-->
+<!--   			<url>http://192.168.101.177:8081/nexus/content/repositories/mcentral/</url>-->
+<!--		</repository>		-->
+<!--	</repositories>-->
+<!--	<pluginRepositories>-->
+<!--		<pluginRepository>-->
+<!--			<id>sdses</id>-->
+<!--   			<url>http://192.168.101.177:8081/nexus/content/repositories/sdses/</url>-->
+<!--		</pluginRepository>-->
+<!--		<pluginRepository>-->
+<!--			<id>releases</id>-->
+<!--   			<url>http://192.168.101.177:8081/nexus/content/repositories/releases/</url>-->
+<!--		</pluginRepository>-->
+<!--		<pluginRepository>-->
+<!--			<id>thirdparty</id>-->
+<!--   			<url>http://192.168.101.177:8081/nexus/content/repositories/thirdparty/</url>-->
+<!--		</pluginRepository>-->
+<!--		<pluginRepository>-->
+<!--			<id>mcentral</id>-->
+<!--   			<url>http://192.168.101.177:8081/nexus/content/repositories/mcentral/</url>-->
+<!--		</pluginRepository>-->
+<!--	</pluginRepositories>-->
 
 </project>

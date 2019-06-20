@@ -1,7 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="607d9c21-7713-4799-9562-73d7daff533e" name="Default Changelist" comment="" />
+    <list default="true" id="607d9c21-7713-4799-9562-73d7daff533e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/sdses-admin/src/main/java/io/sdses/modules/gztz/controller/GoodsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdses-admin/src/main/java/io/sdses/modules/gztz/dao/GoodsDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdses-admin/src/main/java/io/sdses/modules/gztz/entity/GoodsEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdses-admin/src/main/java/io/sdses/modules/gztz/service/GoodsService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdses-admin/src/main/java/io/sdses/modules/gztz/service/impl/GoodsServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdses-admin/src/main/resources/mapper/gztz/GoodsDao.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdses-admin/src/main/resources/statics/js/modules/gztz/goods.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sdses-admin/src/main/resources/templates/modules/gztz/goods.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/admin.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/admin.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-api/target/classes/application-dev.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-api/target/classes/application-prod.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-api/target/classes/application-test.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-api/target/classes/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-api/target/classes/banner.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-api/target/classes/io/sdses/ApiApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-api/target/classes/io/sdses/annotation/Login.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-api/target/classes/io/sdses/annotation/LoginUser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-api/target/classes/io/sdses/config/FilterConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-api/target/classes/io/sdses/config/SwaggerConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-api/target/classes/io/sdses/config/WebMvcConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-api/target/classes/io/sdses/controller/ApiLoginController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-api/target/classes/io/sdses/controller/ApiRegisterController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-api/target/classes/io/sdses/controller/ApiTestController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-api/target/classes/io/sdses/dao/TokenDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-api/target/classes/io/sdses/dao/UserDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-api/target/classes/io/sdses/entity/TokenEntity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-api/target/classes/io/sdses/entity/UserEntity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-api/target/classes/io/sdses/exception/RRExceptionHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-api/target/classes/io/sdses/form/LoginForm.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-api/target/classes/io/sdses/form/RegisterForm.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-api/target/classes/io/sdses/interceptor/AuthorizationInterceptor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-api/target/classes/io/sdses/resolver/LoginUserHandlerMethodArgumentResolver.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-api/target/classes/io/sdses/service/TokenService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-api/target/classes/io/sdses/service/UserService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-api/target/classes/io/sdses/service/impl/TokenServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-api/target/classes/io/sdses/service/impl/UserServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-api/target/classes/logback-spring.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-api/target/classes/mapper/TokenDao.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-api/target/classes/mapper/UserDao.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-common/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-common/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-common/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-common/target/sdses-common.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-generator/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sdses-generator/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-generator/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/sdses-generator/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-generator/target/classes/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-generator/target/classes/META-INF/maven/io.sdses/sdses-generator/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-generator/target/classes/META-INF/maven/io.sdses/sdses-generator/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-generator/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/sdses-generator/target/classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-generator/target/classes/io/sdses/GeneratorApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/sdses-generator/target/classes/io/sdses/GeneratorApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-generator/target/classes/io/sdses/config/DbConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/sdses-generator/target/classes/io/sdses/config/DbConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-generator/target/classes/io/sdses/controller/SysGeneratorController.class" beforeDir="false" afterPath="$PROJECT_DIR$/sdses-generator/target/classes/io/sdses/controller/SysGeneratorController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-generator/target/classes/io/sdses/dao/GeneratorDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/sdses-generator/target/classes/io/sdses/dao/GeneratorDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-generator/target/classes/io/sdses/dao/MySQLGeneratorDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/sdses-generator/target/classes/io/sdses/dao/MySQLGeneratorDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-generator/target/classes/io/sdses/dao/OracleGeneratorDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/sdses-generator/target/classes/io/sdses/dao/OracleGeneratorDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-generator/target/classes/io/sdses/dao/PostgreSQLGeneratorDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/sdses-generator/target/classes/io/sdses/dao/PostgreSQLGeneratorDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-generator/target/classes/io/sdses/dao/SQLServerGeneratorDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/sdses-generator/target/classes/io/sdses/dao/SQLServerGeneratorDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-generator/target/classes/io/sdses/entity/ColumnEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/sdses-generator/target/classes/io/sdses/entity/ColumnEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-generator/target/classes/io/sdses/entity/TableEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/sdses-generator/target/classes/io/sdses/entity/TableEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-generator/target/classes/io/sdses/service/SysGeneratorService.class" beforeDir="false" afterPath="$PROJECT_DIR$/sdses-generator/target/classes/io/sdses/service/SysGeneratorService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-generator/target/classes/io/sdses/utils/DateUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/sdses-generator/target/classes/io/sdses/utils/DateUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-generator/target/classes/io/sdses/utils/GenUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/sdses-generator/target/classes/io/sdses/utils/GenUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-generator/target/classes/io/sdses/utils/PageUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/sdses-generator/target/classes/io/sdses/utils/PageUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-generator/target/classes/io/sdses/utils/Query.class" beforeDir="false" afterPath="$PROJECT_DIR$/sdses-generator/target/classes/io/sdses/utils/Query.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-generator/target/classes/io/sdses/utils/R.class" beforeDir="false" afterPath="$PROJECT_DIR$/sdses-generator/target/classes/io/sdses/utils/R.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-generator/target/classes/io/sdses/utils/RRException.class" beforeDir="false" afterPath="$PROJECT_DIR$/sdses-generator/target/classes/io/sdses/utils/RRException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sdses-generator/target/classes/io/sdses/utils/RRExceptionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/sdses-generator/target/classes/io/sdses/utils/RRExceptionHandler.class" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/sdses-common/target/" />
     <ignored path="$PROJECT_DIR$/sdses-generator/target/" />
@@ -15,43 +85,15 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DefaultGradleProjectSettings">
-    <option name="testRunner" value="GRADLE" />
-    <option name="delegatedBuild" value="true" />
+    <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sdses-admin/src/main/resources/application-dev.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="8" column="29" lean-forward="true" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sdses-api/src/main/resources/application-dev.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sdses-admin/src/main/java/io/sdses/AdminApplication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="365">
-              <caret line="20" column="25" lean-forward="true" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/sdses-admin/src/main/resources/application.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
-              <caret line="63" column="29" lean-forward="true" selection-start-line="63" selection-start-column="29" selection-end-line="63" selection-end-column="29" />
+            <state relative-caret-position="378">
+              <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -77,6 +119,8 @@
       <list>
         <option value="$PROJECT_DIR$/sdses-api/src/main/resources/application-dev.yml" />
         <option value="$PROJECT_DIR$/sdses-admin/src/main/resources/application-dev.yml" />
+        <option value="$PROJECT_DIR$/sdses-generator/src/main/resources/application.yml" />
+        <option value="$PROJECT_DIR$/sdses-generator/pom.xml" />
       </list>
     </option>
   </component>
@@ -95,17 +139,7 @@
   </component>
   <component name="MavenProjectNavigator">
     <treeState>
-      <expand>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="sdses-admin" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-        </path>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="sdses-admin" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
-        </path>
-      </expand>
+      <expand />
       <select />
     </treeState>
   </component>
@@ -121,7 +155,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -129,16 +162,70 @@
               <item name="sdses-security" type="b2602c69:ProjectViewProjectNode" />
               <item name="renren_pure" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="sdses-security" type="b2602c69:ProjectViewProjectNode" />
+              <item name="renren_pure" type="462c0819:PsiDirectoryNode" />
+              <item name="sdses-admin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sdses-security" type="b2602c69:ProjectViewProjectNode" />
+              <item name="renren_pure" type="462c0819:PsiDirectoryNode" />
+              <item name="sdses-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sdses-security" type="b2602c69:ProjectViewProjectNode" />
+              <item name="renren_pure" type="462c0819:PsiDirectoryNode" />
+              <item name="sdses-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sdses-security" type="b2602c69:ProjectViewProjectNode" />
+              <item name="renren_pure" type="462c0819:PsiDirectoryNode" />
+              <item name="sdses-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sdses-security" type="b2602c69:ProjectViewProjectNode" />
+              <item name="renren_pure" type="462c0819:PsiDirectoryNode" />
+              <item name="sdses-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="sdses" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sdses-security" type="b2602c69:ProjectViewProjectNode" />
+              <item name="renren_pure" type="462c0819:PsiDirectoryNode" />
+              <item name="sdses-generator" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/sdses-admin/src/main/resources/templates/modules" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\dev\renren_pure\sdses-admin\src\main\resources\templates\modules" />
+      <recent name="D:\dev\renren_pure\sdses-admin\src\main\resources\statics\js\modules" />
+      <recent name="D:\dev\renren_pure\sdses-admin\src\main\resources\mapper" />
+      <recent name="D:\dev\renren_pure\sdses-admin\src\main\java\io\sdses\modules" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\dev\renren_pure\sdses-admin\src\main\resources\mapper" />
+      <recent name="D:\dev\renren_pure\sdses-admin\src\main\java\io\sdses\modules" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -152,7 +239,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.AdminApplication">
     <configuration name="AdminApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="io.sdses.AdminApplication" />
       <module name="sdses-admin" />
@@ -166,9 +253,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="GeneratorApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="io.sdses.GeneratorApplication" />
+      <module name="sdses-generator" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="io.sdses.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.AdminApplication" />
+        <item itemvalue="Application.GeneratorApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -197,32 +298,32 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info id="Image Layers" />
-      <window_info id="Designer" />
-      <window_info id="UI Designer" />
-      <window_info id="Capture Tool" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17857143" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20895523" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" weight="0.32936078" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" weight="0.32936078" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.18655097" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.643167" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32936078" />
-      <window_info anchor="right" id="Palette" />
-      <window_info anchor="right" id="Theme Preview" />
-      <window_info anchor="right" id="Maven" weight="0.32995737" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="right" id="Palette&#9;" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49946696" weight="0.3286334" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49946696" weight="0.3286334" />
+      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50053304" side_tool="true" weight="0.3286334" />
+      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49946696" weight="0.329718" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.23861171" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Maven" order="4" weight="0.32995737" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
     </layout>
   </component>
   <component name="editorHistoryManager">
@@ -243,38 +344,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sdses-generator/src/main/resources/application.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="15" column="14" lean-forward="true" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/logs/admin.log">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-39586">
           <caret line="53" column="53" selection-start-line="53" selection-start-column="53" selection-end-line="53" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sdses-admin/src/main/resources/application-dev.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="8" column="29" lean-forward="true" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sdses-api/src/main/resources/application-dev.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sdses-admin/src/main/java/io/sdses/AdminApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="20" column="25" lean-forward="true" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -285,10 +358,87 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/sdses-api/src/main/resources/application-dev.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/sdses-admin/src/main/resources/application.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="63" column="29" lean-forward="true" selection-start-line="63" selection-start-column="29" selection-end-line="63" selection-end-column="29" />
+        <state relative-caret-position="590">
+          <caret line="63" column="29" selection-start-line="63" selection-start-column="29" selection-end-line="63" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sdses-generator/src/main/resources/generator.properties">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sdses-generator/src/main/java/io/sdses/service/SysGeneratorService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sdses-admin/src/main/resources/application-dev.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="7" column="45" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27">
+          <caret line="1" column="82" selection-start-line="1" selection-start-column="82" selection-end-line="1" selection-end-column="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sdses-generator/src/main/java/io/sdses/GeneratorApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sdses-generator/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="140" column="11" selection-start-line="140" selection-start-column="11" selection-end-line="140" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sdses-generator/src/main/resources/application.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="14" column="36" lean-forward="true" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sdses-admin/src/main/java/io/sdses/modules/gztz/dao/GoodsDao.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sdses-admin/src/main/resources/mapper/gztz/GoodsDao.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sdses-admin/src/main/resources/statics/js/modules/gztz/goods.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sdses-admin/src/main/resources/templates/modules/gztz/goods.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sdses-admin/src/main/java/io/sdses/AdminApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
         </state>
       </provider>
     </entry>

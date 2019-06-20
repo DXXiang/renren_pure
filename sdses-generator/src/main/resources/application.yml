@@ -12,9 +12,9 @@ spring:
     #url: jdbc:mysql://192.168.102.127:3306/sdses_security?useUnicode=true&characterEncoding=UTF-8&useSSL=false
     #username: root
     #password: facesaas
-    url: jdbc:mysql://127.0.0.1:3306/sdses_security?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
-    username: root
-    password: lcwkd123
+    url: jdbc:mysql://120.79.254.175:3306/sdses_security?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+    username: dxx
+    password: dxx19971221
     #oracle配置
 #    driverClassName: oracle.jdbc.OracleDriver
 #    url: jdbc:oracle:thin:@192.168.10.10:1521:helowin
