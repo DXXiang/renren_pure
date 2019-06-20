@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.sdses.modules.qxda.dao.PersonDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.sdses.modules.qxda.entity.PersonEntity" id="personMap">
+        <result property="personId" column="person_id"/>
+        <result property="name" column="name"/>
+        <result property="sex" column="sex"/>
+        <result property="nation" column="nation"/>
+        <result property="numId" column="num_id"/>
+        <result property="numPhone" column="num_phone"/>
+        <result property="numNetwork" column="num_network"/>
+        <result property="placeHome" column="place_home"/>
+        <result property="placeActive" column="place_active"/>
+        <result property="placeLive" column="place_live"/>
+        <result property="placeNative" column="place_native"/>
+        <result property="nickname" column="nickname"/>
+        <result property="driverNum" column="driver_num"/>
+        <result property="passportNum" column="passport_num"/>
+        <result property="isMarried" column="is_married"/>
+        <result property="workY" column="work_y"/>
+        <result property="workJ" column="work_j"/>
+        <result property="workW" column="work_w"/>
+        <result property="personType" column="person_type"/>
+        <result property="isSin" column="is_sin"/>
+        <result property="country" column="country"/>
+        <result property="religion" column="religion"/>
+        <result property="character" column="character"/>
+        <result property="stabilizeFlag" column="stabilize_flag"/>
+        <result property="fearType" column="fear_type"/>
+        <result property="userType" column="user_type"/>
+        <result property="pathHead" column="path_head"/>
+        <result property="pathVoice" column="path_voice"/>
+        <result property="pathAtlas" column="path_atlas"/>
+        <result property="rlActive" column="rl_active"/>
+        <result property="rlOpinion" column="rl_opinion"/>
+        <result property="createType" column="create_type"/>
+        <result property="userId" column="user_id"/>
+        <result property="deptId" column="dept_id"/>
+        <result property="createTime" column="create_time"/>
+        <result property="delFlag" column="del_flag"/>
+    </resultMap>
+
+
+	<!-- 查询全息列表 -->
+	<select id="queryPageByRole" resultType="io.sdses.modules.qxda.entity.PersonEntity">
+	SELECT
+		person_id,
+		name,
+		sex,
+		num_id,
+		nickname,
+		place_native,
+		place_home,
+		nation,
+		create_time
+	FROM
+		tb_person AS p
+	WHERE
+		del_flag = 0
+	<if test="name != null and name !=''">
+		AND p.name like CONCAT('%',#{name},'%')
+	</if>
+	<if test="sex != null and sex !=''">
+		AND p.sex like CONCAT('%',#{sex},'%')
+	</if>
+	<if test="placeNative != null and placeNative !=''">
+		AND p.place_native like CONCAT('%',#{placeNative},'%')
+	</if>
+	<if test="numId != null and numId !=''">
+		AND p.num_id like CONCAT('%',#{numId},'%')
+	</if>
+	<if test="nickname != null and nickname !=''">
+		AND p.nickname like CONCAT('%',#{nickname},'%')
+	</if>
+	<if test="selectedIds != null and selectedIds !=''">
+		AND p.person_id not in ${selectedIds}
+	</if>
+	<if test="orderByType == 0">
+		ORDER BY person_id DESC
+	</if>
+	</select>
+	
+	<!-- 根据 人员ID获取 通讯工具列表 -->
+	<select id="queryPersonTelByPersonId" resultType="io.sdses.modules.qxda.entity.PersonTelEntity">
+		SELECT
+			*
+		FROM
+			tb_person_tel
+		WHERE
+			person_id = #{personId}
+		ORDER BY create_time;
+	</select>
+	
+	<!-- 根据 人员ID获取 社交工具列表 -->
+	<select id="queryPersonChatByPersonId" resultType="io.sdses.modules.qxda.entity.PersonChatEntity">
+		SELECT
+			*
+		FROM
+			tb_person_chat
+		WHERE
+			person_id = #{personId}
+		ORDER BY create_time;
+	</select>
+</mapper>

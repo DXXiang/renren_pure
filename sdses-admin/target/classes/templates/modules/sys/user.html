@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>管理员列表</title>
+<#include "/header.html">
+</head>
+<body>
+<div id="rrapp" v-cloak class="appmain">
+	<div v-show="showList">
+		<div class="grid-btn">
+			<div class="searchbar">
+			    <div class="input-group">
+			         <input type="text" class="" v-model.trim="q.username" @keyup.enter="query" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')" placeholder="用户名">
+			        <div class="input-group-btn">
+			           <a class="btn btn-primary search-btn"  @click="query"><i class="glyphicon glyphicon-search"></i>&nbsp;搜索</a>
+	                </div>
+				</div>
+		    </div>
+			<#if shiro.hasPermission("sys:user:save")>
+			<a class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
+			</#if>
+			<#if shiro.hasPermission("sys:user:update")>
+			<a class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+			</#if>
+			<#if shiro.hasPermission("sys:user:delete")>
+			<a class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+			</#if>
+		</div>
+	    <table id="jqGrid"></table>
+	    <div id="jqGridPager"></div>
+    </div>
+
+	<div v-show="!showList" class="panel panel-default">
+		<div class="panel-heading">{{title}}</div>
+		<div class="panel-body panel-width-600">
+		   <form class="form-horizontal col-sm-9" id="userform">
+			  <div class="form-group">
+					<div class="col-sm-2 control-label">用户名</div>
+					<div class="col-sm-10 ">
+						<input type="text" maxlength="50" class="form-control" v-model.trim="user.username" onkeypress="return keyNumAll(event);" onpaste="return false" placeholder="登录账号"/>
+						<!-- <span class="text-muted">*</span> -->
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">姓名</div>
+					<div class="col-sm-10">
+						<input type="text" maxlength="100" class="form-control" v-model.trim="user.realname" placeholder="真实姓名"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">所属机构</div>
+					<div class="col-sm-10">
+						<input type="text" id="deptName" class="form-control" style="cursor:pointer;" v-model.trim="user.deptName" @click="deptTree" readonly="readonly" placeholder="所属机构"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label" v-show="addUser">密码</div>
+					<div class="col-sm-2 control-label" v-show="!addUser">新密码</div>
+					<div class="col-sm-10">
+						<input type="password" class="form-control" v-model.trim="user.password" maxlength="20" onkeypress="return keyNumAll(event);" onpaste="return false" placeholder="密码"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">邮箱</div>
+					<div class="col-sm-10">
+						<input type="text" maxlength="100" class="form-control" v-model.trim="user.email" placeholder="邮箱"/>
+					</div>
+				</div>
+				<div class="form-group">
+				<div class="col-sm-2 control-label">电话</div>
+				<div class="col-sm-10">
+					<input type="text" maxlength="100" class="form-control" v-model.trim="user.mobile" placeholder="电话/手机号"/>
+				</div>
+			   </div>
+				<!-- <div class="form-group">
+					<div class="col-sm-2 control-label">角色</div>
+					<div class="col-sm-10">
+						<label v-for="role in roleList" class="checkbox-inline">
+							<input type="checkbox" :value="role.roleId" v-model="user.roleIdList">{{role.roleName}}
+						</label>
+					</div>
+				</div> -->
+			<div class="form-group">
+					<div class="col-sm-2 control-label">角色</div>
+					<div class="col-sm-10">
+						<!-- <select id="rolese" title="请选择角色" class="form-control selectpicker"  v-model="user.roleIdList"  multiple data-live-search="true">
+				    		 <option v-for="roleDict in roleList" v-bind:value="roleDict.roleId ">
+				   				{{ roleDict.roleName }}
+				  			</option>  
+
+						</select>  -->
+						
+						 <input type="text" id="rolename" class="form-control" v-model.trim="rolename" readonly="readonly" placeholder="选择角色" @click="showRoleTree()"/>
+						<!-- 选择角色 (多选)-->
+						<div id="roleLayer" style="display: none;">
+							<ul id="roleTree" class="ztree"></ul>
+						</div>
+					</div>
+				</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">性别</div>
+				<label class="radio-inline">
+					<input type="radio" name="sex" value="0" v-model.trim="user.sex"/> 女
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="sex" value="1" v-model.trim="user.sex"/> 男
+				</label>
+			</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">状态</div>
+					<label class="radio-inline">
+						<input type="radio" name="status" value="0" v-model.trim="user.status"/> 禁用
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="status" value="1" v-model.trim="user.status"/> 正常
+					</label>
+				</div> 
+			</form>
+			<div class="col-sm-3">
+				<img v-if='user.pathHead == null || user.pathHead == ""' id="photoImg" src="${request.contextPath}/statics/img/police.jpg" class="center-block img-responsive img-thumbnail" style="max-height:400px;" alt="Responsive image">
+   				<img v-else id="photoImg" @click='showImageModel' v-bind:src='baseURL+user.pathHead' class="center-block img-responsive img-thumbnail" style="max-height:400px;" alt="Responsive image">
+				<div class="center-block" style="margin-top:5px;position: relative; width:60%;text-align:center;">
+					<div id="photoUploadBtn">
+						<label for="photoFile" class="btn btn-primary photoFile">
+							<span v-if='user.pathHead != null && user.pathHead != ""'>修改头像</span>
+							<span v-else>上传头像</span>
+						</label> 
+						<input id="photoFile" ref="photoFile" type="file" style="display: none" @change="uploadPersonPhoto">
+					</div>
+					<div class="progress center-block" style="display:none;width:auto;" id="photoProgressBar">
+			   			<div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
+							<span class="sr-only"></span>
+			    		</div>
+					</div>
+				</div>
+			</div>
+			<div class="panel-footer">
+			   <div class="center-block btn-two">
+			      <a class="btn btn-primary" @click="saveOrUpdate" :disabled="bool"><i class="fa fa-check"></i>&nbsp;确定</a>
+			      <a class="btn btn-primary" @click="back"><i class="fa fa-reply"></i>&nbsp;返回</a>
+			   </div>
+			</div>
+		</div>
+	</div>	
+	<!-- 头像放大预览模态框 B -->
+	<div id="imageModal" class="modal" @click='$("#imageModal").modal("hide")' style="justify-content: center; align-items: center;">
+		<!-- <div class="modal-header">
+			<button data-dismiss="modal" class="close" type="button"></button>
+		</div> -->
+		<div class="modal-body" style="padding-top:0 !important;">
+			<div>
+				<img v-bind:src='baseURL+user.pathHead' class="center-block img-responsive img-thumbnail" style="max-height:96vh;" alt="Responsive image">
+			</div>
+		</div>
+	</div>
+	<!-- 头像放大预览模态框 E -->
+</div>
+<!-- 选择机构 -->
+<div id="deptLayer" style="display: none;">
+	<ul id="deptTree" class="ztree"></ul>
+</div>
+
+
+<script src="${request.contextPath}/statics/js/modules/sys/user.js?_${.now?long}"></script>
+</body>
+
+</html>

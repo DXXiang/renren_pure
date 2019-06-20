@@ -1,0 +1,23 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<groupId>io.sdses</groupId>
+		<artifactId>sdses-security</artifactId>
+		<version>3.2.0</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>sdses-common</artifactId>
+	<packaging>jar</packaging>
+	<description>sdses-common</description>
+
+	<build>
+		<finalName>${project.artifactId}</finalName>
+	</build>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>5.0.9.RELEASE</version>
+        </dependency>
+    </dependencies>
+
+</project>

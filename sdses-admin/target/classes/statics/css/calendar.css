@@ -1,0 +1,225 @@
+/*calendar*/
+.calendar *{
+	box-sizing:border-box;
+	font-size:16px;
+}
+.calendar-sm{
+	cursor:default;
+}
+.calendar{
+	cursor:default;
+	width:90%;
+	height:78%;
+	margin:4% auto 0;
+	background: #fff021；
+}
+.c-event-top{
+	width:25%;
+	height:100%;
+	float: left;
+	border-radius: 3px;
+	position: relative;
+	color:#ffffff;
+	background: linear-gradient(to bottom, #1b67a7 0%,#104d81 100%);
+}
+
+.c-grid{
+	width:75%;
+	height:94%;
+	float:right;
+	color: #c3dfff;
+}
+.c-grid .c-pad-top{
+	width:13.2857142857%;
+	height: 14.2857142857%;
+	line-height: 14.2857142857%;
+	margin:0.5% 0.5% 0;
+	text-align:center !important;
+	display: flex;
+	justify-content: center;
+    align-items: center;
+    border-radius: 3px; 
+}
+.c-day{
+	float:left;
+	text-align:center;
+	color: #36c4ff;
+}
+.c-day-previous-month, .c-day-next-month{
+	float:left;
+	text-align:center;
+	color:gray;
+}
+.c-week-day{
+	width:13.2857142857%;
+	height:20%;
+	margin:0 0.5% 5px;
+	float:left;
+	text-align:center;
+	padding-top:1%;
+	font-size:12px;
+}
+.c-next{
+	width:24px;
+	height:24px;
+	text-align:right;
+	cursor:pointer;
+	text-align: center;
+	background: url(../img/you.png);
+	position: absolute;
+	bottom:15px;
+	right: 25px;
+}
+.c-previous{
+	width:24px;
+	height:24px;
+	text-align:left;
+	cursor:pointer;
+	text-align: center;
+	background: url(../img/zuo.png);
+	position: absolute;
+	bottom:15px;
+	right: 60px;
+}
+.c-month{
+	width:100%;
+	position:absolute;
+	top:50%;
+	margin-top: -40%;
+	/* height:inherit; */
+	/* display: flex;
+	justify-content: center;
+    align-items: center; */
+}
+.c-month-top, .c-month-center,.c-month-bottom{
+	width:100%;
+	clear:both;
+	display:block;
+	text-align:center;
+	font-size: 22px;
+}
+.c-month-center{
+	font-size: 50px;
+}
+.c-month-bottom{
+	height: 0px;
+}
+.c-nav-btn-over{}
+.c-today{
+	color:white;
+	background: -webkit-linear-gradient(left, #ffc74e , #ff9211); /* Safari 5.1 - 6.0 */
+	background: -o-linear-gradient(right, #ffc74e , #ff9211); /* Opera 11.1 - 12.0 */
+	background: -moz-linear-gradient(right, #ffc74e , #ff9211); /* Firefox 3.6 - 15 */
+	background: linear-gradient(to right, #ffc74e , #ff9211);
+}
+.c-event{
+	background-color:#00aeff;
+	color:#fff;
+	font-weight:700;
+	cursor:pointer;
+	position:relative;
+	overflow:hidden; 
+}
+.c-event-grid{
+	margin-left:1px;
+	height:inherit;
+	width:565px;
+	float:left;
+}
+.c-grid-title{
+	float:left;
+	color:#fff;
+}
+.c-event-body{
+	height:342px;
+	overflow: hidden;
+}
+.c-event-list{
+	padding:7 0 0 0;
+	overflow:auto;
+	height:95%;
+	position:relative; 
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+.c-event-list::-webkit-scrollbar {
+	display:none;
+}
+.c-event-item>.title{
+	font-weight:700;
+}
+.c-event-item>div{
+	text-overflow:ellipsis;
+	width:inherit;
+	overflow:hidden;
+	white-space:nowrap;
+}
+.c-event-item{
+	transition:all .5s;
+	-moz-transition:all .5s;
+	-webkit-transition:all .5s;
+	-o-transition:all .5s;
+	padding-left:10px;
+	padding: 20px 0px 20px 20px;
+	margin-left: 30px;
+	border-bottom: 1px solid #f9f9f9;
+}
+.c-event-over{
+	font-weight:700;
+	color:#fff;
+	background: -webkit-linear-gradient(left, #01c2e6 , #1160ff); /* Safari 5.1 - 6.0 */
+	background: -o-linear-gradient(right, #01c2e6 , #1160ff); /* Opera 11.1 - 12.0 */
+	background: -moz-linear-gradient(right, #01c2e6 , #1160ff); /* Firefox 3.6 - 15 */
+	background: linear-gradient(to right, #01c2e6 , #1160ff)
+}
+.c-event-over1{
+	background: #f9f9f9;
+	color: #000000;
+}
+.c-event-over1 a{
+	color: #000000;
+}
+.c-event-over a{
+	color: white;
+}
+.c-event-over>.description{
+	font-weight:400;
+}
+.title{
+	float: left;
+}
+.description{
+	float: left;
+}
+
+.c-event-window{
+	/* border: 1px solid; */
+	overflow-y:auto; 
+	min-width:120px;
+	/* overflow:hidden; */
+	border-radius: 3px;
+	color: #ffffff;
+	/*width:30%;
+	 height:50%; */
+	z-index: 999999;
+	position: absolute;
+	-webkit-transition: .5s ease-in-out;
+	-moz-transition: .5s ease-in-out;/*这里为了兼容其他浏览器*/
+	-o-transition: .5s ease-in-out;
+	background: linear-gradient(to bottom, #1b67a7 0%,#104d81 100%);
+}
+
+.c-event-window ul {
+	margin:5px;
+}
+
+/* .c-event-window ul li{
+	line-height:20px;
+	height:20px;
+	overflow:hidden;
+} */
+
+.c-event-window ul a:hover{
+	color:white;
+}
+

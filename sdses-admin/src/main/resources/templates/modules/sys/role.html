@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>角色管理</title>
+<#include "/header.html">
+</head>
+<body>
+<div id="rrapp" v-cloak class="appmain">
+	<div v-show="showList">
+		<div class="grid-btn">
+	        <div class="searchbar">
+			    <div class="input-group">
+			        <input type="text" class="" v-model.trim="q.roleName" @keyup.enter="query" placeholder="角色名称">
+			        <div class="input-group-btn">
+			           <a class="btn btn-primary search-btn"  @click="query"><i class="glyphicon glyphicon-search"></i>&nbsp;搜索</a>
+	                </div>
+				</div>
+		    </div> 
+			<#if shiro.hasPermission("sys:role:save")>
+			<a class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
+			</#if>
+			<#if shiro.hasPermission("sys:role:update")>
+			<a class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+			</#if>
+			<#if shiro.hasPermission("sys:role:delete")>
+			<a class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+			</#if>
+		</div>
+	    <table id="jqGrid"></table>
+	    <div id="jqGridPager"></div>
+    </div>
+
+	<div v-show="!showList" class="panel panel-default">
+		<div class="panel-heading">{{title}}</div>
+		<div class="panel-body panel-width-600">
+			<form class="form-horizontal">
+				<div class="form-group">
+					<div class="col-sm-2 control-label">角色名称</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" v-model.trim="role.roleName" maxlength="100" placeholder="角色名称"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">所属机构</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" style="cursor:pointer;" v-model.trim="role.deptName" @click="deptTree" readonly="readonly" placeholder="所属机构"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label">备注</div>
+					<div class="col-sm-10">
+						<input type="text" maxlength="100" class="form-control" v-model.trim="role.remark" placeholder="备注"/>
+					</div>
+				</div>
+				<div class="form-group">
+					  <div class="col-sm-2 control-label">功能权限</div>
+					  <div class="col-sm-10">
+						  <div class="col-sm-4">
+							  <ul id="menuTree" class="ztree"></ul>
+						  </div>
+						  <div class="col-sm-2 control-label">数据权限</div>
+						  <div class="col-sm-4">
+							  <ul id="dataTree" class="ztree"></ul>
+						  </div>
+					 </div>
+				</div>
+			</form>
+			<div class="panel-footer">
+			   <div class="center-block btn-two">
+			      <a class="btn btn-primary" @click="saveOrUpdate"><i class="fa fa-check"></i>&nbsp;确定</a>
+			      <a class="btn btn-primary" @click="back"><i class="fa fa-reply"></i>&nbsp;返回</a>
+			   </div>
+			</div>
+		</div>	
+	</div>
+</div>
+
+<!-- 选择部门 -->
+<div id="deptLayer" style="display: none;">
+	<ul id="deptTree" class="ztree"></ul>
+</div>
+
+<script src="${request.contextPath}/statics/js/modules/sys/role.js?_${.now?long}"></script>
+</body>
+</html>

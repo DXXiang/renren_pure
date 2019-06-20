@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>情报分析数据平台</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="shortcut icon" href="${request.contextPath}/statics/img/favicon.ico" />
+  <link rel="bookmark"href="${request.contextPath}/statics/img/favicon.ico" />
+  <link rel="stylesheet" href="${request.contextPath}/statics/css/bootstrap.min.css">
+  <link rel="stylesheet" href="${request.contextPath}/statics/css/font-awesome.min.css">
+  <link rel="stylesheet" href="${request.contextPath}/statics/css/login.css">
+  <style>
+		 [v-cloak]{
+			display: none;
+		} 
+	</style>
+  
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  <script src="${request.contextPath}/statics/libs/jquery.min.js"></script>
+  <script src="${request.contextPath}/statics/libs/vue.min.js"></script>
+</head>
+<body>
+<div class="login-top">
+	<div class="login-tit">
+		<div class="logos"><img src="${request.contextPath}/statics/img/logos.png"/></div>
+		<p>情报分析数据平台</p>
+	</div>
+</div>
+<div class="loginwork" id="rrapp" v-cloak>
+  <div class="login-box-body1 loginwork">
+     <div class="login_subtit">管理员登录</div>
+     <div class="login" >
+	     <div v-if="error" class="alert-messages" v-cloak>
+	        <i class="fa fa-exclamation-triangle"></i> {{errorMsg}}
+	      </div>
+	      <div class="login_row">
+	        <span class="login-icon"><img src="${request.contextPath}/statics/img/user.png"/></span>
+	        <input type="text" class="login_input" v-model="username" placeholder="账号">
+	      </div>
+	      <div class="login_row">
+	        <span class="login-icon"><img src="${request.contextPath}/statics/img/password.png"/></span>
+	        <input type="password" class="login_input" v-model="password" maxlength="20" onkeypress="return keyNumAll(event);" onpaste="return false" placeholder="密码">
+	      </div>
+	      <!-- <div class="login_row">
+	          <span class="login-icon"><img src="${request.contextPath}/statics/img/yzm.png"/></span>
+	          <input type="text" class="login_input yzm" v-model="captcha" @keyup.enter="login" placeholder="验证码">
+	          <img alt="如果看不清楚，请单击图片刷新！" class="yzmimg" :src="src" @click="refreshCode">
+	      </div>  -->
+	      <div style="text-align:center;">
+		      <button type="button" id="loginId" class="login_submit" @click="login">登&nbsp;&nbsp;&nbsp;录</button>
+	      </div>
+     </div> 
+  </div>
+</div>
+
+<div class="login-copyright">
+	<p>Copyright © 2019 因诺微科技(天津)有限公司, All Rights Reserved</p>
+	<p>v2.0.2</p>
+</div>
+<canvas id="bg"></canvas> 
+
+<script src="${request.contextPath}/statics/libs/bootstrap.min.js"></script>
+<script src="${request.contextPath}/statics/libs/jquery.slimscroll.min.js"></script>
+<script src="${request.contextPath}/statics/libs/fastclick.min.js"></script>
+<script src="${request.contextPath}/statics/libs/app.js"></script>
+<script src="${request.contextPath}/statics/libs/login.js"></script>
+<script type="text/javascript">
+document.onkeydown=function(event){               //网页内按下回车触发
+    if(event.keyCode==13)
+    {
+        document.getElementById("loginId").click();   
+        return false;                               
+    }
+}
+var vm = new Vue({
+	el:'#rrapp',
+	data:{
+		username: '',
+		password: '',
+		captcha: '',
+		error: false,
+		errorMsg: '',
+		src: 'captcha.jpg'
+	},
+	watch:{
+		username:function() {
+			this.username=this.username.replace(/[^\w\.\/]/ig,'');
+		}
+	},
+	beforeCreate: function(){
+		if(self != top){
+			top.location.href = self.location.href;
+		}
+	},
+	methods: {
+		refreshCode: function(){
+			this.src = "captcha.jpg?t=" + $.now();
+		},
+		login: function (event) {
+			$.ajax({
+				type: "POST",
+			    url: "sys/login",
+			    data: {username: vm.username, password: vm.password, captcha: vm.captcha},
+			    dataType: "json",
+			    success: function(result){
+					if(result.code == 0){//登录成功
+						parent.location.href ='index.html';
+					}else{
+						vm.error = true;
+						vm.errorMsg = result.msg;
+						vm.refreshCode();
+					}
+				}
+			});
+		}
+	}
+});
+function keyNumAll(evt){ 
+	//兼容IE和Firefox获得keyBoardEvent对象 
+	evt = (evt) ? evt : ((window.event) ? window.event : ""); 
+	var key = evt.keyCode?evt.keyCode:evt.which;//兼容IE和Firefox获得keyBoardEvent对象的键值 
+	if(key==8 || key==9 || key==37 || key==39) {
+		return true;
+	}
+	var reg = /[\w\.\/]/;
+	//alert(reg.test(String.fromCharCode(key)));
+	return reg.test(String.fromCharCode(key));
+} 
+</script>
+</body>
+</html>

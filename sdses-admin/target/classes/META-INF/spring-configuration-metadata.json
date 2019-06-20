@@ -1,0 +1,12 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "io.sdses.datasources.DynamicDataSourceConfig",
+      "name": "spring.datasource.druid.first",
+      "sourceMethod": "firstDataSource()",
+      "type": "javax.sql.DataSource"
+    }
+  ],
+  "properties": []
+}
