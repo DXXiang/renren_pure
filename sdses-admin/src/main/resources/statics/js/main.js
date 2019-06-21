@@ -353,24 +353,24 @@ var vm = new Vue({
 			this.xsErrorMsg = val;
 		},
 		//获取案件种类数据
-		getIntelligenceData:function(){
-			var _self = this;
-			$.ajax({
-				type: "POST",
-			    url: "homepage/intelligenceByMonth",
-			    dataType: "json",
-			    success: function(result){
-			    	//console.log("案件种类数据-------"+JSON.stringify(result))
-			    	if(result.code == 0 && result.intelligenceInfo != null){
-						_self.numRunFun(_self.xsNum,result.intelligenceInfo.xs,'xsNum');
-						_self.numRunFun(_self.ajNum,result.intelligenceInfo.aj,'ajNum');
-			    	}else{
-			    		_self.xsNum = "0";
-			    		_self.ajNum = "0";
-			    	}
-				}
-			});
-		},
+//		getIntelligenceData:function(){
+//			var _self = this;
+//			$.ajax({
+//				type: "POST",
+//			    url: "homepage/intelligenceByMonth",
+//			    dataType: "json",
+//			    success: function(result){
+//			    	//console.log("案件种类数据-------"+JSON.stringify(result))
+//			    	if(result.code == 0 && result.intelligenceInfo != null){
+//						_self.numRunFun(_self.xsNum,result.intelligenceInfo.xs,'xsNum');
+//						_self.numRunFun(_self.ajNum,result.intelligenceInfo.aj,'ajNum');
+//			    	}else{
+//			    		_self.xsNum = "0";
+//			    		_self.ajNum = "0";
+//			    	}
+//				}
+//			});
+//		},
 		//数字滚动效果
 		numRunFun:function(curNum,newNum,curObjName){
 			var numText = parseInt(curNum) ;
