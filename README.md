@@ -17,7 +17,102 @@
 
 * 无论什么方式，**建议在本地my_dev分支开发，然后push到dev分支上**，最后我们再决定如何merge到master分支
 
+* 如何做（本地开发，线上merge）？
+
+  1. 先clone项目到本地(已经clone请跳过)
+
+  2. 然后创建本地my_dev分支并且和远程dev分支对应
+     
+     ```shell
+     $ git branch -a  #先查看下当前的本地和远程分支
+     $ git checkout -b my_dev origin/dev  #假如先前已经track了远程dev分支，则直接git checkout my_dev
+$ git pull #将本地分支my_dev对应的远程分支dev拉下来
+     ```
+     
+  3. 开发
+  
+  4. push到远程分支
+     
+     ```shell
+     $ git push origin HEAD:dev  #push到远程dev分支
+     ```
+  5. 线上merge
 ## 备忘
 
-qrtz前缀的数据库是用于Quartz任务调度的,但是相关Bean已经被指导老师注释了,而且也没有相关的DAO层代码以及MyBatismapper.xml，暂认为无效,可考虑去除
+1. 已有模块内容
+
+   <table style="border-collapse:
+    collapse;table-layout:fixed;width:312pt" width="416" cellspacing="0" cellpadding="0" border="0">
+    <colgroup><col style="width:54pt" width="72">
+    <col style="mso-width-source:userset;mso-width-alt:5280;width:124pt" width="165">
+    <col style="mso-width-source:userset;mso-width-alt:3328;width:78pt" width="104">
+    <col style="mso-width-source:userset;mso-width-alt:2400;width:56pt" width="75">
+    <col style="mso-width-source:userset;mso-width-alt:5056;width:119pt" width="158">
+    <col style="mso-width-source:userset;mso-width-alt:1344;width:32pt" width="42">
+    </colgroup><tbody><tr style="height:14.25pt" height="19">
+     <td style="height:14.25pt;width:54pt" width="72" height="19">模块名称</td>
+     <td style="width:124pt" width="165">包名</td>
+     <td style="width:78pt" width="104">功能模块</td>
+     <td style="width:56pt" width="75">命名前缀</td>
+    </tr>
+    <tr style="height:14.25pt" height="19">
+     <td style="height:14.25pt" height="19">数据管理</td>
+     <td>io.sdses.modules.qxda</td>
+     <td>全系档案</td>
+     <td>Person</td>
+    </tr>
+    <tr style="height:14.25pt" height="19">
+     <td rowspan="9" class="xl65" style="height:128.25pt" height="171">系统管理</td>
+     <td rowspan="9" class="xl65">io.sdses.modules.sys</td>
+     <td>系统页面视图</td>
+     <td>SysPage</td>
+    </tr>
+    <tr style="height:14.25pt" height="19">
+     <td style="height:14.25pt" height="19">系统菜单</td>
+     <td>SysMenu</td>
+    </tr>
+    <tr style="height:14.25pt" height="19">
+     <td style="height:14.25pt" height="19">登录相关</td>
+     <td>SysLogin</td>
+    </tr>
+    <tr style="height:14.25pt" height="19">
+     <td style="height:14.25pt" height="19">系统配置信息</td>
+     <td>SysConfig</td>
+    </tr>
+    <tr style="height:14.25pt" height="19">
+     <td style="height:14.25pt" height="19">用户管理</td>
+     <td>SysUser</td>
+    </tr>
+    <tr style="height:14.25pt" height="19">
+     <td style="height:14.25pt" height="19">角色管理</td>
+     <td>SysRole</td>
+    </tr>
+    <tr style="height:14.25pt" height="19">
+     <td style="height:14.25pt" height="19">系统日志</td>
+     <td>SysLog</td>
+    </tr>
+    <tr style="height:14.25pt" height="19">
+     <td style="height:14.25pt" height="19">数据字典</td>
+     <td>SysDict</td>
+    </tr>
+    <tr style="height:14.25pt" height="19">
+     <td style="height:14.25pt" height="19">部门管理</td>
+     <td>SysDept</td>
+    </tr>
+    <!--[if supportMisalignedColumns]-->
+    <tr style="display:none" height="0">
+     <td style="width:54pt" width="72"></td>
+     <td style="width:124pt" width="165"></td>
+     <td style="width:78pt" width="104"></td>
+     <td style="width:56pt" width="75"></td>
+    </tr>
+    <!--[endif]-->
+   </tbody></table>
+
+计划添加的模块是**微信公众号管理**，子功能模块有**消息推送**
+
+计划修改的模块**数据管理**为**认证数据管理**，修改功能模块**全系档案**为**认证档案**
+
+2. qrtz前缀的数据库是用于Quartz任务调度的,但是相关Bean已经被指导老师注释了,而且也没有相关的DAO层代码以及MyBatismapper.xml，暂认为无效
+3. job模块是关于定时任务的，个人认为可以不用理会，原因是这个模块相关的数据库表schedule_job和schedule_job_log记录的是项目服务开启的消息。这个模块存在相关的html，但是网页内容结构表sys_menu中并未存入其消息，平台上不显示页面。所以认为该模块对平台的使用无影响，仅用于记录服务器测试信息
 
