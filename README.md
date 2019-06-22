@@ -26,7 +26,7 @@
      ```shell
      $ git branch -a  #先查看下当前的本地和远程分支
      $ git checkout -b my_dev origin/dev  #假如先前已经track了远程dev分支，则直接git checkout my_dev
-$ git pull #将本地分支my_dev对应的远程分支dev拉下来
+     $ git pull #将本地分支my_dev对应的远程分支dev拉下来
      ```
      
   3. 开发
