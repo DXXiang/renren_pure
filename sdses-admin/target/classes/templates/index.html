@@ -51,7 +51,7 @@
       <span class="logo-lg">
 		  <div class="logo_title">
 		    <div></div>
-			  <span>情报分析数据平台</span>
+			  <span>待遇资格认证数据平台</span>
 		  </div>
 	  </span>
     </a>
@@ -108,9 +108,10 @@
 		</div>
 	</div>
     <!-- Main content -->
-    <section class="content">
+<!--    <section class="content">-->
       <iframe id="iframe-4" class="iframeClass" scrolling="yes" frameborder="0" style="width:100%;min-height:420px;overflow:visible;" src="main.html"></iframe> </section>
     <!-- /.content -->
+
   </div>
 	
   <!-- /.content-wrapper -->
@@ -158,36 +159,36 @@
 </div>
 
 	<!-- 登录人信息 -->
-	<div  class="info1">
-		<div  class="info2"   >
-			<div id="userInfo"  style="display: none; ">
-				<form style="padding-top: 15px;">
-					<div class="form-group col-sm-7">
-						<div class="form-group">
-						   	<div class="info_title">姓名</div>
-						    <span class="info_text" style="white-space: nowrap;">{{user.realname}}</span>
-						</div>
-						 <div class="form-group">
-						   	<div class="info_title">性别</div>
-						    <span class="info_text" style="white-space: nowrap;">{{user.sex}}</span>
-						</div> 
-						<div class="form-group">
-						   	<div class="info_title">电话</div>
-						    <span class="info_text" style="white-space: nowrap;">{{user.mobile}}</span>
-						</div>
-						<div class="form-group">
-						   	<div class="info_title">单位</div>
-						    <span class="info_text" style="white-space: nowrap;">{{user.deptName}}</span>
-						</div>
-					</div>
-					<div class="col-sm-5">
-						<img v-if='user.pathHead == null || user.pathHead == ""' src="${request.contextPath}/statics/img/police.jpg" class="center-block img-responsive img-thumbnail" style="max-height:122px;" alt="Responsive image">
-   						<img v-else v-bind:src='user.pathHead' class="center-block img-responsive img-thumbnail" style="max-height:122px;" alt="Responsive image">
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+<!--	<div  class="info1">-->
+<!--		<div  class="info2"   >-->
+<!--			<div id="userInfo"  style="display: none; ">-->
+<!--				<form style="padding-top: 15px;">-->
+<!--					<div class="form-group col-sm-7">-->
+<!--						<div class="form-group">-->
+<!--						   	<div class="info_title">姓名</div>-->
+<!--						    <span class="info_text" style="white-space: nowrap;">{{user.realname}}</span>-->
+<!--						</div>-->
+<!--						 <div class="form-group">-->
+<!--						   	<div class="info_title">性别</div>-->
+<!--						    <span class="info_text" style="white-space: nowrap;">{{user.sex}}</span>-->
+<!--						</div> -->
+<!--						<div class="form-group">-->
+<!--						   	<div class="info_title">电话</div>-->
+<!--						    <span class="info_text" style="white-space: nowrap;">{{user.mobile}}</span>-->
+<!--						</div>-->
+<!--						<div class="form-group">-->
+<!--						   	<div class="info_title">单位</div>-->
+<!--						    <span class="info_text" style="white-space: nowrap;">{{user.deptName}}</span>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--					<div class="col-sm-5">-->
+<!--						<img v-if='user.pathHead == null || user.pathHead == ""' src="${request.contextPath}/statics/img/police.jpg" class="center-block img-responsive img-thumbnail" style="max-height:122px;" alt="Responsive image">-->
+<!--   						<img v-else v-bind:src='user.pathHead' class="center-block img-responsive img-thumbnail" style="max-height:122px;" alt="Responsive image">-->
+<!--					</div>-->
+<!--				</form>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--	</div>-->
 	<!-- 右上角页面列表页 B -->
 	<div v-show="showHidePageListPanel" class="well" style="padding:10px 10px 0px 0px;width:200px; position:absolute;top:100px;right:5px;max-height:80vh;overflow-y:auto; z-index: 29891016; ">
 		<ul id="idPageTag">

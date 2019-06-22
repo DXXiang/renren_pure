@@ -7,9 +7,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="sdses-api" />
-        <module name="sdses-common" />
-        <module name="sdses-admin" />
         <module name="sdses-generator" />
+        <module name="sdses-admin" />
+        <module name="sdses-common" />
       </profile>
     </annotationProcessing>
   </component>
