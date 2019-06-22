@@ -3379,15 +3379,15 @@ var vm = new Vue({
 		   vm.rightSearchResult = null;
 		   vm.rightRanelParam = '';
 		   vm.rightSearchType = 0;
-		   let searchText = "";
-		   if(flag == 0){
+           let searchText = "";
+           if(flag == 0){
 			   if(vm.rightRanelParam.length <= 0){
 				   vm.rightSearchResult = 1;
 				   return;
 			   }
 			   searchText = vm.rightRanelParam;
 		   }else{
-			   let textInfo =  CKEDITOR.instances.clueIntroEditor.getData();
+               let textInfo =  CKEDITOR.instances.clueIntroEditor.getData();
 			   if(textInfo.trim() == ''){
 				   return;
 			   }
