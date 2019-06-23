@@ -3,7 +3,7 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.jdbc.Driver
     druid:
-      first:  #数据源1
+      first:  #数据源1,董翔祥的阿里云MariaDB数据库
         username: dxx
         url: jdbc:mysql://120.79.254.175:3306/sdses_security?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&rewriteBatchedStatements=true
         password: dxx19971221
@@ -44,6 +44,18 @@ spring:
       additional-paths:
       - src/main/java
       exclude: statics/**,templates/**
+
+  #微信配置
+  wechat:
+    JsSDK:
+      appId: wx679677b804f19fcc
+      appSecret: 73b6c99b7556e5a590347f6b6e8a7945
+    access_token_url_model: https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET
+    jsapi_ticket_url_model: https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=ACCESS_TOKEN&type=jsapi
+
+
+
+
 
 file:
     #静态资源访问路径

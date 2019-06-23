@@ -69,6 +69,11 @@ public class ShiroConfig {
     }
 
 
+    /**
+     * 这里添加拦截规则
+     * @param securityManager
+     * @return
+     */
     @Bean("shiroFilter")
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
@@ -78,6 +83,7 @@ public class ShiroConfig {
         shiroFilter.setUnauthorizedUrl("/homepage");
 
         Map<String, String> filterMap = new LinkedHashMap<>();
+        filterMap.put("/wechat/dev/**", "anon"); //测试用
         filterMap.put("/swagger/**", "anon");
         filterMap.put("/v2/api-docs", "anon");
         filterMap.put("/swagger-ui.html", "anon");
@@ -87,12 +93,13 @@ public class ShiroConfig {
         filterMap.put("/statics/**", "anon");
         
         filterMap.put("/homepage/*", "anon");
-        
+
         filterMap.put("/login.html", "anon");
         filterMap.put("/sys/login", "anon");
         filterMap.put("/favicon.ico", "anon");
         filterMap.put("/captcha.jpg", "anon");
         filterMap.put("/**", "authc");
+
         shiroFilter.setFilterChainDefinitionMap(filterMap);
 
         return shiroFilter;
