@@ -15,13 +15,13 @@
 
 #### 3. 建议
 
-* 无论什么方式，**建议在本地my_dev分支开发，然后push到dev分支上**，最后我们再决定如何merge到master分支
+* 无论什么方式，**建议在本地my_dev分支开发，然后push到dev分支上**，最后我们再决定如何`merge`到`master`分支
 
 * 如何做（本地开发，线上merge）？
 
-  1. 先clone项目到本地(已经clone请跳过)
+  1. 先`clone`项目到本地(已经`clone`请跳过)
 
-  2. 然后创建本地my_dev分支并且和远程dev分支对应
+  2. 然后创建本地`my_dev`分支并且和远程`dev`分支对应
      
      ```shell
      $ git branch -a  #先查看下当前的本地和远程分支
@@ -31,7 +31,7 @@
      
   3. 开发
   
-  4. push到远程分支
+  4. push到远程分支，若先前命名本地分支为dev则可直接push
      
      ```shell
      $ git push origin HEAD:dev  #push到远程dev分支
@@ -109,10 +109,10 @@
     <!--[endif]-->
    </tbody></table>
 
-计划添加的模块是**微信公众号管理**，子功能模块有**消息推送**
+计划添加的模块是**微信公众号管理**,包名暂定`io.sdses.modules.wechat`，子功能模块命名前缀为`WechatXX`,如计划开发功能有**消息推送**(命名前缀: `WechatPub`)，推送后内容要存表wechat_pub
 
-计划修改的模块**数据管理**为**认证数据管理**，修改功能模块**全系档案**为**认证档案**
+计划修改的模块**数据管理**为**认证管理**(authentication manage),包名暂定`io.sdses.modules.auth`,子功能命名前缀为`AuthXX`，修改显示功能模块**全系档案**为**认证档案**(命名前缀: `Auth`),此模块除了显示认证结果数据表`auth_result`、用户账号基本信息表`auth_user`，还需负责认证功能，可以共用一个Controller,开发认证相关Service
 
-2. qrtz前缀的数据库是用于Quartz任务调度的,但是相关Bean已经被指导老师注释了,而且也没有相关的DAO层代码以及MyBatismapper.xml，暂认为无效
-3. job模块是关于定时任务的，个人认为可以不用理会，原因是这个模块相关的数据库表schedule_job和schedule_job_log记录的是项目服务开启的消息。这个模块存在相关的html，但是网页内容结构表sys_menu中并未存入其消息，平台上不显示页面。所以认为该模块对平台的使用无影响，仅用于记录服务器测试信息
+2. `qrtz`前缀的数据库是用于Quartz任务调度的,但是相关Bean已经被指导老师注释了,而且也没有相关的DAO层代码以及`MyBatismapper.xml`，暂认为无效
+3. `job`模块是关于定时任务的，个人认为暂时可以不用理会，原因是这个模块相关的数据库表`schedule_job`和`schedule_job_log`记录的是项目服务开启的消息。这个模块存在相关的html，但是网页内容结构表`sys_menu`中并未存入其消息，平台上不显示页面。所以认为该模块对平台的使用无影响，仅用于记录服务器启动测试的信息
 
