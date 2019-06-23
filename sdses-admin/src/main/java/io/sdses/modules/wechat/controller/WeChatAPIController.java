@@ -86,11 +86,10 @@ public class WeChatAPIController {
         }
         //重新获取AccessToken
         AccessToken newAccessToken = weChatAPIService.getAccessToken();//取新的AccessToken
-        //然后根据AccessToken获取jsapiTicket
+        //然后根据AccessToken获取jsapiTicket,保存到Cookie
         jsapiTicket = weChatAPIService.getJsapiTicket(newAccessToken);
         JSONObject tokenJsonObject = JSONObject.fromObject(newAccessToken);
         JSONObject ticketJsonObject = JSONObject.fromObject(jsapiTicket);
-        //保存新AccessToken和新JsapiTicket
         Cookie cookieToken = new Cookie("AccessToken", URLEncoder.encode(tokenJsonObject.toString(),
                 "utf-8"));//使用json字符串存储
         Cookie cookieTicket = new Cookie("JsapiTicket",URLEncoder.encode(ticketJsonObject.toString(),
@@ -101,18 +100,15 @@ public class WeChatAPIController {
         return result;
     }
 
-    @RequestMapping("/getCookie")
-    public void testGetCookie(
-            @CookieValue(
-                    name = "AccessToken" ,
-                    defaultValue = ""
-            ) String cookieTokenStr,
+    @RequestMapping("/getSignature")
+    public Map<String,Object> getSignature(
             @CookieValue(
                     name = "JsapiTicket" ,
                     defaultValue = ""
-            ) String cookieTicketStr
-    ){
-        System.err.println(cookieTokenStr);
-        System.err.println(cookieTicketStr);
+            ) String cookieTicketStr, HttpServletResponse response
+    ) {
+        Map<String,Object> result = new HashMap<>();
+
+        return result;
     }
 }
