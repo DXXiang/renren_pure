@@ -7,6 +7,7 @@ import io.sdses.modules.wechat.service.WeChatAPIService;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,21 +21,23 @@ import java.util.Map;
 /**
  * 测试微信通信
  */
+@CrossOrigin
 @RestController
-@RequestMapping("/wechat/api")
+@RequestMapping("/wechat/dev")
 public class WeChatAPIController {
     @Autowired
     private WeChatAPIService weChatAPIService = null;
     @Autowired
     private JsSDK jsSDK = null;
 
-//    @RequestMapping("/getAccessToken")
-//    public Map<String,Object> getAccessToken(){
-//        AccessToken accessToken = weChatAPIService.getAccessToken();
-//        Map<String,Object> result = new HashMap<>();
-//        result.put("AccessToken", accessToken);
-//        return result;
-//    }
+    @RequestMapping("/getJson")
+    public Map<String,Object> getAccessToken(){
+        Map<String,Object> result = new HashMap<>();
+        result.put("key1", "value1");
+        result.put("key2", "value2");
+        result.put("code", "1");
+        return result;
+    }
 
     @RequestMapping("/getJsSDK")
     public JsSDK getJsSDK(){
