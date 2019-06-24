@@ -18,7 +18,7 @@
 
 	<!-- 根据key，查询value -->
 	<select id="selectByUserId" parameterType="Long" resultType="io.sdses.modules.common.entity.ComMsgEntity">
-		SELECT * FROM COM_MSG 
+		SELECT * FROM com_msg
 		WHERE 
 			RECEIVED_USER_ID = #{USERID}
 			AND IS_READ = 0
@@ -28,7 +28,7 @@
 	
 	<!-- 获取用户历史消息 -->
 	<select id="selectShowMsgByUserId" resultType="io.sdses.modules.common.entity.ComMsgEntity">
-		SELECT * FROM COM_MSG 
+		SELECT * FROM com_msg
 		WHERE 
 			RECEIVED_USER_ID = #{userId}
 			AND IS_READ = 0
@@ -41,7 +41,7 @@
 	
 	<!-- 获取用户当天提醒的消息，提醒时间大于当前时间 -->
 	<select id="selectHideMsgByUserId" resultType="io.sdses.modules.common.entity.ComMsgEntity">
-		SELECT * FROM COM_MSG 
+		SELECT * FROM com_msg
 		WHERE 
 			RECEIVED_USER_ID = #{userId}
 			AND IS_READ = 0
@@ -54,7 +54,7 @@
 	<select id="selectNoticeByUserId"  resultType="io.sdses.modules.common.entity.ComMsgEntity">
 		SELECT MSG_ID,TITLE,CONTENT, RELATION_ID,
 		CASE WHEN MSG_TIME IS NOT NULL AND MSG_TIME != '' THEN MSG_TIME ELSE CREATE_TIME END AS MSG_TIME
-		FROM COM_MSG 
+		FROM com_msg
 		WHERE 
 			RECEIVED_USER_ID = #{userId}
 			AND TYPE = '5'
