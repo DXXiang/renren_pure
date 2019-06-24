@@ -50,7 +50,7 @@ public class SysPageController {
 		return "login";
 	}
 
-	@RequestMapping("c")
+	@RequestMapping("main.html")
 	public String main(){
 		return "main";
 	}
