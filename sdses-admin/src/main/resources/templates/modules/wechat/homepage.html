@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>实名认证</title>
+    <meta name="author" content="Ye">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+    <link rel="stylesheet" href="./weui.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+<script>
+    $(function(){
+        $('#send').click(function(){
+            $.ajax({
+                type: "GET",
+                url: "http://34dad8cd.ngrok.io/sdses-admin/wechat/dev/getJson",
+                data: {username:$("#username").val(), content:$("#content").val()},
+                dataType: "json",
+                success: function(data){
+                    $('#resText').empty();   //清空resText里面的所有内容
+                    var html = '';
+                    html += '<div class="comment"><h6>' + data.code
+                        + '</h6><p class="para">' + data.key1
+                        + '</p>' +'<p>'+data.key2+'</p>'+
+                        '</div>';
+                    $('#resText').html(html);
+                }
+            });
+        });
+    });
+</script>
+
+<body>
+
+
+<p id="resText"></p>
+<a href="./orcrenzheng.html" class="weui-btn weui-btn_primary">开始认证</a>
+<a id="send" class="weui-btn weui-btn_primary">测试</a>
+
+
+
+</body>
+
+</html>

@@ -1,6 +1,5 @@
 package io.sdses.modules.wechat.controller;
 
-import com.sun.xml.internal.bind.v2.runtime.output.Encoded;
 import io.sdses.modules.wechat.entity.AccessToken;
 import io.sdses.modules.wechat.entity.JsSDK;
 import io.sdses.modules.wechat.entity.JsapiTicket;

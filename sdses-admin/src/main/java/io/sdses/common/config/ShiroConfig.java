@@ -84,6 +84,7 @@ public class ShiroConfig {
 
         Map<String, String> filterMap = new LinkedHashMap<>();
         filterMap.put("/wechat/dev/**", "anon"); //测试用
+        filterMap.put("/modules/wechat/**", "anon"); //测试用
         filterMap.put("/swagger/**", "anon");
         filterMap.put("/v2/api-docs", "anon");
         filterMap.put("/swagger-ui.html", "anon");
