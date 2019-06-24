@@ -22,6 +22,19 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>com.github.binarywang</groupId>
+			<artifactId>weixin-java-common</artifactId>
+			<version>3.4.5.B</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.binarywang</groupId>
+			<artifactId>weixin-java-mp</artifactId>
+			<version>3.4.5.B</version>
+		</dependency>
+
+
+		<dependency>
 			<groupId>io.sdses</groupId>
 			<artifactId>sdses-common</artifactId>
 			<version>3.2.0</version>
