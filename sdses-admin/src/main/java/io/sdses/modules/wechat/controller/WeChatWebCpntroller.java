@@ -1,5 +1,7 @@
 package io.sdses.modules.wechat.controller;
 
+import me.chanjar.weixin.mp.api.WxMpService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,4 +14,5 @@ public class WeChatWebCpntroller {
         System.out.println("modules/" + module + "/" + url);
         return "modules/" + module + "/" + url;
     }
+
 }

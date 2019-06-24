@@ -182,6 +182,12 @@
 			<artifactId>spring-boot-autoconfigure</artifactId>
 			<version>2.0.5.RELEASE</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.github.binarywang/weixin-java-mp -->
+		<dependency>
+			<groupId>com.github.binarywang</groupId>
+			<artifactId>weixin-java-mp</artifactId>
+			<version>3.4.5.B</version>
+		</dependency>
 
 
 	</dependencies>
