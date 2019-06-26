@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>视频认证</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="./test.css">
+    <link rel="stylesheet" href="./weui.css">
+    <style>
+        input.file
+        {
+            position: relative;
+            -moz-opacity:0 ;
+            filter:alpha(opacity: 0);
+            opacity: 0;
+            z-index: 2;
+        }
+        .wrapper{
+            color: #fff;
+            background-color: #31b0d5;
+            border-color: #269abc;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app" v-cloak>
+    <h4 class="center">视频认证</h4>
+    <div class="center">
+        <div>
+            <img src="img.png">
+        </div>
+        <div>
+            <a href="javascript:;" class="weui-btn weui-btn_block weui-btn_default">6 6 6 6 6 6</a>
+        </div>
+        <span type="primary" class="wrapper">
+            <label class="btn" for="fileUpload">开始拍摄视频</label>
+        </span>
+        <input type="file" accept="video/*" capture="camera" id="fileUpload" style="position:absolute; clip:rect(0 0 0 0);"  onchange="uploadVideo(this)">
+    </div>
+</div>
+<script>
+
+    function uploadVideo(obj) {
+        var formData = new FormData();
+        formData.append('file', $('#fileUpload')[0].files[0]); 
+        $.ajax({
+            url: 'http://localhost:8088/sdses-admin/wechat/page/upLoad',
+            type: 'POST',
+            cache: false, //上传文件不需要缓存
+            data: formData,
+            async:true,
+            processData: false, // 告诉jQuery不要去处理发送的数据
+            contentType: false, // 告诉jQuery不要去设置Content-Type请求头
+
+            success: function (data) {
+                if(data.state==1){
+
+                    console.log(data.msg);
+                }else{
+                    console.log(data.msg);
+                }
+            },
+            error: function (data) {
+                console.log(data.msg);
+            }
+        })
+    }
+
+</script>
+</body>
+</html>

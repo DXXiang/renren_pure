@@ -5,22 +5,47 @@
     <title>实名认证</title>
     <meta name="author" content="Ye">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-    <link rel="stylesheet" href="${request.contextPath}/statics/css/weui.css">
+    <link rel="stylesheet" href="./weui.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <style>
+        .file-box {
+            position: relative;
+            display: inline-block;
+        }
+        .file-box img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            position: absolute;
+            top: -30px;
+            left: 0;
+            display: inline-block;
+            border: none;
+        }
+        .file-box .txt,.file-box .file {
+            width: 70px;
+            height: 36px;
+            position: absolute;
+            top: -20px;
+            left: 100px;
+            text-align: center;
+        }
+    </style>
+
 </head>
 <script>
     $(function(){
         $('#send').click(function(){
             $.ajax({
                 type: "GET",
-                url: "http://34dad8cd.ngrok.io/sdses-admin/wechat/dev/getJson",
+                url: "http://localhost:8088/sdses-admin/wechat/page/fail.html",
                 data: {username:$("#username").val(), content:$("#content").val()},
                 dataType: "json",
                 success: function(data){
                     $('#resText').empty();   //清空resText里面的所有内容
                     var html = '';
-                    html += '<div class="comment"><h6>' + data.code
-                        + '</h6><p class="para">' + data.key1
+                    html += '<div class="comment"><p class="para">' + data.key1
                         + '</p>' +'<p>'+data.key2+'</p>'+
                         '</div>';
                     $('#resText').html(html);
@@ -30,11 +55,68 @@
     });
 </script>
 
+<script>
+    function imgPreview(fileDom) {
+        //判断是否支持FileReader
+        if(window.FileReader) {
+            var reader = new FileReader();
+        } else {
+            alert("您的设备不支持图片预览功能，如需该功能请升级您的设备！");
+        }
+        //获取文件
+        var file = fileDom.files[0];
+        var imageType = /^image\//;
+        //是否是图片
+        if(!imageType.test(file.type)) {
+            alert("请选择图片！");
+            return;
+        }
+        //读取完成
+        reader.onload = function(e) {
+            //获取图片dom
+            var img = document.getElementById("preview");
+            //图片路径设置为读取的图片
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+
+        var formData = new FormData();
+        formData.append('file', $('#input_file')[0].files[0]);  //添加图片信息的参数
+        formData.append('sizeid',123);  //添加其他参数
+        $.ajax({
+            url: 'http://localhost:8088/sdses-admin/wechat/page/upLoad',
+            type: 'POST',
+            cache: false, //上传文件不需要缓存
+            data: formData,
+            processData: false, // 告诉jQuery不要去处理发送的数据
+            contentType: false, // 告诉jQuery不要去设置Content-Type请求头
+
+            success: function (data) {
+                if(data.state==1){
+                    console.log('上传成功！');
+                }else{
+                    console.log(data.msg);
+                }
+            },
+            error: function (data) {
+                console.log("上传失败");
+            }
+        })
+    }
+
+
+</script>
+
 <body>
+<div class="file-box">
+    <img id="preview" />
+    <input type="text" id="imgfield" class="txt" placeholder="预览">
+    <input type="file" name="file" id = "input_file" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg" onchange= "imgPreview(this)" >
+</div>
 
 
 <p id="resText"></p>
-<a href="./orcrenzheng.html" class="weui-btn weui-btn_primary">开始认证</a>
+<a href="ocrenzheng.html" class="weui-btn weui-btn_primary">开始认证</a>
 <a id="send" class="weui-btn weui-btn_primary">测试</a>
 
 
