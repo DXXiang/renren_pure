@@ -42,6 +42,7 @@ public class WechatAPIController {
         result.put("key1", "value1");
         result.put("key2", "value2");
         result.put("code", "1");
+        result.put("code1", "2");
         return result;
     }
 
