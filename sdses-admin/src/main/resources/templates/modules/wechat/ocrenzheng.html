@@ -5,8 +5,8 @@
     <title>OCR认证</title>
     <meta name="author" content="Ye">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-    <link rel="stylesheet" href="./weui.css">
-    <link rel="stylesheet" href="./test.css">
+    <link rel="stylesheet" href="${request.contextPath}/statics/css/weui.css">
+    <link rel="stylesheet" href="${request.contextPath}/statics/css/test.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
 <body>
@@ -16,12 +16,12 @@
         <div>
             <button onclick="uploadpic()" class="weui-btn weui-btn_plain-default" for="zmiput">上传</button>
         </div>
-        <input id="zminput" type="file" name="f1" onchange="choosePic(this,'zhengmianzhaopian')"/>
+        <input id="zminput" accept=“image/* type="file" name="f1" onchange="choosePic(this,'zhengmianzhaopian')"/>
     </div>
     <div class="center">
         <div>背面</div>
         <div><img id="beimianzhaopian" src="./img.png" alt="正面照片"></div>
-        <div><input id="bminput" type="file" onchange="choosePic(this,'beimianzhaopian')"/></div>
+        <div><input id="bminput" accept=“image/* type="file" onchange="choosePic(this,'beimianzhaopian')"/></div>
     </div>
 <button id="up" onclick="window.location.href='./huotijiance.html'" href="fail.html" class="weui-btn weui-btn_primary">下一步</button>
 </body>
@@ -33,7 +33,7 @@
         formData.append('file', $('#zminput')[0].files[0]);  //添加图片信息的参数
         formData.append('file', $('#bminput')[0].files[0]);  //添加图片信息的参数
         $.ajax({
-            url: 'http://localhost:8088/sdses-admin/wechat/page/upLoad',
+            url: '/sdses-admin/wechat/page/upLoad',
             type: 'POST',
             cache: false, //上传文件不需要缓存
             data: formData,

@@ -23,7 +23,7 @@ public class WechatWebPageCpntroller {
 
     @RequestMapping("/upLoad")
     @ResponseBody
-    public Map<String,Object> MultiPictareaddData(MultipartFile[] file, HttpServletRequest request) throws IOException {
+    public Map<String,Object> MultiPictareadData(MultipartFile[] file, HttpServletRequest request) throws IOException {
         List<String> list = new ArrayList<String>();
         Map<String,Object> map=new HashMap<String,Object>();
         if (file != null && file.length > 0) {
@@ -48,7 +48,7 @@ public class WechatWebPageCpntroller {
         String exet = originalFilename.substring(index);
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd\\HH\\mm\\ss");
-        String dateStr = sdf.format(date); // D:\\uploads\\20180824 String
+        String dateStr = sdf.format(date);
         String filePath = "C:\\Users\\HPuser\\Desktop\\" + dateStr;
         System.out.println("filePath=" + filePath);
         File file2 = new File(filePath);
