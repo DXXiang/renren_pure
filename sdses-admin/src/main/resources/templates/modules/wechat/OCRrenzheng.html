@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>OCR认证</title>
+    <meta name="author" content="Ye">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+    <link rel="stylesheet" href="${request.contextPath}/statics/css/weui.css">
+    <link rel="stylesheet" href="${request.contextPath}/statics/css/test.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+    <div class="center">
+        <div>正面</div>
+        <div><img id="zhengmianzhaopian" src="./img.png" alt="正面照片"></div>
+        <div>
+            <button onclick="uploadpic()" class="weui-btn weui-btn_plain-default" for="zmiput">上传</button>
+        </div>
+        <input id="zminput" accept=“image/* type="file" name="f1" onchange="choosePic(this,'zhengmianzhaopian')"/>
+    </div>
+    <div class="center">
+        <div>背面</div>
+        <div><img id="beimianzhaopian" src="./img.png" alt="正面照片"></div>
+        <div><input id="bminput" accept=“image/* type="file" onchange="choosePic(this,'beimianzhaopian')"/></div>
+    </div>
+<button id="up" onclick="window.location.href='./huotijiance.html'" href="fail.html" class="weui-btn weui-btn_primary">下一步</button>
+</body>
+
+<script>
+
+    function test() {
+        var reader = new FileReader();
+        var AllowImgFileSize = 2100000; //上传图片最大值(单位字节)（ 2 M = 2097152 B ）超过2M上传失败
+        var file = $('#zminput')[0].files[0];
+        alert(typeof(file));
+        var imgUrlBase64;
+        if (file) {
+            //将文件以Data URL形式读入页面
+            imgUrlBase64 = reader.readAsDataURL(file);
+            reader.onload = function (e) {
+                //var ImgFileSize = reader.result.substring(reader.result.indexOf(",") + 1).length;//截取base64码部分（可选可不选，需要与后台沟通）
+                if (AllowImgFileSize != 0 && AllowImgFileSize < reader.result.length) {
+                    console.log(typeof(imgUrlBase64));
+                    alert( '上传失败，请上传不大于2M的图片！');
+                    return;
+                }else{
+                    //执行上传操作
+                    console.log(typeof(imgUrlBase64));
+                    alert(reader.result);
+                }
+            }
+        }
+    }
+
+    function uploadpic(){
+        var formData = new FormData();
+
+        formData.append('file', $('#zminput')[0].files[0]);  //添加图片信息的参数
+        formData.append('file', $('#bminput')[0].files[0]);  //添加图片信息的参数
+        $.ajax({
+            url: '/sdses-admin/wechat/page/upLoad',
+            type: 'POST',
+            cache: false, //上传文件不需要缓存
+            data: formData,
+            async:true,
+            processData: false, // 告诉jQuery不要去处理发送的数据
+            contentType: false, // 告诉jQuery不要去设置Content-Type请求头
+
+            success: function (data) {
+                if(data.state==1){
+
+                    console.log(data.msg);
+                }else{
+                    console.log(data.msg);
+                }
+            },
+            error: function (data) {
+                console.log(data.msg);
+            }
+        })
+    }
+
+    function choosePic(obj, id) {
+        //FileReader
+        if(window.FileReader){//验证当前的浏览器是否支持图片预览
+            var reader=new FileReader();
+            var file=obj.files[0];
+            var regexImage=/^image\//;//js正则表达式，匹配是否拥有image
+            if(regexImage.test(file.type)){
+                //设置读取结束的回调函数
+                reader.onload=function(data){
+                    var img=document.getElementById(id);
+                    img.src=data.target.result;//将结果数据显示到img标签上
+                };
+                //开始读取上传的文件内容
+                reader.readAsDataURL(file);
+            }else{
+                alert("亲，看清楚是图片预览");
+                return;
+            }
+        }else{
+            alert("亲，浏览器该升级了");
+            return;
+        }
+    }
+
+
+</script>
+
+</html>

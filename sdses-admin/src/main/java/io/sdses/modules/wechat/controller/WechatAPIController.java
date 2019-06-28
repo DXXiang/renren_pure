@@ -1,16 +1,12 @@
 package io.sdses.modules.wechat.controller;
 
-import com.sun.xml.internal.bind.v2.runtime.output.Encoded;
 import io.sdses.modules.wechat.entity.AccessToken;
 import io.sdses.modules.wechat.entity.JsSDK;
 import io.sdses.modules.wechat.entity.JsapiTicket;
 import io.sdses.modules.wechat.service.WeChatAPIService;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +21,7 @@ import java.util.Map;
 @CrossOrigin
 @RestController
 @RequestMapping("/wechat/dev")
-public class WeChatAPIController {
+public class WechatAPIController {
     @Autowired
     private WeChatAPIService weChatAPIService = null;
     @Autowired
@@ -37,6 +33,7 @@ public class WeChatAPIController {
         result.put("key1", "value1");
         result.put("key2", "value2");
         result.put("code", "1");
+        result.put("code1", "2");
         return result;
     }
 

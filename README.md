@@ -21,22 +21,31 @@
 
   1. 先`clone`项目到本地(已经`clone`请跳过)
 
-  2. 然后创建本地`my_dev`分支并且和远程`dev`分支对应
+  2. 然后创建本地`dev`分支并且和远程`dev`分支对应
      
      ```shell
      $ git branch -a  #先查看下当前的本地和远程分支
-     $ git checkout -b my_dev origin/dev  #假如先前已经track了远程dev分支，则直接git checkout my_dev
-     $ git pull #将本地分支my_dev对应的远程分支dev拉下来
+     $ git checkout -b dev origin/dev  #创建本地dev分支track远程dev分支，以后切换分支直接git checkout dev
+     $ git pull #将远程dev拉取
      ```
      
   3. 开发
   
-  4. push到远程分支，若先前命名本地分支为dev则可直接push
+  4. push到远程分支，若本地分支命名为dev则可直接git push
      
      ```shell
-     $ git push origin HEAD:dev  #push到远程dev分支
+     $ git push origin HEAD:dev  #命名为其他则需指定push到远程的dev分支
      ```
+     
+     ```shell
+     $ git push  #本地分支命名为dev直接push即可
+     ```
+     
   5. 线上merge
+## 注意！！！
+
+* **代码生成器生成的目录请放到项目根目录下，以备其他人使用**
+
 ## 备忘
 
 1. 已有模块内容
@@ -113,6 +122,6 @@
 
 计划修改的模块**数据管理**为**认证管理**(authentication manage),包名暂定`io.sdses.modules.auth`,子功能命名前缀为`AuthXX`，修改显示功能模块**全系档案**为**认证档案**(命名前缀: `Auth`),此模块除了显示认证结果数据表`auth_result`、用户账号基本信息表`auth_user`，还需负责认证功能，可以共用一个Controller,开发认证相关Service
 
-2. `qrtz`前缀的数据库是用于Quartz任务调度的,但是相关Bean已经被指导老师注释了,而且也没有相关的DAO层代码以及`MyBatismapper.xml`，暂认为无效
-3. `job`模块是关于定时任务的，个人认为暂时可以不用理会，原因是这个模块相关的数据库表`schedule_job`和`schedule_job_log`记录的是项目服务开启的消息。这个模块存在相关的html，但是网页内容结构表`sys_menu`中并未存入其消息，平台上不显示页面。所以认为该模块对平台的使用无影响，仅用于记录服务器启动测试的信息
+2. `qrtz`前缀的数据库是用于Quartz任务调度的,但是相关Bean已经被指导老师注释了,而且也没有相关的DAO层代码以及`mapper.xml`文件，
+3. `job`模块是关于定时任务的，6.25的会议上说明不需要进行定时任务，即无需定时获取token，则更无需开启全局redis缓存，相关功能可认为禁用
 
