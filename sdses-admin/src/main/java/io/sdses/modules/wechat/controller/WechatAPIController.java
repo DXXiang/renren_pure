@@ -27,15 +27,6 @@ public class WechatAPIController {
     @Autowired
     private JsSDK jsSDK = null;
 
-    @RequestMapping("/upLoad")
-    @ResponseBody
-    public Map<String,Object> upLoad(){
-        Map<String,Object> result = new HashMap<>();
-        result.put("key1", "value1");
-        result.put("key2", "value2");
-        return result;
-    }
-
     @RequestMapping("/getJson")
     public Map<String,Object> getAccessToken(){
         Map<String,Object> result = new HashMap<>();
