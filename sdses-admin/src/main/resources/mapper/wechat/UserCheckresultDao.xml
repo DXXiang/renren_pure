@@ -14,5 +14,12 @@
         <result property="failReason" column="fail_reason"/>
     </resultMap>
 
+    <select id="selectAuthedPersons" resultMap="userCheckresultMap">
+        select * from user_checkResult where result = '认证成功'
+    </select>
+
+    <select id="selectAllPersons" resultMap="userCheckresultMap">
+        select * from user_checkResult
+    </select>
 
 </mapper>

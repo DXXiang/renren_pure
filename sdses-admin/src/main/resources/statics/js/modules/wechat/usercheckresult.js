@@ -117,6 +117,10 @@ var vm = new Vue({
 			$("#jqGrid").jqGrid('setGridParam',{ 
                 page:page
             }).trigger("reloadGrid");
+		},
+		exportToExcel:function (event) {
+			var url = baseURL + "wechat/export/exportToExcel";
+			window.location.href = url;
 		}
 	}
 });

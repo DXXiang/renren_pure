@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotations.TableName;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * 
@@ -14,7 +15,7 @@ import java.util.Date;
  * @date 2019-06-28 17:53:52
  */
 @TableName("user_checkResult")
-public class UserCheckresultEntity implements Serializable {
+public class UserCheckresultEntity implements Serializable ,Comparable<UserCheckresultEntity>{
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -130,5 +131,32 @@ public class UserCheckresultEntity implements Serializable {
 	 */
 	public String getFailReason() {
 		return failReason;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		UserCheckresultEntity that = (UserCheckresultEntity) o;
+		return Objects.equals(openid, that.openid) &&
+				Objects.equals(idname, that.idname) &&
+				Objects.equals(idnum, that.idnum) &&
+				Objects.equals(id, that.id) &&
+				Objects.equals(picture, that.picture) &&
+				Objects.equals(result, that.result) &&
+				Objects.equals(failReason, that.failReason);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(openid, idname, idnum, id, picture, result, failReason);
+	}
+
+
+	@Override
+	public int compareTo(UserCheckresultEntity o) {
+		if (this.getId() - o.getId() > 0) return 1;
+		else if(this.getId() - o.getId() < 0) return -1;
+		else return 0;
 	}
 }

@@ -2,8 +2,10 @@ package io.sdses.modules.wechat.service;
 
 import com.baomidou.mybatisplus.service.IService;
 import io.sdses.common.utils.PageUtils;
+import io.sdses.modules.wechat.entity.PersonAuthed;
 import io.sdses.modules.wechat.entity.UserCheckresultEntity;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,5 +18,7 @@ import java.util.Map;
 public interface UserCheckresultService extends IService<UserCheckresultEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+    List<PersonAuthed> getAuthedPersons();
+    List<UserCheckresultEntity> getAllPersons();
 }
 

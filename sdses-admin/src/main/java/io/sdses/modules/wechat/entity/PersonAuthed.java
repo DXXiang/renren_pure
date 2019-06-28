@@ -37,4 +37,13 @@ public class PersonAuthed {
 
     public PersonAuthed() {
     }
+
+    @Override
+    public String toString() {
+        return "PersonAuthed{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", cardId='" + cardId + '\'' +
+                '}';
+    }
 }
