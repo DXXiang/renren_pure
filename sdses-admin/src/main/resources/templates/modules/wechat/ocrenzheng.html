@@ -28,8 +28,33 @@
 
 <script>
 
+    function test() {
+        var reader = new FileReader();
+        var AllowImgFileSize = 2100000; //上传图片最大值(单位字节)（ 2 M = 2097152 B ）超过2M上传失败
+        var file = $('#zminput')[0].files[0];
+        alert(typeof(file));
+        var imgUrlBase64;
+        if (file) {
+            //将文件以Data URL形式读入页面
+            imgUrlBase64 = reader.readAsDataURL(file);
+            reader.onload = function (e) {
+                //var ImgFileSize = reader.result.substring(reader.result.indexOf(",") + 1).length;//截取base64码部分（可选可不选，需要与后台沟通）
+                if (AllowImgFileSize != 0 && AllowImgFileSize < reader.result.length) {
+                    console.log(typeof(imgUrlBase64));
+                    alert( '上传失败，请上传不大于2M的图片！');
+                    return;
+                }else{
+                    //执行上传操作
+                    console.log(typeof(imgUrlBase64));
+                    alert(reader.result);
+                }
+            }
+        }
+    }
+
     function uploadpic(){
         var formData = new FormData();
+
         formData.append('file', $('#zminput')[0].files[0]);  //添加图片信息的参数
         formData.append('file', $('#bminput')[0].files[0]);  //添加图片信息的参数
         $.ajax({
