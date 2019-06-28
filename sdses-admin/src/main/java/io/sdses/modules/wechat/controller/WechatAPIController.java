@@ -21,11 +21,20 @@ import java.util.Map;
 @CrossOrigin
 @RestController
 @RequestMapping("/wechat/dev")
-public class WeChatAPIController {
+public class WechatAPIController {
     @Autowired
     private WeChatAPIService weChatAPIService = null;
     @Autowired
     private JsSDK jsSDK = null;
+
+    @RequestMapping("/upLoad")
+    @ResponseBody
+    public Map<String,Object> upLoad(){
+        Map<String,Object> result = new HashMap<>();
+        result.put("key1", "value1");
+        result.put("key2", "value2");
+        return result;
+    }
 
     @RequestMapping("/getJson")
     public Map<String,Object> getAccessToken(){
@@ -33,6 +42,7 @@ public class WeChatAPIController {
         result.put("key1", "value1");
         result.put("key2", "value2");
         result.put("code", "1");
+        result.put("code1", "2");
         return result;
     }
 

@@ -7,20 +7,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
     <link rel="stylesheet" href="${request.contextPath}/statics/css/weui.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <style>
+        .file-box {
+            position: relative;
+            display: inline-block;
+        }
+        .file-box img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            position: absolute;
+            top: -30px;
+            left: 0;
+            display: inline-block;
+            border: none;
+        }
+        .file-box .txt,.file-box .file {
+            width: 70px;
+            height: 36px;
+            position: absolute;
+            top: -20px;
+            left: 100px;
+            text-align: center;
+        }
+    </style>
+
 </head>
 <script>
     $(function(){
-        $('#send').click(function(){
+        $('#test').click(function(){
             $.ajax({
                 type: "GET",
-                url: "http://34dad8cd.ngrok.io/sdses-admin/wechat/dev/getJson",
+                url: "/sdses-admin/wechat/dev/getJson",
                 data: {username:$("#username").val(), content:$("#content").val()},
                 dataType: "json",
                 success: function(data){
                     $('#resText').empty();   //清空resText里面的所有内容
                     var html = '';
-                    html += '<div class="comment"><h6>' + data.code
-                        + '</h6><p class="para">' + data.key1
+                    html += '<div class="comment"><p class="para">' + data.key1
                         + '</p>' +'<p>'+data.key2+'</p>'+
                         '</div>';
                     $('#resText').html(html);
@@ -32,10 +57,9 @@
 
 <body>
 
-
-<p id="resText"></p>
-<a href="./orcrenzheng.html" class="weui-btn weui-btn_primary">开始认证</a>
-<a id="send" class="weui-btn weui-btn_primary">测试</a>
+<p id="resText">测试用</p>
+<a href="ocrenzheng.html" class="weui-btn weui-btn_primary">开始认证</a>
+<a id="test" class="weui-btn weui-btn_primary">测试</a>
 
 
 
