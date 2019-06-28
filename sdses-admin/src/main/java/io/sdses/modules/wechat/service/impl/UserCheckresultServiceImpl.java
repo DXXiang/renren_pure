@@ -1,6 +1,5 @@
 package io.sdses.modules.wechat.service.impl;
 
-import io.sdses.modules.wechat.entity.PersonAuthed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,23 +28,20 @@ public class UserCheckresultServiceImpl extends ServiceImpl<UserCheckresultDao, 
                 new Query<UserCheckresultEntity>(params).getPage(),
                 new EntityWrapper<UserCheckresultEntity>()
         );
-
         return new PageUtils(page);
     }
 
+    /**
+     * 取通过者列表，并且去重以及根据id做排序
+     * @return
+     */
     @Override
-    public List<PersonAuthed> getAuthedPersons() {
+    public List<UserCheckresultEntity> getAuthedPersons() {
         List<UserCheckresultEntity> fullMessageAuthedPersons = userCheckresultDao.selectAuthedPersons();
         Set<UserCheckresultEntity> set = new TreeSet<>(fullMessageAuthedPersons); // 排序和去重
-        List<PersonAuthed> result = new ArrayList<>();
-        for (UserCheckresultEntity userCheckresultEntity : set) {
-            PersonAuthed personAuthed = new PersonAuthed(userCheckresultEntity.getId(),
-                    userCheckresultEntity.getIdname(),
-                    userCheckresultEntity.getIdnum());
-            result.add(personAuthed);
-        }
-        return result;
+        return new ArrayList<>(set);
     }
+
 
     @Override
     public List<UserCheckresultEntity> getAllPersons() {
