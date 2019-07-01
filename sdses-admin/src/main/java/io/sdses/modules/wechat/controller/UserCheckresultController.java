@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import io.sdses.common.validator.ValidatorUtils;
-import io.sdses.modules.wechat.entity.PersonAuthed;
 import io.sdses.modules.wechat.service.ExcelExportService;
 import io.sdses.modules.wechat.view.ExcelView;
 import org.apache.poi.ss.usermodel.Row;
