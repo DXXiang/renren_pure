@@ -1,16 +1,10 @@
 package io.sdses.modules.wechat.controller;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 import io.sdses.common.validator.ValidatorUtils;
-import io.sdses.modules.wechat.entity.PersonAuthed;
-import io.sdses.modules.wechat.service.ExcelExportService;
-import io.sdses.modules.wechat.view.ExcelView;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +13,6 @@ import io.sdses.modules.wechat.entity.UserCheckresultEntity;
 import io.sdses.modules.wechat.service.UserCheckresultService;
 import io.sdses.common.utils.PageUtils;
 import io.sdses.common.utils.R;
-import org.springframework.web.servlet.ModelAndView;
 
 
 /**

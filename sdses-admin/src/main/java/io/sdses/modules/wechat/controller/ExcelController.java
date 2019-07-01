@@ -38,10 +38,10 @@ public class ExcelController {
         ev.setFileName("export.xls");
         //获取全部认证通过者信息
         List<UserCheckresultEntity> authedList = userCheckresultService.getAuthedPersons();
-        System.err.println(authedList);
+//        System.err.println(authedList);
         mv.addObject("authedList", authedList);
         mv.setView(ev);
-        System.err.println("out");
+//        System.err.println("out");
         return mv;
 
     }
