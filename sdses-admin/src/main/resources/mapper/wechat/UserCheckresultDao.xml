@@ -12,8 +12,8 @@
         <result property="picture" column="picture"/>
         <result property="result" column="result"/>
         <result property="failReason" column="fail_reason"/>
+        <result property="date" column="date"/>
     </resultMap>
-
     <select id="selectAuthedPersons" resultMap="userCheckresultMap">
         select * from user_checkResult where result = '认证成功'
     </select>

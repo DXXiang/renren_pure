@@ -3,14 +3,13 @@ $(function () {
         url: baseURL + 'wechat/usercheckresult/list',
         datatype: "json",
         colModel: [
-        	{ label: 'id', name: 'id', index: 'id', width: 50, key: true },
+			{ label: 'id', name: 'id', index: 'id', width: 50, key: true },
 			{ label: '', name: 'openid', index: 'openid', width: 80 }, 			
 			{ label: '', name: 'idname', index: 'idname', width: 80 }, 			
 			{ label: '', name: 'idnum', index: 'idnum', width: 80 },
 			{ label: '', name: 'picture', index: 'picture', width: 80 }, 			
 			{ label: '', name: 'result', index: 'result', width: 80 }, 			
-			{ label: '', name: 'failReason', index: 'fail_reason', width: 80 }, 			
-			{ label: '', name: 'date', index: 'date', width: 80 }			
+			{ label: '', name: 'failReason', index: 'fail_reason', width: 80 }			
         ],
 		viewrecords: true,
         height: 385,

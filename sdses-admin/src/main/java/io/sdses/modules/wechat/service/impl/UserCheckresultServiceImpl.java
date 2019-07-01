@@ -28,9 +28,9 @@ public class UserCheckresultServiceImpl extends ServiceImpl<UserCheckresultDao, 
                 new Query<UserCheckresultEntity>(params).getPage(),
                 new EntityWrapper<UserCheckresultEntity>()
         );
+
         return new PageUtils(page);
     }
-
     /**
      * 取通过者列表，并且去重以及根据id做排序
      * @return
@@ -47,5 +47,4 @@ public class UserCheckresultServiceImpl extends ServiceImpl<UserCheckresultDao, 
     public List<UserCheckresultEntity> getAllPersons() {
         return userCheckresultDao.selectAllPersons();
     }
-
 }
