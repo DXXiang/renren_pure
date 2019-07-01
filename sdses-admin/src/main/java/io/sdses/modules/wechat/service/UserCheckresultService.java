@@ -12,7 +12,7 @@ import java.util.Map;
  *
  * @author wangxd
  * @email wangxiaodong@sdses.com
- * @date 2019-06-28 17:53:52
+ * @date 2019-07-01 16:33:17
  */
 public interface UserCheckresultService extends IService<UserCheckresultEntity> {
 

@@ -10,23 +10,36 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
 <body>
+<p id="openid">
+    null
+</p>
     <div class="center">
         <div>正面</div>
-        <div><img id="zhengmianzhaopian" src="./img.png" alt="正面照片"></div>
-        <div>
-            <button onclick="uploadpic()" class="weui-btn weui-btn_plain-default" for="zmiput">上传</button>
-        </div>
-        <input id="zminput" accept=“image/* type="file" name="f1" onchange="choosePic(this,'zhengmianzhaopian')"/>
+        <div><img onclick="zminput.click()" id="zhengmianzhaopian" src="./img.png" alt="点击上传正面照片"></div>
+        <input style="display:none"  id="zminput" accept=“image/* type="file" name="f1" onchange="choosePic(this,'zhengmianzhaopian')"/>
     </div>
     <div class="center">
         <div>背面</div>
-        <div><img id="beimianzhaopian" src="./img.png" alt="正面照片"></div>
-        <div><input id="bminput" accept=“image/* type="file" onchange="choosePic(this,'beimianzhaopian')"/></div>
+        <div><img onclick="bminput.click()" id="beimianzhaopian" src="./img.png" alt="点击上传背面照片"></div>
+        <div><input style="display:none"  id="bminput" accept=“image/* type="file" onchange="choosePic(this,'beimianzhaopian')"/></div>
     </div>
-<button id="up" onclick="window.location.href='./huotijiance.html'" href="fail.html" class="weui-btn weui-btn_primary">下一步</button>
+<div>
+    <button id="btn" onclick="button()" class="weui-btn weui-btn_primary" for="zmiput">上传</button>
+</div>
+
 </body>
 
 <script>
+
+    var flag = false;
+    var OpenID;
+
+    function button() {
+        if(flag==false)uploadpic();
+        else {
+            $(window).attr("location","/sdses-admin/wechat/page/huotijiance.html?openid="+OpenID);
+        }
+    }
 
     function test() {
         var reader = new FileReader();
@@ -52,9 +65,34 @@
         }
     }
 
+    function getQueryVariable(variable)
+    {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
+        }
+        return(false);
+    }
+
+    window.onload=function (){
+        var _openid = getQueryVariable("openid");
+        openid.innerHTML = _openid;
+        OpenID = _openid;
+    }
+
     function uploadpic(){
         var formData = new FormData();
 
+        if(!$('#zminput')[0].files[0]){
+            alert("请添加正面照")
+            return;
+        }
+        if(!$('#bminput')[0].files[0]){
+            alert("请添加背面照")
+            return;
+        }
         formData.append('file', $('#zminput')[0].files[0]);  //添加图片信息的参数
         formData.append('file', $('#bminput')[0].files[0]);  //添加图片信息的参数
         $.ajax({
@@ -62,23 +100,21 @@
             type: 'POST',
             cache: false, //上传文件不需要缓存
             data: formData,
-            async:true,
+            async:false,
             processData: false, // 告诉jQuery不要去处理发送的数据
             contentType: false, // 告诉jQuery不要去设置Content-Type请求头
 
             success: function (data) {
-                if(data.state==1){
-
-                    console.log(data.msg);
-                }else{
-                    console.log(data.msg);
-                }
+                console.log(data.msg);
+                btn.innerHTML="下一步";
+                flag = true;
             },
             error: function (data) {
                 console.log(data.msg);
             }
         })
     }
+
 
     function choosePic(obj, id) {
         //FileReader

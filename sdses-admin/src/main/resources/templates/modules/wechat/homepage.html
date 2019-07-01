@@ -35,6 +35,9 @@
 
 </head>
 <script>
+
+    var OpenID;
+
     $(function(){
         $('#test').click(function(){
             var code = getQueryVariable("code");
@@ -71,6 +74,7 @@
             url: "/sdses-admin/wechat/page/getOpenID?code="+code,
             success: function(data) {
                 resText.innerHTML = "OpenID:"+data.openid;
+                OpenID = data.openid;
             }
 
         })
@@ -92,11 +96,10 @@
                         alert("找不到该页面");//失败报错
 
                     }
-
                 },
 
                 success: function(data) {
-                    $(window).attr("location","/sdses-admin/wechat/page/OCRrenzheng.html")
+                    $(window).attr("location","/sdses-admin/wechat/page/OCRrenzheng.html?openid="+OpenID);
                 }
 
             })

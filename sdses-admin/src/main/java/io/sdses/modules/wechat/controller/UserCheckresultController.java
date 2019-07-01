@@ -1,25 +1,22 @@
 package io.sdses.modules.wechat.controller;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 import io.sdses.common.validator.ValidatorUtils;
-import io.sdses.modules.wechat.entity.PersonAuthed;
-import io.sdses.modules.wechat.service.ExcelExportService;
-import io.sdses.modules.wechat.view.ExcelView;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import io.sdses.modules.wechat.entity.UserCheckresultEntity;
 import io.sdses.modules.wechat.service.UserCheckresultService;
 import io.sdses.common.utils.PageUtils;
 import io.sdses.common.utils.R;
-import org.springframework.web.servlet.ModelAndView;
+
 
 
 /**
@@ -27,7 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
  *
  * @author wangxd
  * @email wangxiaodong@sdses.com
- * @date 2019-06-28 17:53:52
+ * @date 2019-07-01 16:33:17
  */
 @RestController
 @RequestMapping("wechat/usercheckresult")
