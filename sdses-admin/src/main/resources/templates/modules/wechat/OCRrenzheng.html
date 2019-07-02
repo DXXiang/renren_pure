@@ -34,6 +34,7 @@
     var flag = false;
     var OpenID;
 
+    //按钮
     function button() {
         if(flag==false)uploadpic();
         else {
@@ -41,11 +42,10 @@
         }
     }
 
-    function test() {
+    //base64
+    function FileToBase64(file) {
         var reader = new FileReader();
         var AllowImgFileSize = 2100000; //上传图片最大值(单位字节)（ 2 M = 2097152 B ）超过2M上传失败
-        var file = $('#zminput')[0].files[0];
-        alert(typeof(file));
         var imgUrlBase64;
         if (file) {
             //将文件以Data URL形式读入页面
@@ -53,18 +53,39 @@
             reader.onload = function (e) {
                 //var ImgFileSize = reader.result.substring(reader.result.indexOf(",") + 1).length;//截取base64码部分（可选可不选，需要与后台沟通）
                 if (AllowImgFileSize != 0 && AllowImgFileSize < reader.result.length) {
-                    console.log(typeof(imgUrlBase64));
-                    alert( '上传失败，请上传不大于2M的图片！');
+
+                    var scale = reader.result.length/AllowImgFileSize;
+
+                    var image = new Image();    //新建一个img标签（不嵌入DOM节点，仅做canvas操作)
+                    image.src = reader.result;   //让该标签加载base64格式的原图
+                    image.onload = function() {    //图片加载完毕后再通过canvas压缩图片，否则图片还没加载完就压缩，结果图片是全黑的
+                        var canvas = document.createElement('canvas'), //创建一个canvas元素
+                            context = canvas.getContext('2d'),    //context相当于画笔，里面有各种可以进行绘图的API
+                            imageWidth = 300,    //压缩后图片的宽度，这里设置为缩小一半
+                            imageHeight = 200    //压缩后图片的高度，这里设置为缩小一半
+                        canvas.width = imageWidth    //设置绘图的宽度
+                        canvas.height = imageHeight    //设置绘图的高度
+
+                        //使用drawImage重新设置img标签中的图片大小，实现压缩。drawImage方法的参数可以自行查阅W3C
+                        context.drawImage(image, 0, 0, imageWidth, imageHeight)
+
+                        //使用toDataURL将canvas上的图片转换为base64格式
+                        imgUrlBase64 = canvas.toDataURL('image/jpeg')
+                        console.log(imgUrlBase64);
+                    }
+
                     return;
                 }else{
                     //执行上传操作
-                    console.log(typeof(imgUrlBase64));
-                    alert(reader.result);
+                    imgUrlBase64 = reader.result;
                 }
             }
         }
     }
 
+
+
+    //url传参
     function getQueryVariable(variable)
     {
         var query = window.location.search.substring(1);
@@ -76,12 +97,14 @@
         return(false);
     }
 
+    //页面加载函数
     window.onload=function (){
         var _openid = getQueryVariable("openid");
         openid.innerHTML = _openid;
         OpenID = _openid;
     }
 
+    //上传
     function uploadpic(){
         var formData = new FormData();
 
