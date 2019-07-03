@@ -39,29 +39,27 @@
     var OpenID;
 
     $(function(){
+
         $('#test').click(function(){
+            var formdata = new FormData();
+            formdata.append("file",fileUpload.files[0]);
+            formdata.append("openid",OpenID);
+            formdata.append("idname","idname");
+            formdata.append("idnum","idnum");
+            formdata.append("num4","num4");
+            formdata.append("image","image");
             $.ajax({
-
-                type: "POST",//使用servlet中的post方法
-
-                url: "http://47.93.1.226:8081/sdses-api/api/getnum",//进入那个servlet中去
-
-                statusCode: {
-
-                    404: function() {
-
-                        alert("找不到该页面");//失败报错
-
-                    }
-                },
-
-                success: function(data) {
-                    console.log(data);
-                },
-                error:function (data) {
-                    console.log(data);
+                url: '/sdses-admin/wechat/page/uploadvideo',
+                type: 'POST',
+                cache: false, //上传文件不需要缓存
+                data: formdata,
+                async:true,
+                processData: false, // 告诉jQuery不要去处理发送的数据
+                contentType: false, // 告诉jQuery不要去设置Content-Type请求头
+                success:function(data){
+                    console.log(data.msg);
                 }
-            })
+            });
         });
     });
 
@@ -81,7 +79,6 @@
         $.ajax({
 
             type: "get",//使用servlet中的post方法
-
             url: "/sdses-admin/wechat/page/getOpenID?code="+code,
             success: function(data) {
                 resText.innerHTML = "OpenID:"+data.openid;
@@ -89,6 +86,15 @@
             }
 
         })
+
+        $.ajax({
+            type:'get',
+            url:'/sdses-admin/wechat/page/saveOpenID?openid='+OpenID,
+            success:function(data){
+                console.log(data.msg);
+            }
+        });
+
     }
 
     $(function(){
@@ -131,6 +137,8 @@
         <div class="button-sp-area">
             <button id="startbtn" class="weui-btn weui-btn_primary">开始认证</button>
             <a id="test" class="weui-btn weui-btn_primary">测试</a>
+            <input type="file" accept="video/*" capture="camera" id="fileUpload">
+
         </div>
     </div>
 </div>

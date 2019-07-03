@@ -1,46 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>TEST</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-    <link rel="stylesheet" href="https://weui.io/weui.css" />
-    <link rel="stylesheet" href="https://weui.io/example.css">
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <meta charset="UTF-8">
+    <title>jQuery实现JSONP</title>
 </head>
 <body>
-
-<div class="page__bd page__bd_spacing">
-    <a href="javascript:$.toast('消息', 20000);" class="weui-btn weui-btn_default" id="showToast">成功提示</a>
-    <a href="javascript:;" class="weui-btn weui-btn_default" id="showLoadingToast">加载中提示</a>
+<div id="mydiv">
+    <button id="btn">点击</button>
 </div>
-
-<script type="text/javascript" class="toast js_show">
-    // toast
+</body>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script type="text/javascript">
     $(function(){
-        var $toast = $('#toast');
-        $('#showToast').on('click', function(){
-            if ($toast.css('display') != 'none') return;
+        $("#btn").click(function(){
 
-            $toast.fadeIn(100);
-            setTimeout(function () {
-                $toast.fadeOut(100);
-            }, 2000);
+            $.ajax({
+                async : true,
+                url : "http://47.93.1.226:8081/sdses-api/api/getnum",
+                type : "POST",
+                dataType : "jsonp", // 返回的数据类型，设置为JSONP方式
+                jsonp : 'callback', //指定一个查询参数名称来覆盖默认的 jsonp 回调参数名 callback
+                jsonpCallback: 'handleResponse', //设置回调函数名
+                data : {
+                    q : "javascript",
+                    count : 1
+                },
+                success: function(response, status, xhr){
+                    console.log('状态为：' + status + ',状态是：' + xhr.statusText);
+                    console.log(response);
+                }
+            });
         });
     });
-
-    // loading
-    $(function(){
-        var $loadingToast = $('#loadingToast');
-        $('#showLoadingToast').on('click', function(){
-            if ($loadingToast.css('display') != 'none') return;
-
-            $loadingToast.fadeIn(100);
-            setTimeout(function () {
-                $loadingToast.fadeOut(100);
-            }, 2000);
-        });
-    });</script>
-
-</body>
+</script>
 </html>
