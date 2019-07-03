@@ -37,6 +37,14 @@ public class WechatWebPageCpntroller {
         return map;
     }
 
+    @RequestMapping("/test")
+    @ResponseBody
+    public Map<String,String> getOpenID(){
+
+        Map<String,String> map=new HashMap<String,String>();
+        map.put("openid","test");
+        return map;
+    }
 
     @RequestMapping("/upLoad")
     @ResponseBody

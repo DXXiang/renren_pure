@@ -6,25 +6,47 @@
     <meta name="author" content="Ye">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
     <link rel="stylesheet" href="${request.contextPath}/statics/css/weui.css">
+    <link rel="stylesheet" href="https://weui.io/weui.css">
     <link rel="stylesheet" href="${request.contextPath}/statics/css/test.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
 <body>
-<p id="openid">
-    null
-</p>
-    <div class="center">
-        <div>正面</div>
-        <div><img onclick="zminput.click()" id="zhengmianzhaopian" src="./img.png" alt="点击上传正面照片"></div>
+
+<div class="page__bd page__bd_spacing">
+    <div id="openid">openid</div>
+    <div>
+        <div>
+            <a href="javascript:zminput.click();" class="weui-btn weui-btn_block weui-btn_primary">点击上传正面照</a>
+        </div>
+        <div><img onclick="zminput.click()" style="width: 100%;" id="zhengmianzhaopian" src="https://gss0.baidu.com/9vo3dSag_xI4khGko9WTAnF6hhy/zhidao/wh%3D600%2C800/sign=0b663d8e6fd0f703e6e79dda38ca7d05/d833c895d143ad4b50662d598f025aafa50f06da.jpg
+" alt="点击上传正面照片"></div>
         <input style="display:none"  id="zminput" accept=“image/* type="file" name="f1" onchange="choosePic(this,'zhengmianzhaopian')"/>
     </div>
-    <div class="center">
-        <div>背面</div>
-        <div><img onclick="bminput.click()" id="beimianzhaopian" src="./img.png" alt="点击上传背面照片"></div>
+    <div>
+        <div>
+            <a href="javascript:bminput.click();" class="weui-btn weui-btn_block weui-btn_primary">点击上传背面照</a>
+        </div>
+        <div><img onclick="bminput.click()" style="width: 100%;" id="beimianzhaopian" src="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=2384163257,1795060609&fm=173&app=49&f=JPEG?w=640&h=429&s=00114F30075665C8087940C80300F0B2" alt="点击上传背面照片"></div>
         <div><input style="display:none"  id="bminput" accept=“image/* type="file" onchange="choosePic(this,'beimianzhaopian')"/></div>
     </div>
-<div>
-    <button id="btn" onclick="button()" class="weui-btn weui-btn_primary" for="zmiput">上传</button>
+
+    <div class="buttom-sp-area">
+        <a href="javascript:button();" class="weui-btn weui-btn_primary" id="btn">上传</a>
+    </div>
+    <div id="toast" style="display: none;">
+        <div class="weui-mask_transparent"></div>
+        <div class="weui-toast">
+            <i class="weui-icon-success-no-circle weui-icon_toast"></i>
+            <p class="weui-toast__content">已完成</p>
+        </div>
+    </div>
+    <div id="loadingToast" style="display: none;">
+        <div class="weui-mask_transparent"></div>
+        <div class="weui-toast">
+            <i class="weui-loading weui-icon_toast"></i>
+            <p class="weui-toast__content">上传中</p>
+        </div>
+    </div>
 </div>
 
 </body>
@@ -33,10 +55,55 @@
 
     var flag = false;
     var OpenID;
+    var upload= false;
 
     //按钮
     function button() {
-        if(flag==false)uploadpic();
+
+        if(flag==false){
+
+            var $loadingToast = $('#loadingToast');
+            var $toast = $('#toast');
+            if ($loadingToast.css('display') != 'none') return;
+            $loadingToast.fadeIn(100);
+
+            if(!$('#zminput')[0].files[0]){
+                $loadingToast.fadeOut(100);
+                alert("请添加正面照")
+                return;
+            }
+            if(!$('#bminput')[0].files[0]){
+                $loadingToast.fadeOut(100);
+                alert("请添加背面照")
+                return;
+            }
+
+            uploadpic($('#zminput')[0].files[0])
+            if(upload){
+                progress =50;
+                uploadpic($('#bminput')[0].files[0])
+                if(upload){
+                    progress =100;
+                    flag = true;
+                    $loadingToast.fadeOut(100);
+                    $toast.fadeIn(100);
+                    setTimeout(function () {
+                        $toast.fadeOut(100);
+                    }, 2000);
+                    btn.innerHTML = "下一步";
+                }else {
+                    progress =0;
+                    $loadingToast.fadeOut(100);
+                    alert("上传失败");
+                    return;
+                }
+            }else {
+                prograss =0;
+                $loadingToast.fadeOut(100);
+                alert("上传失败");
+                return;
+            }
+        }
         else {
             $(window).attr("location","/sdses-admin/wechat/page/huotijiance.html?openid="+OpenID);
         }
@@ -54,7 +121,6 @@
                 //var ImgFileSize = reader.result.substring(reader.result.indexOf(",") + 1).length;//截取base64码部分（可选可不选，需要与后台沟通）
                 if (AllowImgFileSize != 0 && AllowImgFileSize < reader.result.length) {
 
-                    var scale = reader.result.length/AllowImgFileSize;
 
                     var image = new Image();    //新建一个img标签（不嵌入DOM节点，仅做canvas操作)
                     image.src = reader.result;   //让该标签加载base64格式的原图
@@ -104,20 +170,16 @@
         OpenID = _openid;
     }
 
+
     //上传
-    function uploadpic(){
+    function uploadpic(file){
         var formData = new FormData();
 
-        if(!$('#zminput')[0].files[0]){
-            alert("请添加正面照")
-            return;
-        }
-        if(!$('#bminput')[0].files[0]){
-            alert("请添加背面照")
-            return;
-        }
-        formData.append('file', $('#zminput')[0].files[0]);  //添加图片信息的参数
-        formData.append('file', $('#bminput')[0].files[0]);  //添加图片信息的参数
+        //formData.append('file', $('#zhengmianzhaopian')[0].src);  //添加图片base64
+        //formData.append('file', $('#beimianzhaopian')[0].src);  //添加图片base64
+        //formData.append('file', $('#zminput')[0].files[0]);  //添加图片信息的参数
+        //formData.append('file', $('#bminput')[0].files[0]);  //添加图片信息的参数
+        formData.append('file',file);
         $.ajax({
             url: '/sdses-admin/wechat/page/upLoad',
             type: 'POST',
@@ -128,12 +190,10 @@
             contentType: false, // 告诉jQuery不要去设置Content-Type请求头
 
             success: function (data) {
-                console.log(data.msg);
-                btn.innerHTML="下一步";
-                flag = true;
+                upload = true;
             },
             error: function (data) {
-                console.log(data.msg);
+                upload = false;
             }
         })
     }
@@ -148,8 +208,26 @@
             if(regexImage.test(file.type)){
                 //设置读取结束的回调函数
                 reader.onload=function(data){
-                    var img=document.getElementById(id);
-                    img.src=data.target.result;//将结果数据显示到img标签上
+
+                    var image = new Image();    //新建一个img标签（不嵌入DOM节点，仅做canvas操作)
+                    image.src = reader.result;   //让该标签加载base64格式的原图
+                    image.onload = function() {    //图片加载完毕后再通过canvas压缩图片，否则图片还没加载完就压缩，结果图片是全黑的
+                        var canvas = document.createElement('canvas'), //创建一个canvas元素
+                            context = canvas.getContext('2d'),    //context相当于画笔，里面有各种可以进行绘图的API
+                            imageWidth = 342.4,    //压缩后图片的宽度
+                            imageHeight = 216.0    //压缩后图片的高度
+                        canvas.width = imageWidth    //设置绘图的宽度
+                        canvas.height = imageHeight    //设置绘图的高度
+
+                        //使用drawImage重新设置img标签中的图片大小，实现压缩。drawImage方法的参数可以自行查阅W3C
+                        context.drawImage(image, 0, 0, imageWidth, imageHeight)
+
+                        var img=document.getElementById(id);
+                        img.src=canvas.toDataURL('image/jpeg');
+
+                    }
+
+
                 };
                 //开始读取上传的文件内容
                 reader.readAsDataURL(file);

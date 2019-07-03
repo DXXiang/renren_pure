@@ -1,108 +1,112 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>视频认证</title>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <link rel="stylesheet" href="${request.contextPath}/statics/css/test.css">
+    <meta charset="utf-8">
+    <title>视频活体检测</title>
+    <meta name="author" content="Ye">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
     <link rel="stylesheet" href="${request.contextPath}/statics/css/weui.css">
-    <style>
-        input.file
-        {
-            position: relative;
-            -moz-opacity:0 ;
-            filter:alpha(opacity: 0);
-            opacity: 0;
-            z-index: 2;
-        }
-        .wrapper{
-            color: #fff;
-            background-color: #31b0d5;
-            border-color: #269abc;
-            margin-top: 5px;
-            margin-bottom: 5px;
-            display: inline-block;
-            padding: 6px 12px;
-            margin-bottom: 0;
-            font-size: 14px;
-            font-weight: 400;
-            line-height: 1.42857143;
-            text-align: center;
-            white-space: nowrap;
-            vertical-align: middle;
-            -ms-touch-action: manipulation;
-            touch-action: manipulation;
-            cursor: pointer;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            background-image: none;
-            border: 1px solid transparent;
-            border-radius: 4px;
-        }
-    </style>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
 <body>
+<p id="openid">
+    null
+</p>
 
-<div id="app" v-cloak>
-    <h4 class="center">视频认证</h4>
-    <div class="center">
-        <div>
-            <img src="img.png">
+<div class="center">
+    <div>开始视频活体检测</div>
+    <div><img style="width: 100%;" id="demo" src="https://gss0.baidu.com/9vo3dSag_xI4khGko9WTAnF6hhy/zhidao/wh%3D600%2C800/sign=0b663d8e6fd0f703e6e79dda38ca7d05/d833c895d143ad4b50662d598f025aafa50f06da.jpg
+" alt="演示图片"></div>
+
+    <input type="file" accept="video/*" capture="camera" id="fileUpload" style="position:absolute; clip:rect(0 0 0 0);"  onchange="uploadVideo(this)">
+
+    <div>
+        <a href="javascript:fileUpload.click();" class="weui-btn weui-btn_primary" id="btn">开始录制视频</a>
+    </div>
+
+    <div id="toast" style="display: none;">
+        <div class="weui-mask_transparent"></div>
+        <div class="weui-toast">
+            <i class="weui-icon-success-no-circle weui-icon_toast"></i>
+            <p class="weui-toast__content">已完成</p>
         </div>
-        <div>
-            <a id="yzm" href="javascript:;" class="weui-btn weui-btn_block weui-btn_default">6 6 6 6 6 6</a>
+    </div>
+    <div id="loadingToast" style="display: none;">
+        <div class="weui-mask_transparent"></div>
+        <div class="weui-toast">
+            <i class="weui-loading weui-icon_toast"></i>
+            <p class="weui-toast__content">上传中</p>
         </div>
-        <span type="primary" class="wrapper">
-            <div>
-                <label class="btn" for="fileUpload">开始拍摄视频</label>
-            </div><br>
-            <div>
-                <label onclick="uploadVideo()" class="btn">上传</label>
-            </div>
-        </span>
-        <input type="file" accept="video/*" capture="camera" id="fileUpload" style="position:absolute; clip:rect(0 0 0 0);"  onchange="test(this)">
     </div>
 </div>
+</body>
+
 <script>
 
-    function test(obj) {
-        yzm.innerHTML=obj.files[0].name
+    var OpenID;
+
+    //url传参
+    function getQueryVariable(variable)
+    {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
+        }
+        return(false);
     }
 
+    //页面加载函数
+    window.onload=function (){
+        var _openid = getQueryVariable("openid");
+        openid.innerHTML = _openid;
+        OpenID = _openid;
+    }
+
+
+    //上传
     function uploadVideo(obj) {
+        var $loadingToast = $('#loadingToast');
+        var $toast = $('#toast');
+        if ($loadingToast.css('display') != 'none') return;
+        $loadingToast.fadeIn(100);
         var formData = new FormData();
         var file = fileUpload.files[0];
         formData.append('file', file);  //添加图片信息的参数
+        formData.append('openid', OpenID);  //添加图片信息的参数
+        formData.append('idname', "idname_");  //添加图片信息的参数
+        formData.append('idnum', "idnum_");  //添加图片信息的参数
+        formData.append('num4', "num4_");  //添加图片信息的参数
+        formData.append('image', "sadas");  //添加图片信息的参数
+
         $.ajax({
-            url: '/sdses-admin/wechat/page/upLoad',
+            url: 'https://47.93.1.226:8081/sdses-api/api/upload',
             type: 'POST',
             cache: false, //上传文件不需要缓存
             data: formData,
             async:true,
             processData: false, // 告诉jQuery不要去处理发送的数据
             contentType: false, // 告诉jQuery不要去设置Content-Type请求头
+            header: {
+                "Content-Type": "multipart/form-data"
+            },
 
             success: function (data) {
-                if(data.state==1){
-
-                    console.log(data.msg);
-                }else{
-                    console.log(data.msg);
-                }
+                $loadingToast.fadeOut(100);
+                $toast.fadeIn(100);
+                setTimeout(function () {
+                    $toast.fadeOut(100);
+                }, 2000);
             },
             error: function (data) {
+                $loadingToast.fadeOut(100);
                 console.log(data.msg);
             }
         })
     }
 
+
 </script>
-</body>
+
 </html>
