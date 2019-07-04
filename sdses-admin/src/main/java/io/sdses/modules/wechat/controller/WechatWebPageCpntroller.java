@@ -1,6 +1,7 @@
 package io.sdses.modules.wechat.controller;
 
 
+import io.sdses.common.utils.HttpUtil;
 import io.sdses.modules.wechat.utils.HttpUtils;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
@@ -14,7 +15,7 @@ import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-@CrossOrigin
+
 @Controller
 @RequestMapping("/wechat/page")
 public class WechatWebPageCpntroller {
@@ -37,6 +38,53 @@ public class WechatWebPageCpntroller {
         return map;
     }
 
+    @RequestMapping("/saveOpenID")
+    @ResponseBody
+    public JSONObject saveOpenID(HttpServletRequest request){
+        JSONObject send = JSONObject.fromObject("{openid:'"+request.getParameter("openid")+"',type:'1'}");
+        String url = "http://47.93.1.226:8081/sdses-api/api/sendopenid";
+        JSONObject jsonObject = HttpUtils.doPost(url,send);
+
+        return jsonObject;
+    }
+
+    @RequestMapping("/uploadpic")
+    @ResponseBody
+    public JSONObject uploadpic(HttpServletRequest request) throws IOException {
+        String base64 = request.getParameter("photo").split(",")[1];
+        String type= request.getParameter("type");
+        JSONObject send = JSONObject.fromObject("{photo:'"+base64+"',type:'"+type+"'}");
+        String url = "http://47.93.1.226:8081/sdses-api/api/ocr";
+        JSONObject jsonObject = HttpUtils.doPost(url,send);
+        System.out.println(jsonObject.toString());
+        return jsonObject;
+    }
+
+    @RequestMapping("/getNum")
+    @ResponseBody
+    public JSONObject getNum(){
+        String url = "http://47.93.1.226:8081/sdses-api/api/getnum";
+        String result = HttpUtil.httpURLConnectionPOST(url);
+        JSONObject jsonObject =JSONObject.fromObject(result);
+        return jsonObject;
+    }
+
+    @RequestMapping("/uploadvideo")
+    @ResponseBody
+    public JSONObject uploadvideo(MultipartFile[] file, HttpServletRequest request) throws IOException {
+        String result = "";
+        if (file != null && file.length > 0) {
+            System.out.println("fileLength"+ file.length);
+            for (int i = 0; i < file.length; i++) {
+                MultipartFile filex = file[i];
+                // 保存文件
+                result = HttpUtils.uploadFileToOSS(filex,"http://47.93.1.226:8081/sdses-api/api/upload",request);
+            }
+        }else{
+            result = "{mes:'上传失败'}";
+        }
+        return JSONObject.fromObject(result);
+    }
 
     @RequestMapping("/upLoad")
     @ResponseBody

@@ -1,6 +1,6 @@
 ﻿# [renren_pure]待遇领取资格认证系统
 
-
+by董翔祥
 
 ## 如何合作开发？
 
@@ -21,7 +21,7 @@
 
   1. 先`clone`项目到本地(已经`clone`请跳过)
 
-  2. 然后创建本地`dev`分支并且和远程`dev`分支对应
+  2. 然后创建本地`dev`分支并且和远程`dev`分支对应(已经`track`请跳过)
      
      ```shell
      $ git branch -a  #先查看下当前的本地和远程分支
@@ -31,16 +31,23 @@
      
   3. 开发
   
-  4. push到远程分支，若本地分支命名为dev则可直接git push
+     ```shell
+     $ git add . # 将改动加入本地暂存
+     $ git commit -m "备注" # 提交暂存改动
+     ```
+  
      
+  
+  4. 阶段开发完成，push到远程分支
+  
      ```shell
      $ git push origin HEAD:dev  #命名为其他则需指定push到远程的dev分支
      ```
-     
+  
      ```shell
      $ git push  #本地分支命名为dev直接push即可
      ```
-     
+  
   5. 线上merge
 ## 注意！！！
 
@@ -48,7 +55,7 @@
 
 ## 备忘
 
-1. 已有模块内容
+1. 框架初始模块内容
 
    <table style="border-collapse:
     collapse;table-layout:fixed;width:312pt" width="416" cellspacing="0" cellpadding="0" border="0">
@@ -117,10 +124,6 @@
     </tr>
     <!--[endif]-->
    </tbody></table>
-
-计划添加的模块是**微信公众号管理**,包名暂定`io.sdses.modules.wechat`，子功能模块命名前缀为`WechatXX`,如计划开发功能有**消息推送**(命名前缀: `WechatPub`)，推送后内容要存表wechat_pub
-
-计划修改的模块**数据管理**为**认证管理**(authentication manage),包名暂定`io.sdses.modules.auth`,子功能命名前缀为`AuthXX`，修改显示功能模块**全系档案**为**认证档案**(命名前缀: `Auth`),此模块除了显示认证结果数据表`auth_result`、用户账号基本信息表`auth_user`，还需负责认证功能，可以共用一个Controller,开发认证相关Service
 
 2. `qrtz`前缀的数据库是用于Quartz任务调度的,但是相关Bean已经被指导老师注释了,而且也没有相关的DAO层代码以及`mapper.xml`文件，
 3. `job`模块是关于定时任务的，6.25的会议上说明不需要进行定时任务，即无需定时获取token，则更无需开启全局redis缓存，相关功能可认为禁用

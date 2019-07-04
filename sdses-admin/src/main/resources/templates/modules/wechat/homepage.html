@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>实名认证</title>
+    <title>待遇资格认证系统</title>
     <meta name="author" content="Ye">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
     <link rel="stylesheet" href="${request.contextPath}/statics/css/weui.css">
@@ -39,18 +39,27 @@
     var OpenID;
 
     $(function(){
+
         $('#test').click(function(){
-            var code = getQueryVariable("code");
+            var formdata = new FormData();
+            formdata.append("file",fileUpload.files[0]);
+            formdata.append("openid",OpenID);
+            formdata.append("idname","idname");
+            formdata.append("idnum","idnum");
+            formdata.append("num4","num4");
+            formdata.append("image","image");
             $.ajax({
-
-                type: "get",//使用servlet中的post方法
-
-                url: "/sdses-admin/wechat/page/getOpenID?code="+code,
-                success: function(data) {
-                    resText.innerHTML = "OpenID:"+data.openid;
+                url: '/sdses-admin/wechat/page/uploadvideo',
+                type: 'POST',
+                cache: false, //上传文件不需要缓存
+                data: formdata,
+                async:true,
+                processData: false, // 告诉jQuery不要去处理发送的数据
+                contentType: false, // 告诉jQuery不要去设置Content-Type请求头
+                success:function(data){
+                    console.log(data.msg);
                 }
-
-            })
+            });
         });
     });
 
@@ -70,7 +79,6 @@
         $.ajax({
 
             type: "get",//使用servlet中的post方法
-
             url: "/sdses-admin/wechat/page/getOpenID?code="+code,
             success: function(data) {
                 resText.innerHTML = "OpenID:"+data.openid;
@@ -78,6 +86,15 @@
             }
 
         })
+
+        $.ajax({
+            type:'get',
+            url:'/sdses-admin/wechat/page/saveOpenID?openid='+OpenID,
+            success:function(data){
+                console.log(data.msg);
+            }
+        });
+
     }
 
     $(function(){
@@ -111,12 +128,20 @@
 </script>
 
 <body>
+<div class="container">
+    <div class="page__hd">
+        <a href="javascript:;" class="weui-btn weui-btn_block weui-btn_default">待遇资格认证系统</a>
+        <p id="resText">openid</p>
+    </div>
+    <div class="page__bd page__bd_spacing">
+        <div class="button-sp-area">
+            <button id="startbtn" class="weui-btn weui-btn_primary">开始认证</button>
+            <a id="test" class="weui-btn weui-btn_primary">测试</a>
+            <input type="file" accept="video/*" capture="camera" id="fileUpload">
 
-<p id="resText">测试用</p>
-<button id="startbtn" class="weui-btn weui-btn_primary">开始认证</button>
-<a id="test" class="weui-btn weui-btn_primary">测试</a>
-
-
+        </div>
+    </div>
+</div>
 
 </body>
 
