@@ -1,4 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+﻿<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
 		<groupId>io.sdses</groupId>
 		<artifactId>sdses-security</artifactId>
@@ -6,7 +6,7 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>sdses-api</artifactId>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<description>sdses-api</description>
 
 	<properties>
@@ -19,6 +19,12 @@
 			<artifactId>sdses-common</artifactId>
 			<version>3.2.0</version>
 		</dependency>
+        <dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.4</version>
+		</dependency>
+
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
@@ -29,6 +35,72 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>${swagger.version}</version>
 		</dependency>
+		
+		<dependency>
+          <groupId>com.aliyun</groupId>
+          <artifactId>httpcore</artifactId>
+          <version>4.4.7</version>
+          <scope>system</scope>
+          <systemPath>${project.basedir}/lib/httpcore-4.4.7.jar</systemPath>
+        </dependency>
+        
+        <dependency>
+          <groupId>com.aliyun</groupId>
+          <artifactId>commons-logging</artifactId>
+          <version>1.2.0</version>
+          <scope>system</scope>
+          <systemPath>${project.basedir}/lib/commons-logging-1.2.jar</systemPath>
+        </dependency>
+        
+        <dependency>
+          <groupId>com.aliyun</groupId>
+          <artifactId>fastjson</artifactId>
+          <version>1.2.9</version>
+          <scope>system</scope>
+          <systemPath>${project.basedir}/lib/fastjson-1.2.9.jar</systemPath>
+        </dependency>
+        
+        <dependency>
+          <groupId>com.aliyun</groupId>
+          <artifactId>fluent-hc</artifactId>
+          <version>4.5.4</version>
+          <scope>system</scope>
+          <systemPath>${project.basedir}/lib/fluent-hc-4.5.4.jar</systemPath>
+        </dependency>
+        
+        <dependency>
+          <groupId>com.aliyun</groupId>
+          <artifactId>httpclient</artifactId>
+          <version>4.5.4</version>
+          <scope>system</scope>
+          <systemPath>${project.basedir}/lib/httpclient-4.5.4.jar</systemPath>
+        </dependency>
+        
+        <dependency>
+          <groupId>com.aliyun</groupId>
+          <artifactId>httpmime</artifactId>
+          <version>4.5.4</version>
+          <scope>system</scope>
+          <systemPath>${project.basedir}/lib/httpmime-4.5.4.jar</systemPath>
+        </dependency>
+        
+        <dependency>
+          <groupId>com.aliyun</groupId>
+          <artifactId>jettison</artifactId>
+          <version>1.0.1</version>
+          <scope>system</scope>
+          <systemPath>${project.basedir}/lib/jettison-1.0.1.jar</systemPath>
+        </dependency>
+        
+        <dependency>
+          <groupId>com.aliyun</groupId>
+          <artifactId>json-simple</artifactId>
+          <version>1.1.1</version>
+          <scope>system</scope>
+          <systemPath>${project.basedir}/lib/json-simple-1.1.1.jar</systemPath>
+        </dependency>
+        
+	
 	</dependencies>
 
 	<build>
@@ -37,6 +109,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				 <configuration>
+                   <includeSystemScope>true</includeSystemScope>
+                 </configuration> 
 			</plugin>
 			<!-- 跳过单元测试 -->
 			<plugin>
@@ -44,6 +119,7 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
 					<skipTests>true</skipTests>
+					<includeSystemScope>true</includeSystemScope>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -60,6 +136,7 @@
 							<include>${project.build.finalName}.jar</include>
 						</resource>
 					</resources>
+					<includeSystemScope>true</includeSystemScope>
 				</configuration>
 				<!-- 运行命令 mvn clean package docker:build 打包并生成docker镜像 -->
 			</plugin>

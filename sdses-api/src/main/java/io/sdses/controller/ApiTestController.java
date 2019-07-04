@@ -44,5 +44,11 @@ public class ApiTestController {
     public R notToken(){
         return R.ok().put("msg", "无需token也能访问。。。");
     }
+    
+    @GetMapping("ybk")
+    @ApiOperation("ybk")
+    public R notToken1(){
+        return R.ok().put("msg", "无需token也能访问。。。");
+    }
 
 }
