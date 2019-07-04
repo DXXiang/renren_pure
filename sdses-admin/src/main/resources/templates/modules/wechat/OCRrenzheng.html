@@ -16,7 +16,7 @@
     <div id="openid">openid</div>
     <div>
         <div>
-            <a href="javascript:zminput.click();" class="weui-btn weui-btn_block weui-btn_primary">点击上传正面照</a>
+            <a href="javascript:zmupload();" class="weui-btn weui-btn_block weui-btn_primary">点击上传正面照</a>
         </div>
         <div><img onclick="zminput.click()" style="width: 100%;" id="zhengmianzhaopian" src="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=2384163257,1795060609&fm=173&app=49&f=JPEG?w=640&h=429&s=00114F30075665C8087940C80300F0B2"
      alt="点击上传正面照片"></div>
@@ -24,14 +24,14 @@
     </div>
     <div>
         <div>
-            <a href="javascript:bminput.click();" class="weui-btn weui-btn_block weui-btn_primary">点击上传背面照</a>
+            <a href="javascript:bmupload();" class="weui-btn weui-btn_block weui-btn_primary">点击上传背面照</a>
         </div>
         <div><img onclick="bminput.click()" style="width: 100%;" id="beimianzhaopian" src="https://gss0.baidu.com/9vo3dSag_xI4khGko9WTAnF6hhy/zhidao/wh%3D600%2C800/sign=0b663d8e6fd0f703e6e79dda38ca7d05/d833c895d143ad4b50662d598f025aafa50f06da.jpg" alt="点击上传背面照片"></div>
         <div><input style="display:none"  id="bminput" accept=“image/* type="file" onchange="choosePic(this,'beimianzhaopian')"/></div>
     </div>
 
     <div class="buttom-sp-area">
-        <a href="javascript:button();" class="weui-btn weui-btn_primary" id="btn">上传</a>
+        <a href="javascript:button();" class="weui-btn weui-btn_primary" id="btn">下一步</a>
         </div>
     <div id="toast" style="display: none;">
         <div class="weui-mask_transparent"></div>
@@ -53,127 +53,116 @@
 
 <script>
 
-    var flag = false;
+    var zm = false;
+    var bm= false;
     var OpenID;
-    var upload= false;
     var cardid="";
     var name = "";
     var cardphoto = "";
     var check = ""
 
-    function button1() {
-        var formData = new FormData();
+    function zmupload() {
 
-        formData.append('photo',zhengmianzhaopian.src);
-        formData.append('type',"1");
-        $.ajax({
-            url: '/sdses-admin/wechat/page/uploadpic',
-            type: 'POST',
-            cache: false, //上传文件不需要缓存
-            data: formData,
-            async:false,
-            processData: false, // 告诉jQuery不要去处理发送的数据
-            contentType: false, // 告诉jQuery不要去设置Content-Type请求头
+        if(!$('#zminput')[0].files[0]){
+            alert("请添加正面照")
+            return;
+        }
+        var loading = $('#loadingToast');
+        loading.fadeIn(100);
+        setTimeout(function () {
+            var formData = new FormData();
 
-            success: function (data) {
-                console.log(data)
-            },
-            error: function (data) {
-                console.log(data)
-            }
-        })
+            formData.append('photo',zhengmianzhaopian.src);
+            formData.append('type',"1");
+            $.ajax({
+                url: '/sdses-admin/wechat/page/uploadpic',
+                type: 'POST',
+                cache: false, //上传文件不需要缓存
+                data: formData,
+                async:false,
+                processData: false, // 告诉jQuery不要去处理发送的数据
+                contentType: false, // 告诉jQuery不要去设置Content-Type请求头
+
+                success: function (data) {
+                    console.log(data)
+                    if(data.cardID!=undefined){
+                        cardid = data.cardID;
+                        name = data.name;
+                        cardphoto = "data:image/png;base64,"+data.photo;
+                        zm = true;
+                        loading.fadeOut(100);
+                        var finish = $('#toast');
+                        finish.fadeIn(100);
+                        setTimeout(function () {
+                            finish.fadeOut(100);
+                        },1000);
+                    }else {
+                        loading.fadeOut(100);
+                    }
+                },
+                error: function (data) {
+                    console.log(data)
+                    loading.fadeOut(100);
+                    alert("上传失败")
+                }
+            })
+        },101)
     }
     //按钮
+    function bmupload() {
+        if(!$('#bminput')[0].files[0]){
+            alert("请添加背面照")
+            return;
+        }
+        var loading = $('#loadingToast');
+        loading.fadeIn(100);
+        setTimeout(function () {
+            var formData = new FormData();
+
+            formData.append('photo',beimianzhaopian.src);
+            formData.append('type',"2");
+            $.ajax({
+                url: '/sdses-admin/wechat/page/uploadpic',
+                type: 'POST',
+                cache: false, //上传文件不需要缓存
+                data: formData,
+                async:false,
+                processData: false, // 告诉jQuery不要去处理发送的数据
+                contentType: false, // 告诉jQuery不要去设置Content-Type请求头
+
+                success: function (data) {
+                    console.log(data)
+                    if (data.check!=undefined){
+                        check = data.check;
+                        bm=true;
+                        loading.fadeOut(100);
+                        var finish = $('#toast');
+                        finish.fadeIn(100);
+                        setTimeout(function () {
+                            finish.fadeOut(100);
+                        },1000);
+                    }else {
+                        loading.fadeOut(100);
+                    }
+                },
+                error: function (data) {
+                    console.log(data)
+                    loading.fadeOut(100);
+                    alert("上传失败")
+                }
+            })
+        },101)
+    }
 
     function button() {
 
-        if(flag==false){
-
-            var $loadingToast = $('#loadingToast');
-            var $toast = $('#toast');
-            if ($loadingToast.css('display') != 'none') return;
-            $loadingToast.fadeIn(100);
-
-            if(!$('#zminput')[0].files[0]){
-                $loadingToast.fadeOut(100);
-                alert("请添加正面照")
-                return;
-            }
-            if(!$('#bminput')[0].files[0]){
-                $loadingToast.fadeOut(100);
-                alert("请添加背面照")
-                return;
-            }
-
-            uploadpic(zhengmianzhaopian.src,"1");
-            if(upload){
-                uploadpic(beimianzhaopian.src,"2");
-                if(upload){
-                    flag = true;
-                    $loadingToast.fadeOut(100);
-                    $toast.fadeIn(100);
-                    setTimeout(function () {
-                        $toast.fadeOut(100);
-                    }, 2000);
-                    btn.innerHTML = "下一步";
-                }else {
-                    $loadingToast.fadeOut(100);
-                    console.log("上传失败");
-                    return;
-                }
-            }else {
-                $loadingToast.fadeOut(100);
-                console.log("上传失败");
-                return;
-            }
-        }
-        else {
+        if(zm&&bm){
             $(window).attr("location","/sdses-admin/wechat/page/confirm.html?openid="+OpenID+"&name="+name+"&cardid="+cardid+"&photo="+cardphoto+"&check="+check);
         }
-    }
-
-    //base64
-    function FileToBase64(file) {
-        var reader = new FileReader();
-        var AllowImgFileSize = 2100000; //上传图片最大值(单位字节)（ 2 M = 2097152 B ）超过2M上传失败
-        var imgUrlBase64;
-        if (file) {
-            //将文件以Data URL形式读入页面
-            imgUrlBase64 = reader.readAsDataURL(file);
-            reader.onload = function (e) {
-                //var ImgFileSize = reader.result.substring(reader.result.indexOf(",") + 1).length;//截取base64码部分（可选可不选，需要与后台沟通）
-                if (AllowImgFileSize != 0 && AllowImgFileSize < reader.result.length) {
-
-
-                    var image = new Image();    //新建一个img标签（不嵌入DOM节点，仅做canvas操作)
-                    image.src = reader.result;   //让该标签加载base64格式的原图
-                    image.onload = function() {    //图片加载完毕后再通过canvas压缩图片，否则图片还没加载完就压缩，结果图片是全黑的
-                        var canvas = document.createElement('canvas'), //创建一个canvas元素
-                            context = canvas.getContext('2d'),    //context相当于画笔，里面有各种可以进行绘图的API
-                            imageWidth = 300,    //压缩后图片的宽度，这里设置为缩小一半
-                            imageHeight = 200    //压缩后图片的高度，这里设置为缩小一半
-                        canvas.width = imageWidth    //设置绘图的宽度
-                        canvas.height = imageHeight    //设置绘图的高度
-
-                        //使用drawImage重新设置img标签中的图片大小，实现压缩。drawImage方法的参数可以自行查阅W3C
-                        context.drawImage(image, 0, 0, imageWidth, imageHeight)
-
-                        //使用toDataURL将canvas上的图片转换为base64格式
-                        imgUrlBase64 = canvas.toDataURL('image/jpeg')
-                        console.log(imgUrlBase64);
-                    }
-
-                    return;
-                }else{
-                    //执行上传操作
-                    imgUrlBase64 = reader.result;
-                }
-            }
+        else {
+            alert("请先完成身份证正反面上传!")
         }
     }
-
-
-
     //url传参
     function getQueryVariable(variable)
     {
@@ -192,45 +181,6 @@
         openid.innerHTML = _openid;
         OpenID = _openid;
     }
-
-
-    //上传
-    function uploadpic(photo,type){
-        var formData = new FormData();
-
-        formData.append('photo',photo);
-        formData.append('type',type);
-        $.ajax({
-            url: '/sdses-admin/wechat/page/uploadpic',
-            type: 'POST',
-            cache: false, //上传文件不需要缓存
-            data: formData,
-            async:false,
-            processData: false, // 告诉jQuery不要去处理发送的数据
-            contentType: false, // 告诉jQuery不要去设置Content-Type请求头
-
-            success: function (data) {
-                console.log(data);
-                if (data.code==0){
-                    if (data.check!=undefined){
-                        check = data.check;
-                    }
-                    if(data.cardID!=undefined){
-                        cardid = data.cardID;
-                        name = data.name;
-                        cardphoto = "data:image/png;base64,"+data.photo;
-                    }
-                    upload = true;
-                }
-                else upload=false;
-            },
-            error: function (data) {
-                console.log(data);
-                upload=false;
-            }
-        })
-    }
-
 
     function choosePic(obj, id) {
         //FileReader
@@ -274,7 +224,12 @@
         }
     }
 
-
+    function sleep(delay) {
+        var start = (new Date()).getTime();
+        while ((new Date()).getTime() - start < delay) {
+            continue;
+        }
+    }
 </script>
 
 </html>

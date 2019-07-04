@@ -69,6 +69,20 @@ public class WechatWebPageCpntroller {
         return jsonObject;
     }
 
+    @RequestMapping("/test")
+    @ResponseBody
+    public JSONObject test(HttpServletRequest request) throws IOException {
+        String name = request.getParameter("idname");
+        System.out.println("默认："+name);
+        byte bytes[] = name.getBytes("UTF-8");
+        name = new String(bytes,"ISO8859-1");
+        System.out.println("ISO8859-1："+name);
+        bytes = name.getBytes("ISO8859-1");
+        name = new String(bytes,"UTF-8");
+        System.out.println("UTF-8："+name);
+        return null;
+    }
+
     @RequestMapping("/uploadvideo")
     @ResponseBody
     public JSONObject uploadvideo(MultipartFile[] file, HttpServletRequest request) throws IOException {

@@ -19,7 +19,7 @@
 " alt="演示图片"></div>
 
     <input type="file" accept="video/*" capture="camera" id="fileUpload" style="position:absolute; clip:rect(0 0 0 0);"  onchange="uploadVideo(this)">
-
+    <a id="num4" class="weui-btn_cell weui-btn_cell-primary">6666</a>
     <div>
         <a href="javascript:fileUpload.click();" class="weui-btn weui-btn_primary" id="btn">开始录制视频</a>
     </div>
@@ -47,8 +47,8 @@
     var CardID="";
     var Name = "";
     var CardPhoto = "";
-    var Check = ""
-
+    var Check = "";
+    var Num4 = "";
 
     //url传参
     function getQueryVariable(variable)
@@ -70,20 +70,26 @@
         var _cardphoto = getQueryVariable("photo");
         var _check = getQueryVariable("check");
         openid.innerHTML = "openid="+_openid;
-        cardid.innerHTML = "cardid="+_cardid;
-        check.innerHTML = "check="+_check;
-        cardphoto.src = _cardphoto;
         OpenID = _openid;
         Name = _name;
         CardID = _cardid;
         CardPhoto = _cardphoto;
         Check = _check;
-        cardname.innerHTML = "name="+Name;
         console.log(OpenID);
         console.log(Name);
         console.log(CardID);
         console.log(CardPhoto);
         console.log(Check);
+
+        $.ajax({
+            type:"get",
+            url:"/sdses-admin/wechat/page/getNum",
+            success: function(data) {
+                console.log(data);
+                num4.innerHTML = data.num4;
+                Num4 = data.num4;
+            }
+        })
     }
 
 
@@ -97,10 +103,10 @@
         var file = fileUpload.files[0];
         formData.append('file', file);
         formData.append('openid', OpenID);
-        formData.append('idname', "idname_");
-        formData.append('idnum', "idnum_");
-        formData.append('num4', "num4_");
-        formData.append('image', "sadas");
+        formData.append('idname', Name);
+        formData.append('idnum', CardID);
+        formData.append('num4', Num4);
+        formData.append('image', CardPhoto);
 
         $.ajax({
             url: '/sdses-admin/wechat/page/uploadvideo',
@@ -113,10 +119,16 @@
 
             success: function (data) {
                 $loadingToast.fadeOut(100);
-                $toast.fadeIn(100);
-                setTimeout(function () {
-                    $toast.fadeOut(100);
-                }, 2000);
+                console.log(data)
+                if(data.result=="认证成功"){
+                    var finish = $('#toast');
+                    finish.fadeIn(100);
+                    setTimeout(function () {
+                        finish.fadeOut(100);
+                    },1000);
+                }else{
+                    alert(data.失败原因);
+                }
             },
             error: function (data) {
                 $loadingToast.fadeOut(100);

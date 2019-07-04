@@ -12,11 +12,33 @@
 <body>
 
 <div class="page__bd page__bd_spacing">
-    <div id="openid">openid</div>
-    <div id="cardid">cardid</div>
-    <div id="cardname">name</div>
-    <div id="check">check</div>
-    <div><img id="cardphoto"></div>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell weui-cell_vcode">
+            <div class="weui-cell__hd">
+                <label class="weui-label">OpenID</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input id="openidinput" class="weui-input" type="tel" placeholder=OpenID>
+            </div>
+        </div>
+        <div class="weui-cell weui-cell_vcode">
+            <div class="weui-cell__hd">
+                <label class="weui-label">姓名</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input id="nameinput" class="weui-input" type="tel" placeholder=姓名>
+            </div>
+        </div>
+        <div class="weui-cell weui-cell_vcode">
+            <div class="weui-cell__hd">
+                <label class="weui-label">身份证号码</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input id="idinput" class="weui-input" type="tel" placeholder=身份证号码>
+            </div>
+        </div>
+        <div><img id="cardphoto"></div>
+    </div>
     <div class="buttom-sp-area">
         <a href="javascript:confirm();" class="weui-btn weui-btn_primary" id="btn">确认</a>
     </div>
@@ -26,7 +48,7 @@
 
 <script>
 
-    var OpenID;
+    var OpenID="";
     var CardID="";
     var Name = "";
     var CardPhoto = "";
@@ -52,16 +74,16 @@
         var _cardid = getQueryVariable("cardid");
         var _cardphoto = getQueryVariable("photo");
         var _check = getQueryVariable("check");
-        openid.innerHTML = "openid="+_openid;
-        cardid.innerHTML = "cardid="+_cardid;
-        check.innerHTML = "check="+_check;
+        openidinput.placeholder = _openid;
+        idinput.placeholder = _cardid;
+        nameinput.placeholder = _name;
         cardphoto.src = _cardphoto;
         OpenID = _openid;
         Name = _name;
         CardID = _cardid;
         CardPhoto = _cardphoto;
         Check = _check;
-        cardname.innerHTML = "name="+Name;
+
         console.log(OpenID);
         console.log(Name);
         console.log(CardID);
@@ -70,6 +92,8 @@
     }
 
     function confirm(){
+        if(nameinput.value!="")Name = nameinput.value;
+        if(idinput.value!="")CardID = idinput.value;
         $(window).attr("location","/sdses-admin/wechat/page/huotijiance.html?openid="+OpenID+"&name="+Name+"&cardid="+CardID+"&photo="+CardPhoto+"&check="+Check);
     }
 
