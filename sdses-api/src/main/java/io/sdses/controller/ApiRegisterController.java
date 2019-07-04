@@ -5,6 +5,7 @@ import io.sdses.common.utils.R;
 import io.sdses.common.validator.ValidatorUtils;
 import io.sdses.entity.UserEntity;
 import io.sdses.form.RegisterForm;
+import io.sdses.service.TokenService;
 import io.sdses.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -42,6 +43,7 @@ public class ApiRegisterController {
         user.setPassword(DigestUtils.sha256Hex(form.getPassword()));
         user.setCreateTime(new Date());
         userService.insert(user);
+       
 
         return R.ok();
     }
