@@ -18,21 +18,21 @@
         <div>
             <a href="javascript:zminput.click();" class="weui-btn weui-btn_block weui-btn_primary">点击上传正面照</a>
         </div>
-        <div><img onclick="zminput.click()" style="width: 100%;" id="zhengmianzhaopian" src="https://gss0.baidu.com/9vo3dSag_xI4khGko9WTAnF6hhy/zhidao/wh%3D600%2C800/sign=0b663d8e6fd0f703e6e79dda38ca7d05/d833c895d143ad4b50662d598f025aafa50f06da.jpg
-" alt="点击上传正面照片"></div>
+        <div><img onclick="zminput.click()" style="width: 100%;" id="zhengmianzhaopian" src="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=2384163257,1795060609&fm=173&app=49&f=JPEG?w=640&h=429&s=00114F30075665C8087940C80300F0B2"
+     alt="点击上传正面照片"></div>
         <input style="display:none"  id="zminput" accept=“image/* type="file" name="f1" onchange="choosePic(this,'zhengmianzhaopian')"/>
     </div>
     <div>
         <div>
             <a href="javascript:bminput.click();" class="weui-btn weui-btn_block weui-btn_primary">点击上传背面照</a>
         </div>
-        <div><img onclick="bminput.click()" style="width: 100%;" id="beimianzhaopian" src="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=2384163257,1795060609&fm=173&app=49&f=JPEG?w=640&h=429&s=00114F30075665C8087940C80300F0B2" alt="点击上传背面照片"></div>
+        <div><img onclick="bminput.click()" style="width: 100%;" id="beimianzhaopian" src="https://gss0.baidu.com/9vo3dSag_xI4khGko9WTAnF6hhy/zhidao/wh%3D600%2C800/sign=0b663d8e6fd0f703e6e79dda38ca7d05/d833c895d143ad4b50662d598f025aafa50f06da.jpg" alt="点击上传背面照片"></div>
         <div><input style="display:none"  id="bminput" accept=“image/* type="file" onchange="choosePic(this,'beimianzhaopian')"/></div>
     </div>
 
     <div class="buttom-sp-area">
         <a href="javascript:button();" class="weui-btn weui-btn_primary" id="btn">上传</a>
-    </div>
+        </div>
     <div id="toast" style="display: none;">
         <div class="weui-mask_transparent"></div>
         <div class="weui-toast">
@@ -56,6 +56,10 @@
     var flag = false;
     var OpenID;
     var upload= false;
+    var cardid="";
+    var name = "";
+    var cardphoto = "";
+    var check = ""
 
     function button1() {
         var formData = new FormData();
@@ -80,6 +84,7 @@
         })
     }
     //按钮
+
     function button() {
 
         if(flag==false){
@@ -113,17 +118,17 @@
                     btn.innerHTML = "下一步";
                 }else {
                     $loadingToast.fadeOut(100);
-                    alert("上传失败");
+                    console.log("上传失败");
                     return;
                 }
             }else {
                 $loadingToast.fadeOut(100);
-                alert("上传失败");
+                console.log("上传失败");
                 return;
             }
         }
         else {
-            $(window).attr("location","/sdses-admin/wechat/page/huotijiance.html?openid="+OpenID);
+            $(window).attr("location","/sdses-admin/wechat/page/confirm.html?openid="+OpenID+"&name="+name+"&cardid="+cardid+"&photo="+cardphoto+"&check="+check);
         }
     }
 
@@ -194,7 +199,7 @@
         var formData = new FormData();
 
         formData.append('photo',photo);
-        formData.append('type',photo);
+        formData.append('type',type);
         $.ajax({
             url: '/sdses-admin/wechat/page/uploadpic',
             type: 'POST',
@@ -205,10 +210,23 @@
             contentType: false, // 告诉jQuery不要去设置Content-Type请求头
 
             success: function (data) {
-                upload = true;
+                console.log(data);
+                if (data.code==0){
+                    if (data.check!=undefined){
+                        check = data.check;
+                    }
+                    if(data.cardID!=undefined){
+                        cardid = data.cardID;
+                        name = data.name;
+                        cardphoto = "data:image/png;base64,"+data.photo;
+                    }
+                    upload = true;
+                }
+                else upload=false;
             },
             error: function (data) {
-                upload = false;
+                console.log(data);
+                upload=false;
             }
         })
     }

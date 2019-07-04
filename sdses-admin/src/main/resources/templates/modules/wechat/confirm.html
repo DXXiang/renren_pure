@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>OCR认证</title>
+    <meta name="author" content="Ye">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+    <link rel="stylesheet" href="${request.contextPath}/statics/css/weui.css">
+    <link rel="stylesheet" href="${request.contextPath}/statics/css/test.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+
+<div class="page__bd page__bd_spacing">
+    <div id="openid">openid</div>
+    <div id="cardid">cardid</div>
+    <div id="cardname">name</div>
+    <div id="check">check</div>
+    <div><img id="cardphoto"></div>
+    <div class="buttom-sp-area">
+        <a href="javascript:confirm();" class="weui-btn weui-btn_primary" id="btn">确认</a>
+    </div>
+</div>
+
+</body>
+
+<script>
+
+    var OpenID;
+    var CardID="";
+    var Name = "";
+    var CardPhoto = "";
+    var Check = ""
+
+
+    //url传参
+    function getQueryVariable(variable)
+    {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
+        }
+        return(false);
+    }
+
+    //页面加载函数
+    window.onload=function (){
+        var _openid = getQueryVariable("openid");
+        var _name = decodeURI(getQueryVariable("name"));
+        var _cardid = getQueryVariable("cardid");
+        var _cardphoto = getQueryVariable("photo");
+        var _check = getQueryVariable("check");
+        openid.innerHTML = "openid="+_openid;
+        cardid.innerHTML = "cardid="+_cardid;
+        check.innerHTML = "check="+_check;
+        cardphoto.src = _cardphoto;
+        OpenID = _openid;
+        Name = _name;
+        CardID = _cardid;
+        CardPhoto = _cardphoto;
+        Check = _check;
+        cardname.innerHTML = "name="+Name;
+        console.log(OpenID);
+        console.log(Name);
+        console.log(CardID);
+        console.log(CardPhoto);
+        console.log(Check);
+    }
+
+    function confirm(){
+        $(window).attr("location","/sdses-admin/wechat/page/huotijiance.html?openid="+OpenID+"&name="+Name+"&cardid="+CardID+"&photo="+CardPhoto+"&check="+Check);
+    }
+
+</script>
+
+</html>

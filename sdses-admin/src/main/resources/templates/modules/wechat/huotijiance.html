@@ -44,6 +44,11 @@
 <script>
 
     var OpenID;
+    var CardID="";
+    var Name = "";
+    var CardPhoto = "";
+    var Check = ""
+
 
     //url传参
     function getQueryVariable(variable)
@@ -60,8 +65,25 @@
     //页面加载函数
     window.onload=function (){
         var _openid = getQueryVariable("openid");
-        openid.innerHTML = _openid;
+        var _name = decodeURI(getQueryVariable("name"));
+        var _cardid = getQueryVariable("cardid");
+        var _cardphoto = getQueryVariable("photo");
+        var _check = getQueryVariable("check");
+        openid.innerHTML = "openid="+_openid;
+        cardid.innerHTML = "cardid="+_cardid;
+        check.innerHTML = "check="+_check;
+        cardphoto.src = _cardphoto;
         OpenID = _openid;
+        Name = _name;
+        CardID = _cardid;
+        CardPhoto = _cardphoto;
+        Check = _check;
+        cardname.innerHTML = "name="+Name;
+        console.log(OpenID);
+        console.log(Name);
+        console.log(CardID);
+        console.log(CardPhoto);
+        console.log(Check);
     }
 
 

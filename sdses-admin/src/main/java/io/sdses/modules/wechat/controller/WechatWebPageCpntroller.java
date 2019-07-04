@@ -50,17 +50,14 @@ public class WechatWebPageCpntroller {
 
     @RequestMapping("/uploadpic")
     @ResponseBody
-    public Map<String,Object> uploadpic(HttpServletRequest request) throws IOException {
-        List<String> list = new ArrayList<String>();
-        Map<String,Object> map=new HashMap<String,Object>();
-        String base64 = request.getParameter("photo");
+    public JSONObject uploadpic(HttpServletRequest request) throws IOException {
+        String base64 = request.getParameter("photo").split(",")[1];
         String type= request.getParameter("type");
         JSONObject send = JSONObject.fromObject("{photo:'"+base64+"',type:'"+type+"'}");
         String url = "http://47.93.1.226:8081/sdses-api/api/ocr";
         JSONObject jsonObject = HttpUtils.doPost(url,send);
         System.out.println(jsonObject.toString());
-        map.put("msg",jsonObject.toString());
-        return map;
+        return jsonObject;
     }
 
     @RequestMapping("/getNum")
