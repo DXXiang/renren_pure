@@ -21,7 +21,7 @@ by董翔祥
 
   1. 先`clone`项目到本地(已经`clone`请跳过)
 
-  2. 然后创建本地`dev`分支并且和远程`dev`分支对应
+  2. 然后创建本地`dev`分支并且和远程`dev`分支对应(已经`track`请跳过)
      
      ```shell
      $ git branch -a  #先查看下当前的本地和远程分支
@@ -31,16 +31,23 @@ by董翔祥
      
   3. 开发
   
-  4. push到远程分支，若本地分支命名为dev则可直接git push
+     ```shell
+     $ git add . # 将改动加入本地暂存
+     $ git commit -m "备注" # 提交暂存改动
+     ```
+  
      
+  
+  4. 阶段开发完成，push到远程分支
+  
      ```shell
      $ git push origin HEAD:dev  #命名为其他则需指定push到远程的dev分支
      ```
-     
+  
      ```shell
      $ git push  #本地分支命名为dev直接push即可
      ```
-     
+  
   5. 线上merge
 ## 注意！！！
 
