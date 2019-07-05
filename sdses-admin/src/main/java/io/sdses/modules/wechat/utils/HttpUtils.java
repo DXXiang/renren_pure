@@ -97,10 +97,10 @@ public class HttpUtils {
             client = HttpClients.createDefault();
             HttpPost httpPost = new HttpPost(url);
             MultipartEntityBuilder builder = MultipartEntityBuilder.create();
-            builder.setCharset(Charset.forName("utf-8"));
+            ContentType strContent=ContentType.create("text/plain",Charset.forName("UTF-8"));
             builder.addTextBody("openid", request.getParameter("openid"));
             String name = request.getParameter("idname");
-            builder.addTextBody("idname", name);
+            builder.addTextBody("idname", name,strContent);
             builder.addTextBody("idnum", request.getParameter("idnum"));
             builder.addTextBody("num4", request.getParameter("num4"));
             builder.addTextBody("image", request.getParameter("image").split(",")[1]);
