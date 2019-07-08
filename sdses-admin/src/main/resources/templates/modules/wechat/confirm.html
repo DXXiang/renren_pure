@@ -2,25 +2,56 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>OCR认证</title>
+    <title>OCR认证结果确认</title>
     <meta name="author" content="Ye">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
     <link rel="stylesheet" href="${request.contextPath}/statics/css/weui.css">
-    <link rel="stylesheet" href="${request.contextPath}/statics/css/test.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <style>
+        body{
+            width: 100%;
+            background-color: Azure;
+            margin: 0 auto;
+        }
+        .display{
+            width: 100%;
+            margin: auto;
+
+        }
+
+        .tip{
+            margin:auto;
+            padding-top: 35px;
+            width: 100%;
+            text-align: center;
+        }
+        .headpic-area{
+            margin:auto;
+            padding-top: 35px;
+            width: 100%;
+            text-align: center;
+        }
+        .buttom-sp-area{
+            margin:auto;
+            padding-top: 35px;
+            width: 70%;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-
-<div class="page__bd page__bd_spacing">
-    <div class="weui-cells weui-cells_form">
-        <div class="weui-cell weui-cell_vcode">
-            <div class="weui-cell__hd">
-                <label class="weui-label">OpenID</label>
-            </div>
-            <div class="weui-cell__bd">
-                <input id="openidinput" class="weui-input" type="tel" placeholder=OpenID>
-            </div>
+<div class="display">
+    <div class="tip">
+        请确认您的身份证识别结果，若有错误请修改并进入下一步
+    </div>
+    <div class="headpic-area">
+        <div>照片</div><br>
+        <div>
+            <img id="cardphoto">
         </div>
+    </div>
+    <div class="weui-cells weui-cells_form">
         <div class="weui-cell weui-cell_vcode">
             <div class="weui-cell__hd">
                 <label class="weui-label">姓名</label>
@@ -37,13 +68,11 @@
                 <input id="idinput" class="weui-input" type="tel" placeholder=身份证号码>
             </div>
         </div>
-        <div><img id="cardphoto"></div>
     </div>
     <div class="buttom-sp-area">
         <a href="javascript:confirm();" class="weui-btn weui-btn_primary" id="btn">确认</a>
     </div>
 </div>
-
 </body>
 
 <script>
@@ -74,7 +103,6 @@
         var _cardid = getQueryVariable("cardid");
         var _cardphoto = getQueryVariable("photo");
         var _check = getQueryVariable("check");
-        openidinput.placeholder = _openid;
         idinput.placeholder = _cardid;
         nameinput.placeholder = _name;
         cardphoto.src = _cardphoto;

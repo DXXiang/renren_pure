@@ -5,9 +5,9 @@
     <title>OCR认证</title>
     <meta name="author" content="Ye">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
-    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="${request.contextPath}/statics/css/weui.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
     <style>
         body{
             width: 100%;
@@ -55,12 +55,12 @@
 
     <div class="pic-container">
         <img onclick="zminput.click()" style="width: 100%;" id="zhengmianzhaopian" src="${request.contextPath}/statics/img/renxiangmian.png" alt="点击上传正面照片">
-        <div id="zmmsg" class="msg">提示信息</div>
+        <div id="zmmsg" class="msg"></div>
         <input style="display:none"  id="zminput" accept="image/*" type="file" name="f1" onchange="choosePic(this,'zhengmianzhaopian')"/>
     </div>
     <div class="pic-container">
         <img onclick="bminput.click()" style="width: 100%;" id="beimianzhaopian" src="${request.contextPath}/statics/img/guohuimian.png" alt="点击上传背面照片">
-        <div id="bmmsg" class="msg">提示信息</div>
+        <div id="bmmsg" class="msg"></div>
         <input style="display:none"  id="bminput" accept="image/*" type="file" onchange="choosePic(this,'beimianzhaopian')"/>
     </div>
 
@@ -82,11 +82,9 @@
             <p class="weui-toast__content">上传中</p>
         </div>
     </div>
+
 </div>
-<script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
-<script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
-<script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/swiper.min.js"></script>
-<script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/city-picker.min.js"></script>
+
 </body>
 
 <script>
@@ -101,10 +99,6 @@
 
     function zmupload() {
 
-        if(!$('#zminput')[0].files[0]){
-            alert("请添加正面照")
-            return;
-        }
         var loading = $('#loadingToast');
         loading.fadeIn(100);
         setTimeout(function () {
@@ -136,23 +130,21 @@
                             finish.fadeOut(100);
                         },1000);
                     }else {
+                        zmmsg.innerHTML=data.msg;
                         loading.fadeOut(100);
                     }
                 },
                 error: function (data) {
                     console.log(data)
                     loading.fadeOut(100);
-                    zmmsg.innerHTML="验证失败请重试"
+                    zmmsg.innerHTML="上传失败请重试"
                 }
             })
-        },101)
+        },200)
     }
     //按钮
     function bmupload() {
-        if(!$('#bminput')[0].files[0]){
-            alert("请添加背面照")
-            return;
-        }
+
         var loading = $('#loadingToast');
         loading.fadeIn(100);
         setTimeout(function () {
@@ -182,16 +174,17 @@
                             finish.fadeOut(100);
                         },1000);
                     }else {
+                        bmmsg.innerHTML=data.msg;
                         loading.fadeOut(100);
                     }
                 },
                 error: function (data) {
                     console.log(data)
                     loading.fadeOut(100);
-                    bmmsg.innerHTML="上传失败"
+                    bmmsg.innerHTML="上传失败请重试"
                 }
             })
-        },101)
+        },200)
     }
 
     function button() {
@@ -263,7 +256,7 @@
         }
         if(id=="zhengmianzhaopian"){
             zmupload();
-        }else {
+        }else if("beimianzhaopian"){
             bmupload();
         }
     }
