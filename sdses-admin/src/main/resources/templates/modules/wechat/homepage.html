@@ -5,7 +5,8 @@
     <title>待遇资格认证系统</title>
     <meta name="author" content="Ye">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-    <link rel="stylesheet" href="${request.contextPath}/statics/css/weui.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
     <style>
@@ -119,10 +120,38 @@
         <div class="button-sp-area">
             <button id="startbtn" class="weui-btn weui-btn_primary">开始认证</button>
             <a id="test" class="weui-btn weui-btn_primary">测试</a>
+            <a href="#msg_warn" class="weui-btn weui-btn_default">失败提示页</a>
         </div>
     </div>
 </div>
+<script type="text/html" id="tpl_msg_warn">
+    <div class="page">
+        <div class="weui-msg">
+            <div class="weui-msg__icon-area"><i class="weui-icon-warn weui-icon_msg"></i></div>
+            <div class="weui-msg__text-area">
+                <h2 class="weui-msg__title">操作失败</h2>
+                <p class="weui-msg__desc">内容详情，可根据实际需要安排，如果换行则不超过规定长度，居中展现<a href="javascript:void(0);">文字链接</a></p>
+            </div>
+            <div class="weui-msg__tips-area">
+                <p class="weui-msg__tips">提示详情，可根据实际需要安排，如果换行则不超过规定长度，居中展现<a href="javascript:void(0);">文字链接</a></p>
+            </div>
+            <div class="weui-msg__opr-area">
+                <p class="weui-btn-area">
+                    <a href="javascript:history.back();" class="weui-btn weui-btn_default">辅助操作</a>
+                </p>
+            </div>
+            <div class="weui-msg__extra-area">
+                <div class="weui-footer">
+                    <p class="weui-footer__links">
+                        <a href="javascript:void(0);" class="weui-footer__link">底部链接文本</a>
+                    </p>
+                    <p class="weui-footer__text">Copyright &copy; 2008-2016 weui.io</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
+</script>
 </body>
 
 </html>

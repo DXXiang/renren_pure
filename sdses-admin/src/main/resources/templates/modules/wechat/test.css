@@ -2,3 +2,8 @@
     text-align: center;
     border: 3px solid green;
 }
+
+body{
+    width: 700px;
+    margin: auto;
+}

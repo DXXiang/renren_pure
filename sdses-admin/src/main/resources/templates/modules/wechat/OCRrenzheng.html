@@ -5,34 +5,69 @@
     <title>OCR认证</title>
     <meta name="author" content="Ye">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-    <link rel="stylesheet" href="${request.contextPath}/statics/css/weui.css">
-    <link rel="stylesheet" href="https://weui.io/weui.css">
-    <link rel="stylesheet" href="${request.contextPath}/statics/css/test.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <style>
+        body{
+            width: 100%;
+            background-color: Azure;
+            margin: 0 auto;
+        }
+
+        .display{
+            width: 100%;
+            margin: auto;
+
+        }
+        .tip{
+            margin:auto;
+            padding-top: 35px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .pic-container{
+            margin-top:35px;
+            margin-bottom:35px;
+            margin-right:auto;
+            margin-left:auto;
+            width: 70%;
+        }
+
+        .msg{
+            margin: auto;
+            width: 100%;
+        }
+
+        .button-container{
+            margin: auto;
+            width: 70%;
+        }
+
+    </style>
 </head>
 <body>
-
-<div class="page__bd page__bd_spacing">
-    <div id="openid">openid</div>
-    <div>
-        <div>
-            <a href="javascript:zmupload();" class="weui-btn weui-btn_block weui-btn_primary">点击上传正面照</a>
-        </div>
-        <div><img onclick="zminput.click()" style="width: 100%;" id="zhengmianzhaopian" src="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=2384163257,1795060609&fm=173&app=49&f=JPEG?w=640&h=429&s=00114F30075665C8087940C80300F0B2"
-     alt="点击上传正面照片"></div>
-        <input style="display:none"  id="zminput" accept=“image/* type="file" name="f1" onchange="choosePic(this,'zhengmianzhaopian')"/>
-    </div>
-    <div>
-        <div>
-            <a href="javascript:bmupload();" class="weui-btn weui-btn_block weui-btn_primary">点击上传背面照</a>
-        </div>
-        <div><img onclick="bminput.click()" style="width: 100%;" id="beimianzhaopian" src="https://gss0.baidu.com/9vo3dSag_xI4khGko9WTAnF6hhy/zhidao/wh%3D600%2C800/sign=0b663d8e6fd0f703e6e79dda38ca7d05/d833c895d143ad4b50662d598f025aafa50f06da.jpg" alt="点击上传背面照片"></div>
-        <div><input style="display:none"  id="bminput" accept=“image/* type="file" onchange="choosePic(this,'beimianzhaopian')"/></div>
+<div class="display">
+    <div class="tip">
+        拍摄/上传你的二代身份证
     </div>
 
-    <div class="buttom-sp-area">
+    <div class="pic-container">
+        <img onclick="zminput.click()" style="width: 100%;" id="zhengmianzhaopian" src="${request.contextPath}/statics/img/renxiangmian.png" alt="点击上传正面照片">
+        <div id="zmmsg" class="msg">提示信息</div>
+        <input style="display:none"  id="zminput" accept="image/*" type="file" name="f1" onchange="choosePic(this,'zhengmianzhaopian')"/>
+    </div>
+    <div class="pic-container">
+        <img onclick="bminput.click()" style="width: 100%;" id="beimianzhaopian" src="${request.contextPath}/statics/img/guohuimian.png" alt="点击上传背面照片">
+        <div id="bmmsg" class="msg">提示信息</div>
+        <input style="display:none"  id="bminput" accept="image/*" type="file" onchange="choosePic(this,'beimianzhaopian')"/>
+    </div>
+
+    <div class="button-container">
         <a href="javascript:button();" class="weui-btn weui-btn_primary" id="btn">下一步</a>
-        </div>
+    </div>
+
     <div id="toast" style="display: none;">
         <div class="weui-mask_transparent"></div>
         <div class="weui-toast">
@@ -48,7 +83,10 @@
         </div>
     </div>
 </div>
-
+<script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/swiper.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/city-picker.min.js"></script>
 </body>
 
 <script>
@@ -93,6 +131,7 @@
                         loading.fadeOut(100);
                         var finish = $('#toast');
                         finish.fadeIn(100);
+                        zmmsg.innerHTML="验证通过"
                         setTimeout(function () {
                             finish.fadeOut(100);
                         },1000);
@@ -103,7 +142,7 @@
                 error: function (data) {
                     console.log(data)
                     loading.fadeOut(100);
-                    alert("上传失败")
+                    zmmsg.innerHTML="验证失败请重试"
                 }
             })
         },101)
@@ -138,6 +177,7 @@
                         loading.fadeOut(100);
                         var finish = $('#toast');
                         finish.fadeIn(100);
+                        bmmsg.innerHTML="验证通过"
                         setTimeout(function () {
                             finish.fadeOut(100);
                         },1000);
@@ -148,7 +188,7 @@
                 error: function (data) {
                     console.log(data)
                     loading.fadeOut(100);
-                    alert("上传失败")
+                    bmmsg.innerHTML="上传失败"
                 }
             })
         },101)
@@ -178,7 +218,6 @@
     //页面加载函数
     window.onload=function (){
         var _openid = getQueryVariable("openid");
-        openid.innerHTML = _openid;
         OpenID = _openid;
     }
 
@@ -222,14 +261,13 @@
             alert("亲，浏览器该升级了");
             return;
         }
-    }
-
-    function sleep(delay) {
-        var start = (new Date()).getTime();
-        while ((new Date()).getTime() - start < delay) {
-            continue;
+        if(id=="zhengmianzhaopian"){
+            zmupload();
+        }else {
+            bmupload();
         }
     }
+
 </script>
 
 </html>
