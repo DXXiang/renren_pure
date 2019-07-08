@@ -15,12 +15,15 @@ import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.nio.charset.Charset;
+
 public class HttpUtils {
     /**
      * 处理doget请求
@@ -94,12 +97,14 @@ public class HttpUtils {
             client = HttpClients.createDefault();
             HttpPost httpPost = new HttpPost(url);
             MultipartEntityBuilder builder = MultipartEntityBuilder.create();
-
+            ContentType strContent=ContentType.create("text/plain",Charset.forName("UTF-8"));
             builder.addTextBody("openid", request.getParameter("openid"));
-            builder.addTextBody("idname", request.getParameter("idname"));
+            String name = request.getParameter("idname");
+            builder.addTextBody("idname", name,strContent);
             builder.addTextBody("idnum", request.getParameter("idnum"));
             builder.addTextBody("num4", request.getParameter("num4"));
-            builder.addTextBody("image", request.getParameter("image"));
+            builder.addTextBody("image", request.getParameter("image").split(",")[1]);
+
             //addBinaryBody()该方法传入二进制内容，可以传入InputStream，File, 参数三是传入的类型，参数四是文件名称
             builder.addBinaryBody("file", multfile.getInputStream(), ContentType.MULTIPART_FORM_DATA, "1.mp4");
             httpPost.setEntity(builder.build());
