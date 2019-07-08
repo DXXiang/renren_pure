@@ -44,7 +44,9 @@
             margin: auto;
             width: 70%;
         }
-
+    img{
+        width: 100%;
+    }
     </style>
 </head>
 <body>
@@ -54,12 +56,12 @@
     </div>
 
     <div class="pic-container">
-        <img onclick="zminput.click()" style="width: 100%;" id="zhengmianzhaopian" src="${request.contextPath}/statics/img/renxiangmian.png" alt="点击上传正面照片">
+        <img onclick="zminput.click()" id="zhengmianzhaopian" src="${request.contextPath}/statics/img/renxiangmian.png" alt="点击上传正面照片">
         <div id="zmmsg" class="msg"></div>
         <input style="display:none"  id="zminput" accept="image/*" type="file" name="f1" onchange="choosePic(this,'zhengmianzhaopian')"/>
     </div>
     <div class="pic-container">
-        <img onclick="bminput.click()" style="width: 100%;" id="beimianzhaopian" src="${request.contextPath}/statics/img/guohuimian.png" alt="点击上传背面照片">
+        <img onclick="bminput.click()" id="beimianzhaopian" src="${request.contextPath}/statics/img/guohuimian.png" alt="点击上传背面照片">
         <div id="bmmsg" class="msg"></div>
         <input style="display:none"  id="bminput" accept="image/*" type="file" onchange="choosePic(this,'beimianzhaopian')"/>
     </div>
