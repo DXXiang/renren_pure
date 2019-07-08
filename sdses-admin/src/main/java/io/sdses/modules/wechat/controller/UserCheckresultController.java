@@ -1,16 +1,14 @@
 package io.sdses.modules.wechat.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import io.sdses.common.validator.ValidatorUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import io.sdses.modules.wechat.entity.UserCheckresultEntity;
 import io.sdses.modules.wechat.service.UserCheckresultService;
@@ -28,21 +26,33 @@ import io.sdses.common.utils.R;
  */
 @RestController
 @RequestMapping("wechat/usercheckresult")
+@SessionAttributes("resultList")
 public class UserCheckresultController {
     @Autowired
     private UserCheckresultService userCheckresultService;
+
+//    /**
+//     * 列表
+//     */
+//    @RequestMapping("/list")
+//    @RequiresPermissions("wechat:usercheckresult:list")
+//    public R list(@RequestParam Map<String, Object> params){
+//        PageUtils page = userCheckresultService.queryPage(params);
+//
+//        return R.ok().put("page", page);
+//    }
 
     /**
      * 列表
      */
     @RequestMapping("/list")
     @RequiresPermissions("wechat:usercheckresult:list")
-    public R list(@RequestParam Map<String, Object> params){
+    public R list(@RequestParam Map<String, Object> params, Model model){
         PageUtils page = userCheckresultService.queryPage(params);
-
+        model.addAttribute("resultList", userCheckresultService.queryAllByParams(params));
+//        model.addAttribute("resultList", page.getList());
         return R.ok().put("page", page);
     }
-
 
     /**
      * 信息

@@ -104,7 +104,7 @@ public class HttpUtils {
             builder.addTextBody("idnum", request.getParameter("idnum"));
             builder.addTextBody("num4", request.getParameter("num4"));
             builder.addTextBody("image", request.getParameter("image").split(",")[1]);
-
+            System.out.println(request.getParameter("image").split(",")[1]);
             //addBinaryBody()该方法传入二进制内容，可以传入InputStream，File, 参数三是传入的类型，参数四是文件名称
             builder.addBinaryBody("file", multfile.getInputStream(), ContentType.MULTIPART_FORM_DATA, "1.mp4");
             httpPost.setEntity(builder.build());

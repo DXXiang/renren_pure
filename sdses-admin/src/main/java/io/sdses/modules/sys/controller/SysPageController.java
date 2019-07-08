@@ -55,6 +55,11 @@ public class SysPageController {
 		return "main";
 	}
 
+//	@RequestMapping("main.html")
+//	public String main(){
+//		return "/modules/wechat/usercheckresult.html";
+//	}
+
 	@RequestMapping("404.html")
 	public String notFound(){
 		return "404";

@@ -420,7 +420,7 @@ CREATE TABLE `sys_menu`  (
 INSERT INTO `sys_menu` VALUES (1, 0, '系统管理', NULL, NULL, 0, 'fa fa-cog', 99);
 INSERT INTO `sys_menu` VALUES (2, 1, '用户管理', 'modules/sys/user.html', NULL, 1, 'fa fa-user', 1);
 INSERT INTO `sys_menu` VALUES (3, 1, '角色管理', 'modules/sys/role.html', NULL, 1, 'fa fa-user-secret', 2);
-INSERT INTO `sys_menu` VALUES (4, 0, '首页', 'main.html', NULL, 1, 'fa fa-home', 1);
+-- INSERT INTO `sys_menu` VALUES (4, 0, '首页', 'main.html', NULL, 1, 'fa fa-home', 1);
 INSERT INTO `sys_menu` VALUES (15, 2, '查看', NULL, 'sys:user:list,sys:user:info', 2, NULL, 0);
 INSERT INTO `sys_menu` VALUES (16, 2, '新增', NULL, 'sys:user:save,sys:role:select', 2, NULL, 0);
 INSERT INTO `sys_menu` VALUES (17, 2, '修改', NULL, 'sys:user:update,sys:role:select', 2, NULL, 0);

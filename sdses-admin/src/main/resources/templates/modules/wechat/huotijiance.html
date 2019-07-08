@@ -7,38 +7,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
     <link rel="stylesheet" href="${request.contextPath}/statics/css/weui.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <style>
+        body{
+            width: 100%;
+            background-color: Azure;
+            margin: 0 auto;
+        }
+        .display{
+            width: 100%;
+            margin: auto;
+
+        }
+        .yzm{
+            width: 70%;
+            margin: auto;
+            padding: 20px;
+        }
+        img{
+            width: 100%;
+        }
+        .textarea{
+            padding: 20px;
+            width: 70%;
+            margin: auto;
+        }
+        .button{
+            margin: auto;
+            width: 70%;
+            padding: 35px;
+        }
+    </style>
 </head>
 <body>
-<p id="openid">
-    null
-</p>
-
-<div class="center">
-    <div>开始视频活体检测</div>
-    <div><img style="width: 100%;" id="demo" src="https://gss0.baidu.com/9vo3dSag_xI4khGko9WTAnF6hhy/zhidao/wh%3D600%2C800/sign=0b663d8e6fd0f703e6e79dda38ca7d05/d833c895d143ad4b50662d598f025aafa50f06da.jpg
-" alt="演示图片"></div>
-
-    <input type="file" accept="video/*" capture="camera" id="fileUpload" style="position:absolute; clip:rect(0 0 0 0);"  onchange="uploadVideo(this)">
-    <a id="num4" class="weui-btn_cell weui-btn_cell-primary">6666</a>
-    <div>
-        <a href="javascript:fileUpload.click();" class="weui-btn weui-btn_primary" id="btn">开始录制视频</a>
-    </div>
-
-    <div id="toast" style="display: none;">
-        <div class="weui-mask_transparent"></div>
-        <div class="weui-toast">
-            <i class="weui-icon-success-no-circle weui-icon_toast"></i>
-            <p class="weui-toast__content">已完成</p>
+    <div class="display">
+        <div><img id="demo" src="${request.contextPath}/statics/img/shipingpic.png" alt="演示图片"></div>
+        <div class="msg1">您即将进入人脸检测，请注意：</div>
+        <div class="yzm">
+            <a id="num4" class="weui-btn_cell weui-btn_cell-primary">6666</a>
+        </div>
+        <div class="textarea">
+            <div>录制时需匀速朗读一遍上方数字</div>
+            <div>录制时请勿遮挡脸部</div>
+            <div>请使用前置摄像头</div>
+        </div>
+        <div class="button">
+            <a href="javascript:fileUpload.click();" class="weui-btn weui-btn_block weui-btn_primary" id="btn">准备好了，开始录制</a>
+        </div>
+        <input type="file" accept="video/*" capture="camera" id="fileUpload" style="position:absolute; clip:rect(0 0 0 0);"  onchange="uploadVideo(this)">
+        <div id="toast" style="display: none;">
+            <div class="weui-mask_transparent"></div>
+            <div class="weui-toast">
+                <i class="weui-icon-success-no-circle weui-icon_toast"></i>
+                <p class="weui-toast__content">已完成</p>
+            </div>
+        </div>
+        <div id="loadingToast" style="display: none;">
+            <div class="weui-mask_transparent"></div>
+            <div class="weui-toast">
+                <i class="weui-loading weui-icon_toast"></i>
+                <p class="weui-toast__content">上传中</p>
+            </div>
         </div>
     </div>
-    <div id="loadingToast" style="display: none;">
-        <div class="weui-mask_transparent"></div>
-        <div class="weui-toast">
-            <i class="weui-loading weui-icon_toast"></i>
-            <p class="weui-toast__content">上传中</p>
-        </div>
-    </div>
-</div>
 </body>
 
 <script>
@@ -69,7 +99,6 @@
         var _cardid = getQueryVariable("cardid");
         var _cardphoto = getQueryVariable("photo");
         var _check = getQueryVariable("check");
-        openid.innerHTML = "openid="+_openid;
         OpenID = _openid;
         Name = _name;
         CardID = _cardid;
@@ -125,14 +154,15 @@
                     finish.fadeIn(100);
                     setTimeout(function () {
                         finish.fadeOut(100);
+                        $(window).attr("location","/sdses-admin/wechat/page/success.html");
                     },1000);
                 }else{
-                    alert(data.失败原因);
+                    $(window).attr("location","/sdses-admin/wechat/page/fail.html?reason="+data.failreason);
                 }
             },
             error: function (data) {
                 $loadingToast.fadeOut(100);
-                console.log(data.msg);
+                alert("上传失败请重试！")
             }
         })
     }

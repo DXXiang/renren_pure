@@ -22,17 +22,40 @@ public class UserCheckresultServiceImpl extends ServiceImpl<UserCheckresultDao, 
     @Autowired
     private UserCheckresultDao userCheckresultDao = null;
 
+//    @Override
+//    public PageUtils queryPage(Map<String, Object> params) {
+//        Page<UserCheckresultEntity> page = this.selectPage(
+//                new Query<UserCheckresultEntity>(params).getPage(),
+//                new EntityWrapper<UserCheckresultEntity>()
+//        );
+//
+//        return new PageUtils(page);
+//    }
+
+    /**
+     * 根据查询条件,分页获取认证信息列表
+     * @return
+     */
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
-        Page<UserCheckresultEntity> page = this.selectPage(
-                new Query<UserCheckresultEntity>(params).getPage(),
-                new EntityWrapper<UserCheckresultEntity>()
-        );
+        Query<UserCheckresultEntity> query = new Query<>(params);
 
-        return new PageUtils(page);
+        Page<UserCheckresultEntity> page = new Page<>(query.getCurrPage(),query.getLimit());
+        List<UserCheckresultEntity> userCheckresultEntityList = userCheckresultDao.queryPageByRole(page, params);
+        return new PageUtils(page.setRecords(userCheckresultEntityList));
     }
+
     /**
-     * 取通过者列表，并且去重以及根据id做排序
+     * 根据查询条件,取全部认证信息列表
+     * @return
+     */
+    @Override
+    public List<UserCheckresultEntity> queryAllByParams(Map<String, Object> params) {
+        return userCheckresultDao.queryAllByRole(params);
+    }
+
+    /**
+     * 取认证信息列表，并且去重以及根据id做排序
      * @return
      */
     @Override

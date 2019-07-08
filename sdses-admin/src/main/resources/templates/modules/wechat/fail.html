@@ -3,9 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>认证失败</title>
-    <link rel="stylesheet" href="./weui.css">
+    <meta name="author" content="Ye">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+    <link rel="stylesheet" href="${request.contextPath}/statics/css/weui.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
 <body>
-<a href="javascript:;" class="weui-btn weui-btn_warn">认证失败</a>
+    <div class="page msg_warn js_show">
+        <div class="weui-msg">
+            <div class="weui-msg__icon-area"><i class="weui-icon-warn weui-icon_msg"></i></div>
+            <div class="weui-msg__text-area">
+                <h2 class="weui-msg__title">认证失败</h2>
+                <p id="reason" class="weui-msg__desc">错误原因</p>
+            </div>
+            <div class="weui-msg__tips-area">
+                <p class="weui-msg__tips">请重试</p>
+            </div>
+            <div class="weui-msg__opr-area">
+                <p class="weui-btn-area">
+                    <a href="javascript:history.back();" class="weui-btn weui-btn_default">返回视频认证</a>
+                </p>
+            </div>
+        </div>
+    </div>
 </body>
+
+<script>
+    
+    window.onload=function (){
+        reason.innerHTML = decodeURI(getQueryVariable("reason"));
+    }
+
+    function getQueryVariable(variable)
+    {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
+        }
+        return(false);
+    }
+</script>
 </html>

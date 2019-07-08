@@ -1,36 +1,114 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>jQuery实现JSONP</title>
-</head>
-<body>
-<div id="mydiv">
-    <button id="btn">点击</button>
-</div>
-</body>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-<script type="text/javascript">
-    $(function(){
-        $("#btn").click(function(){
+    <meta charset="utf-8">
+    <title>OCR认证</title>
+    <meta name="author" content="Ye">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <style>
+        body{
+            width: 100%;
+            background-color: Azure;
+            margin: 0 auto;
+        }
 
-            $.ajax({
-                async : true,
-                url : "http://47.93.1.226:8081/sdses-api/api/getnum",
-                type : "POST",
-                dataType : "jsonp", // 返回的数据类型，设置为JSONP方式
-                jsonp : 'callback', //指定一个查询参数名称来覆盖默认的 jsonp 回调参数名 callback
-                jsonpCallback: 'handleResponse', //设置回调函数名
-                data : {
-                    q : "javascript",
-                    count : 1
-                },
-                success: function(response, status, xhr){
-                    console.log('状态为：' + status + ',状态是：' + xhr.statusText);
-                    console.log(response);
-                }
+        .display{
+            width: 100%;
+            margin: auto;
+
+        }
+        .tip{
+            margin:auto;
+            padding-top: 35px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .pic-container{
+            margin-top:35px;
+            margin-bottom:35px;
+            margin-right:auto;
+            margin-left:auto;
+            width: 70%;
+        }
+
+        .msg{
+            margin: auto;
+            width: 100%;
+        }
+
+        .button-container{
+            margin: auto;
+            width: 70%;
+        }
+
+    </style>
+</head>
+
+<body ontouchstart="">
+<div class="display">
+
+
+    <div class="container" id="container">
+        <div class="page home_js_show">
+            <div class="button-container">
+                <a href="javascript:button();" id="showToast" class="weui-btn weui-btn_primary" id="btn">下一步</a>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="toast" style="display: none;">
+        <div class="weui-mask_transparent"></div>
+        <div class="weui-toast">
+            <i class="weui-icon-success-no-circle weui-icon_toast"></i>
+            <p class="weui-toast__content">已完成</p>
+        </div>
+    </div>
+    <div id="loadingToast" style="display: none;">
+        <div class="weui-mask_transparent"></div>
+        <div class="weui-toast">
+            <i class="weui-loading weui-icon_toast"></i>
+            <p class="weui-toast__content">上传中</p>
+        </div>
+    </div>
+    <script>
+
+        // toast
+        $(function(){
+            var $toast = $('#toast');
+            $('#showToast').on('click', function(){
+                if ($toast.css('display') != 'none') return;
+
+                $toast.fadeIn(100);
+                setTimeout(function () {
+                    $toast.fadeOut(100);
+                }, 2000);
             });
         });
-    });
-</script>
+
+        // loading
+        $(function(){
+            var $loadingToast = $('#loadingToast');
+            $('#showLoadingToast').on('click', function(){
+                if ($loadingToast.css('display') != 'none') return;
+
+                $loadingToast.fadeIn(100);
+                setTimeout(function () {
+                    $loadingToast.fadeOut(100);
+                }, 2000);
+            });
+        });
+    </script>
+</div>
+<script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/swiper.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/city-picker.min.js"></script>
+</body>
+
 </html>

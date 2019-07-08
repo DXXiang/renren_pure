@@ -7,17 +7,49 @@
 <body>
 <div id="rrapp" v-cloak>
     <div v-show="showList">
+        <div class="advanced-search search-bot">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-1 control-label">姓名</div>
+                    <div class="col-sm-3">
+                        <input v-model.trim="searchParams.idname" type="text" class="form-control" placeholder="" @dblclick="searchParams.idname=''"/>
+                    </div>
+                    <div class="col-sm-1 control-label">身份证号</div>
+                    <div class="col-sm-3">
+                        <input v-model.trim="searchParams.idnum" type="text" class="form-control" placeholder="" @dblclick="searchParams.idnum=''"/>
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    <div class="col-sm-1 control-label">认证时间</div>
+                    <div class="col-sm-3">
+                        <input v-model.trim="searchParams.date" type="text" class="form-control" placeholder="" @dblclick="searchParams.date=''"/>
+                    </div>
+                    <div class="col-sm-1 control-label">认证结果</div>
+                    <div class="col-sm-3">
+                        <input v-model.trim="searchParams.result" type="text" class="form-control" placeholder="" @dblclick="searchParams.result=''"/>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="pull-right">
+                            <a class="btn btn-primary" @click="query"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                            <a class="btn btn-primary" @click="resetSearch"><i class="fa fa-reply"></i>&nbsp;重置</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="grid-btn">
-			<#if shiro.hasPermission("wechat:usercheckresult:save")>
-            <a class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
-            <a class="btn btn-primary" @click="exportToExcel"><i class="fa fa-cloud-download"></i>&nbsp;合格者导出</a>
-			</#if>
-			<#if shiro.hasPermission("wechat:usercheckresult:update")>
-            <a class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
-			</#if>
-			<#if shiro.hasPermission("wechat:usercheckresult:delete")>
-            <a class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
-			</#if>
+<!--			<#if shiro.hasPermission("wechat:usercheckresult:save")>-->
+<!--            <a class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>-->
+<!--			</#if>-->
+<!--			<#if shiro.hasPermission("wechat:usercheckresult:update")>-->
+<!--            <a class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>-->
+<!--			</#if>-->
+<!--			<#if shiro.hasPermission("wechat:usercheckresult:delete")>-->
+<!--            <a class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>-->
+<!--			</#if>-->
+            <a class="btn btn-primary" @click="exportToExcel"><i class="fa fa-cloud-download"></i>&nbsp;信息导出</a>
         </div>
         <table id="jqGrid"></table>
         <div id="jqGridPager"></div>

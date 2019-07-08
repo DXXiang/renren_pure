@@ -3,17 +3,20 @@ $(function () {
         url: baseURL + 'wechat/usercheckresult/list',
         datatype: "json",
         colModel: [
-        	{ label: 'id', name: 'id', index: 'id', width: 50, key: true },
+        	{ label: 'id', name: 'id', index: 'id', width: 50, key: true ,align: "center"},
 			{ label: '', name: 'openid', index: 'openid', width: 80 }, 			
-			{ label: '', name: 'idname', index: 'idname', width: 80 }, 			
-			{ label: '', name: 'idnum', index: 'idnum', width: 80 },
-			{ label: '', name: 'picture', index: 'picture', width: 80 }, 			
-			{ label: '', name: 'result', index: 'result', width: 80 }, 			
-			{ label: '', name: 'failReason', index: 'fail_reason', width: 80 }, 			
-			{ label: '', name: 'date', index: 'date', width: 80 }			
+			{ label: '姓名', name: 'idname', index: 'idname', width: 80 ,align: "center"},
+			{ label: '身份证号码', name: 'idnum', index: 'idnum', width: 80 },
+			{ label: '证件照', name: 'picture', index: 'picture', width: 40 ,height:100,
+				formatter : function(cellValue, options, rowObject) {
+					return '<img src="data:image/png;base64,'+cellValue+'" height=\'100\' width=\'100%\'/>'
+				}},
+			{ label: '认证结果', name: 'result', index: 'result', width: 80 ,align: "center"},
+			{ label: '认证失败原因', name: 'failReason', index: 'fail_reason', width: 80 },
+			{ label: '日期', name: 'date', index: 'date', width: 80 ,align: "center"}
         ],
 		viewrecords: true,
-        height: 385,
+        height: 500,
         rowNum: 10,
 		rowList : [10,30,50],
         rownumbers: true, 
@@ -44,11 +47,13 @@ var vm = new Vue({
 	data:{
 		showList: true,
 		title: null,
-		userCheckresult: {}
+		userCheckresult: {},
+		//查询条件
+		searchParams: {idname:'', idnum:'', date:'', result:""}
 	},
 	methods: {
 		query: function () {
-			vm.reload();
+			vm.reload(1);
 		},
 		add: function(){
 			vm.showList = false;
@@ -112,15 +117,40 @@ var vm = new Vue({
                 vm.userCheckresult = r.userCheckresult;
             });
 		},
-		reload: function (event) {
+		reload: function (pageNum) {
+			//删除查询条件前后空格
+			vm.searchParams.idname=vm.searchParams.idname.trim();
+			vm.searchParams.idnum=vm.searchParams.idnum.trim();
+			vm.searchParams.date=vm.searchParams.date.trim();
+			vm.searchParams.result=vm.searchParams.result.trim();
+			// alert(vm.searchParams.idname);
 			vm.showList = true;
+			// var page = $("#jqGrid").jqGrid('jqGrid','page');
+			// $("#jqGrid").jqGrid('setGridParam',{
+            //     page:page
+            // }).trigger("reloadGrid");
 			var page = $("#jqGrid").jqGrid('getGridParam','page');
-			$("#jqGrid").jqGrid('setGridParam',{ 
-                page:page
-            }).trigger("reloadGrid");
+			if(pageNum != null && pageNum != undefined){
+				page = 1;
+			}
+			$("#jqGrid").jqGrid('setGridParam',{
+				postData:vm.searchParams,
+				page:page
+			}).trigger("reloadGrid");
+		},
+		resetSearch: function(){
+			vm.searchParams = {idname:'', idnum:'', date:'', result:""};
+			//查询除原来的传递参数，并逐个清空 B
+			var postDataTemp = $("#jqGrid").jqGrid("getGridParam", "postData");
+			delete postDataTemp["name"];
+			delete postDataTemp["sex"];
+			delete postDataTemp["placeNative"];
+			delete postDataTemp["numId"];
+			delete postDataTemp["nickname"];
 		},
 		exportToExcel:function (event) {
 			window.location.href = baseURL + "wechat/export/exportToExcel";
 		}
+
 	}
 });
