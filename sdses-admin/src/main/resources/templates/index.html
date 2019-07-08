@@ -101,7 +101,7 @@
     <!-- Content Header (Page header) -->
     <div class="cut">
 	    <div id="iframe-tab">
-	    	<div id="btn-iframe-4" onclick="menuChange('iframe-4')" class="btn btn-primary btn-iframe "><span>首页</span><span class="span-close" onclick="closeIframe('iframe-4')">×</span></div>
+	    	<div id="btn-iframe-4" onclick="menuChange('iframe-4')" class="btn btn-primary btn-iframe "><span>认证记录查询</span><span class="span-close" onclick="closeIframe('iframe-4')">×</span></div>
 		</div>
 		<div v-if="showHidePageTag" @click="showHidePageListPanel = !showHidePageListPanel" class="" style="cursor: pointer;height:20px;float: right;margin-top:-30px;margin-right:10px;color: #c3dfff;font-size: 20px;">
 			<i class="fa fa-angle-double-right" aria-hidden="true"><font style="font-size:10px;">{{hidePageCount}}</font></i>
@@ -109,8 +109,11 @@
 	</div>
     <!-- Main content -->
     <section class="content">
-<!--		下面是首页内容，到时候改掉main.html-->
-      <iframe id="iframe-4" class="iframeClass" scrolling="yes" frameborder="0" style="width:100%;min-height:420px;overflow:visible;" src="main.html"></iframe> </section>
+<!--		下面是首页内容，到时候改掉main.html(已改) by 董翔祥-->
+<!--      <iframe id="iframe-4" class="iframeClass" scrolling="yes" frameborder="0" style="width:100%;min-height:420px;overflow:visible;" src="main.html"></iframe> -->
+		<iframe id="iframe-4" class="iframeClass" scrolling="yes" frameborder="0" style="width:100%;min-height:420px;overflow:visible;" src="${request.contextPath}/modules/wechat/usercheckresult.html"></iframe>
+<!--直接显示认证记录查询 by 董翔祥-->
+	</section>
     <!-- /.content -->
 
   </div>
@@ -198,26 +201,26 @@
 	</div>
 	<!-- 右上角页面列表页 E -->
 
-	<div class="panel panel-primary" id="msg-panel">
-	  <div class="panel-heading">
-	    <h3 class="panel-title" style="cursor:pointer;" @click="msgPanelControl">系统消息<span class="badge">{{msgNum}}</span><span class="glyphicon glyphicon-chevron-down pull-right" aria-hidden="true"></span></h3>
-	  </div>
-	  <div class="panel-body">
-	  </div>
-	</div>
+<!--	<div class="panel panel-primary" id="msg-panel">-->
+<!--	  <div class="panel-heading">-->
+<!--	    <h3 class="panel-title" style="cursor:pointer;" @click="msgPanelControl">系统消息<span class="badge">{{msgNum}}</span><span class="glyphicon glyphicon-chevron-down pull-right" aria-hidden="true"></span></h3>-->
+<!--	  </div>-->
+<!--	  <div class="panel-body">-->
+<!--	  </div>-->
+<!--	</div>-->
 	
 	<!-- 系统消息查看 -->
-	<div id="msgLayer">
-	<div id="sysMsgLayer" style="display: none; " >
-		<div class="form-group">
-			<div class="col-xs-12" align="center" >
-				<p class="text-center"><strong>{{sysMsg.title}}</strong></p>
-				<p class="text-right"><em ><small>{{sysMsg.msgTime}}</small></em></p>
-				<p class="text-left" style="padding-left:5px;text-indent: 20px;">{{sysMsg.content}}</p>
-			</div>
-		</div>
-	</div>
-	</div>
+<!--	<div id="msgLayer">-->
+<!--	<div id="sysMsgLayer" style="display: none; " >-->
+<!--		<div class="form-group">-->
+<!--			<div class="col-xs-12" align="center" >-->
+<!--				<p class="text-center"><strong>{{sysMsg.title}}</strong></p>-->
+<!--				<p class="text-right"><em ><small>{{sysMsg.msgTime}}</small></em></p>-->
+<!--				<p class="text-left" style="padding-left:5px;text-indent: 20px;">{{sysMsg.content}}</p>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--	</div>-->
+<!--	</div>-->
 	<!-- 系统消息查看 -->
 	
 </div>

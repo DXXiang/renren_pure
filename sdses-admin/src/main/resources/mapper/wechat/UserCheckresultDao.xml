@@ -22,4 +22,32 @@
         select * from user_checkResult
     </select>
 
+    <select id="queryPageByRole" resultMap="userCheckresultMap">
+        SELECT
+            openid,
+            idname,
+            idnum,
+            id,
+            picture,
+            result,
+            fail_reason,
+            date
+        FROM user_checkResult AS u
+        WHERE
+        0=0
+        <if test="idname != null and idname !=''">
+            AND u.idname like CONCAT('%',#{idname},'%')
+        </if>
+        <if test="idnum != null and idnum !=''">
+            AND u.idnum like CONCAT('%',#{idnum},'%')
+        </if>
+        <if test="date != null and date !=''">
+            AND u.date like CONCAT('%',#{date},'%')
+        </if>
+        <if test="result != null and result !=''">
+            AND u.result like CONCAT('%',#{result},'%')
+        </if>
+        ORDER BY id DESC
+    </select>
+
 </mapper>

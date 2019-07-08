@@ -44,11 +44,13 @@ var vm = new Vue({
 	data:{
 		showList: true,
 		title: null,
-		userCheckresult: {}
+		userCheckresult: {},
+		//查询条件
+		searchParams: {idname:'', idnum:'', date:'', result:""}
 	},
 	methods: {
 		query: function () {
-			vm.reload();
+			vm.reload(1);
 		},
 		add: function(){
 			vm.showList = false;
@@ -112,15 +114,40 @@ var vm = new Vue({
                 vm.userCheckresult = r.userCheckresult;
             });
 		},
-		reload: function (event) {
+		reload: function (pageNum) {
+			//删除查询条件前后空格
+			vm.searchParams.idname=vm.searchParams.idname.trim();
+			vm.searchParams.idnum=vm.searchParams.idnum.trim();
+			vm.searchParams.date=vm.searchParams.date.trim();
+			vm.searchParams.result=vm.searchParams.result.trim();
+			// alert(vm.searchParams.idname);
 			vm.showList = true;
+			// var page = $("#jqGrid").jqGrid('jqGrid','page');
+			// $("#jqGrid").jqGrid('setGridParam',{
+            //     page:page
+            // }).trigger("reloadGrid");
 			var page = $("#jqGrid").jqGrid('getGridParam','page');
-			$("#jqGrid").jqGrid('setGridParam',{ 
-                page:page
-            }).trigger("reloadGrid");
+			if(pageNum != null && pageNum != undefined){
+				page = 1;
+			}
+			$("#jqGrid").jqGrid('setGridParam',{
+				postData:vm.searchParams,
+				page:page
+			}).trigger("reloadGrid");
+		},
+		resetSearch: function(){
+			vm.searchParams = {idname:'', idnum:'', date:'', result:""};
+			//查询除原来的传递参数，并逐个清空 B
+			var postDataTemp = $("#jqGrid").jqGrid("getGridParam", "postData");
+			delete postDataTemp["name"];
+			delete postDataTemp["sex"];
+			delete postDataTemp["placeNative"];
+			delete postDataTemp["numId"];
+			delete postDataTemp["nickname"];
 		},
 		exportToExcel:function (event) {
 			window.location.href = baseURL + "wechat/export/exportToExcel";
 		}
+
 	}
 });

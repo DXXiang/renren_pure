@@ -22,15 +22,25 @@ public class UserCheckresultServiceImpl extends ServiceImpl<UserCheckresultDao, 
     @Autowired
     private UserCheckresultDao userCheckresultDao = null;
 
+//    @Override
+//    public PageUtils queryPage(Map<String, Object> params) {
+//        Page<UserCheckresultEntity> page = this.selectPage(
+//                new Query<UserCheckresultEntity>(params).getPage(),
+//                new EntityWrapper<UserCheckresultEntity>()
+//        );
+//
+//        return new PageUtils(page);
+//    }
+
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
-        Page<UserCheckresultEntity> page = this.selectPage(
-                new Query<UserCheckresultEntity>(params).getPage(),
-                new EntityWrapper<UserCheckresultEntity>()
-        );
+        Query<UserCheckresultEntity> query = new Query<>(params);
 
-        return new PageUtils(page);
+        Page<UserCheckresultEntity> page = new Page<>(query.getCurrPage(),query.getLimit());
+        List<UserCheckresultEntity> userCheckresultEntityList = userCheckresultDao.queryPageByRole(page, params);
+        return new PageUtils(page.setRecords(userCheckresultEntityList));
     }
+
     /**
      * 取通过者列表，并且去重以及根据id做排序
      * @return

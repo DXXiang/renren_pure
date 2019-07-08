@@ -1,10 +1,12 @@
 package io.sdses.modules.wechat.dao;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.baomidou.mybatisplus.plugins.Page;
 import io.sdses.modules.wechat.entity.UserCheckresultEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 
@@ -17,4 +19,5 @@ import java.util.List;
 public interface UserCheckresultDao extends BaseMapper<UserCheckresultEntity> {
     List<UserCheckresultEntity> selectAuthedPersons ();
     List<UserCheckresultEntity> selectAllPersons ();
+    List<UserCheckresultEntity> queryPageByRole(Page<UserCheckresultEntity> page, Map<String, Object> params);
 }
