@@ -20,4 +20,5 @@ public interface UserCheckresultDao extends BaseMapper<UserCheckresultEntity> {
     List<UserCheckresultEntity> selectAuthedPersons ();
     List<UserCheckresultEntity> selectAllPersons ();
     List<UserCheckresultEntity> queryPageByRole(Page<UserCheckresultEntity> page, Map<String, Object> params);
+    List<UserCheckresultEntity> queryAllByRole(Map<String, Object> params);
 }

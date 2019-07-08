@@ -3,17 +3,20 @@ $(function () {
         url: baseURL + 'wechat/usercheckresult/list',
         datatype: "json",
         colModel: [
-        	{ label: 'id', name: 'id', index: 'id', width: 50, key: true },
+        	{ label: 'id', name: 'id', index: 'id', width: 50, key: true ,align: "center"},
 			{ label: '', name: 'openid', index: 'openid', width: 80 }, 			
-			{ label: '', name: 'idname', index: 'idname', width: 80 }, 			
-			{ label: '', name: 'idnum', index: 'idnum', width: 80 },
-			{ label: '', name: 'picture', index: 'picture', width: 80 }, 			
-			{ label: '', name: 'result', index: 'result', width: 80 }, 			
-			{ label: '', name: 'failReason', index: 'fail_reason', width: 80 }, 			
-			{ label: '', name: 'date', index: 'date', width: 80 }			
+			{ label: '姓名', name: 'idname', index: 'idname', width: 80 ,align: "center"},
+			{ label: '身份证号码', name: 'idnum', index: 'idnum', width: 80 },
+			{ label: '证件照', name: 'picture', index: 'picture', width: 40 ,height:100,
+				formatter : function(cellValue, options, rowObject) {
+					return '<img src="data:image/png;base64,'+cellValue+'" height=\'100\' width=\'100%\'/>'
+				}},
+			{ label: '认证结果', name: 'result', index: 'result', width: 80 ,align: "center"},
+			{ label: '认证失败原因', name: 'failReason', index: 'fail_reason', width: 80 },
+			{ label: '日期', name: 'date', index: 'date', width: 80 ,align: "center"}
         ],
 		viewrecords: true,
-        height: 385,
+        height: 500,
         rowNum: 10,
 		rowList : [10,30,50],
         rownumbers: true, 

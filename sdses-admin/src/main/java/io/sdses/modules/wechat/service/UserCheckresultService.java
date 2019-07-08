@@ -17,6 +17,7 @@ import java.util.Map;
 public interface UserCheckresultService extends IService<UserCheckresultEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+    List<UserCheckresultEntity> queryAllByParams(Map<String, Object> params);
     List<UserCheckresultEntity> getAuthedPersons();
     List<UserCheckresultEntity> getAllPersons();
 }

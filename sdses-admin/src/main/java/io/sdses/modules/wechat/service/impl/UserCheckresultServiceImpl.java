@@ -32,6 +32,10 @@ public class UserCheckresultServiceImpl extends ServiceImpl<UserCheckresultDao, 
 //        return new PageUtils(page);
 //    }
 
+    /**
+     * 根据查询条件,分页获取认证信息列表
+     * @return
+     */
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         Query<UserCheckresultEntity> query = new Query<>(params);
@@ -42,7 +46,16 @@ public class UserCheckresultServiceImpl extends ServiceImpl<UserCheckresultDao, 
     }
 
     /**
-     * 取通过者列表，并且去重以及根据id做排序
+     * 根据查询条件,取全部认证信息列表
+     * @return
+     */
+    @Override
+    public List<UserCheckresultEntity> queryAllByParams(Map<String, Object> params) {
+        return userCheckresultDao.queryAllByRole(params);
+    }
+
+    /**
+     * 取认证信息列表，并且去重以及根据id做排序
      * @return
      */
     @Override
