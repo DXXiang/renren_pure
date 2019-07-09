@@ -2,7 +2,7 @@ package io.sdses.modules.wechat.service;
 
 import com.baomidou.mybatisplus.service.IService;
 import io.sdses.common.utils.PageUtils;
-import io.sdses.modules.wechat.entity.UserOpenidEntity;
+import io.sdses.modules.wechat.entity.MessageEntity;
 
 import java.util.List;
 import java.util.Map;
@@ -12,12 +12,12 @@ import java.util.Map;
  *
  * @author wangxd
  * @email wangxiaodong@sdses.com
- * @date 2019-06-28 17:53:52
+ * @date 2019-07-01 22:39:10
  */
-public interface UserOpenidService extends IService<UserOpenidEntity> {
+public interface MessageService extends IService<MessageEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
-    List<UserOpenidEntity> selectAllOpenId ();
-    List<UserOpenidEntity> selectMpOpenId ();
+    int sendMessages(List<String> openids , String content);
+
 }
 

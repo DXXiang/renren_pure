@@ -8,6 +8,12 @@
         <result property="openid" column="openid"/>
         <result property="type" column="type"/>
     </resultMap>
+    <select id="selectAllOpenId" resultMap="userOpenidMap">
+       select * from   user_openid
+   </select>
+    <select id="selectMpOpenId" resultMap="userOpenidMap">
+       select * from   user_openid where type=1
+   </select>
 
 
 </mapper>
