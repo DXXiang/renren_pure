@@ -441,8 +441,8 @@ INSERT INTO `sys_menu` VALUES (37, 36, '查看', NULL, 'sys:dict:list,sys:dict:i
 INSERT INTO `sys_menu` VALUES (38, 36, '新增', NULL, 'sys:dict:save', 2, NULL, 6);
 INSERT INTO `sys_menu` VALUES (39, 36, '修改', NULL, 'sys:dict:update', 2, NULL, 6);
 INSERT INTO `sys_menu` VALUES (40, 36, '删除', NULL, 'sys:dict:delete', 2, NULL, 6);
-INSERT INTO `sys_menu` VALUES (41, 0, '数据管理', NULL, NULL, 0, 'fa fa-database', 6);
-INSERT INTO `sys_menu` VALUES (69, 41, '全息档案', 'modules/qxda/person.html', NULL, 1, 'fa fa-archive', 6);
+-- INSERT INTO `sys_menu` VALUES (41, 0, '数据管理', NULL, NULL, 0, 'fa fa-database', 6);
+-- INSERT INTO `sys_menu` VALUES (69, 41, '全息档案', 'modules/qxda/person.html', NULL, 1, 'fa fa-archive', 6);
 INSERT INTO `sys_menu` VALUES (42, 0, '微信公众号管理', NULL, NULL, 0, 'fa fa-weixin', 5);
 INSERT INTO `sys_menu` VALUES (5, 0, '认证数据管理', NULL, NULL, 0, 'fa fa-id-badge', 1);
 
