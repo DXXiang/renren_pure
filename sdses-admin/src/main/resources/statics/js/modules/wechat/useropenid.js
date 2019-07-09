@@ -4,7 +4,11 @@ $(function () {
         datatype: "json",
         colModel: [			
 			{ label: 'openid', name: 'openid', index: 'openid', width: 50, key: true },
-			{ label: '', name: 'type', index: 'type', width: 80 }			
+			{ label: '', name: 'type', index: 'type', width: 80 ,
+				formatter : function(cellValue, options, rowObject) {
+					return cellValue === '1' ? '公众号' : '小程序';
+				}
+			}
         ],
 		viewrecords: true,
         height: 385,
