@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.sdses.modules.wechat.dao.MessageDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.sdses.modules.wechat.entity.MessageEntity" id="messageMap">
+        <result property="messNum" column="mess_num"/>
+        <result property="messCont" column="mess_cont"/>
+        <result property="userName" column="user_name"/>
+        <result property="openid" column="openid"/>
+        <result property="deliveryTime" column="delivery_time"/>
+        <result property="sendResults" column="send_results"/>
+        <result property="pushResults" column="push_results"/>
+    </resultMap>
+
+
+
+
+    <insert id="insertMessages"  parameterType="java.util.List">
+        insert  into  message (
+           mess_cont,
+           openid,
+           delivery_time,
+           push_results
+        )
+        values
+        <foreach collection="list" item ="item" index="index" separator=",">
+            (
+            #{item.messCont},
+            #{item.openid},
+            #{item.deliveryTime},
+            #{item.pushResults}
+            )
+        </foreach>
+    </insert>
+
+</mapper>

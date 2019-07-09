@@ -1,14 +1,15 @@
 $(function () {
     $("#jqGrid").jqGrid({
-        url: baseURL + 'wechat/useropenid/list',
+        url: baseURL + 'wechat/message/list',
         datatype: "json",
         colModel: [			
-			{ label: 'openid', name: 'openid', index: 'openid', width: 50, key: true },
-			{ label: '', name: 'type', index: 'type', width: 80 ,
-				formatter : function(cellValue, options, rowObject) {
-					return cellValue === '1' ? '公众号' : '小程序';
-				}
-			}
+			{ label: 'messNum', name: 'messNum', index: 'mess_num', width: 50, key: true },
+			{ label: '', name: 'messCont', index: 'mess_cont', width: 80 }, 			
+			{ label: '', name: 'userName', index: 'user_name', width: 80 }, 			
+			{ label: '', name: 'openid', index: 'openid', width: 80 }, 			
+			{ label: '', name: 'deliveryTime', index: 'delivery_time', width: 80 }, 			
+			{ label: '', name: 'sendResults', index: 'send_results', width: 80 }, 			
+			{ label: '', name: 'pushResults', index: 'push_results', width: 80 }			
         ],
 		viewrecords: true,
         height: 385,
@@ -42,7 +43,7 @@ var vm = new Vue({
 	data:{
 		showList: true,
 		title: null,
-		userOpenid: {}
+		message: {}
 	},
 	methods: {
 		query: function () {
@@ -51,25 +52,27 @@ var vm = new Vue({
 		add: function(){
 			vm.showList = false;
 			vm.title = "新增";
-			vm.userOpenid = {};
+			vm.message = {
+
+			};
 		},
 		update: function (event) {
-			var openid = getSelectedRow();
-			if(openid == null){
+			var messNum = getSelectedRow();
+			if(messNum == null){
 				return ;
 			}
 			vm.showList = false;
             vm.title = "修改";
             
-            vm.getInfo(openid)
+            vm.getInfo(messNum)
 		},
 		saveOrUpdate: function (event) {
-			var url = vm.userOpenid.openid == null ? "wechat/useropenid/save" : "wechat/useropenid/update";
+			var url = vm.message.messNum == null ? "wechat/message/save" : "wechat/message/update";
 			$.ajax({
 				type: "POST",
 			    url: baseURL + url,
                 contentType: "application/json",
-			    data: JSON.stringify(vm.userOpenid),
+			    data: JSON.stringify(vm.message),
 			    success: function(r){
 			    	if(r.code === 0){
 						alert('操作成功', function(index){
@@ -82,17 +85,17 @@ var vm = new Vue({
 			});
 		},
 		del: function (event) {
-			var openids = getSelectedRows();
-			if(openids == null){
+			var messNums = getSelectedRows();
+			if(messNums == null){
 				return ;
 			}
 			
 			confirm('确定要删除选中的记录？', function(){
 				$.ajax({
 					type: "POST",
-				    url: baseURL + "wechat/useropenid/delete",
+				    url: baseURL + "wechat/message/delete",
                     contentType: "application/json",
-				    data: JSON.stringify(openids),
+				    data: JSON.stringify(messNums),
 				    success: function(r){
 						if(r.code == 0){
 							alert('操作成功', function(index){
@@ -105,9 +108,9 @@ var vm = new Vue({
 				});
 			});
 		},
-		getInfo: function(openid){
-			$.get(baseURL + "wechat/useropenid/info/"+openid, function(r){
-                vm.userOpenid = r.userOpenid;
+		getInfo: function(messNum){
+			$.get(baseURL + "wechat/message/info/"+messNum, function(r){
+                vm.message = r.message;
             });
 		},
 		reload: function (event) {

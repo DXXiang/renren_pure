@@ -56,12 +56,12 @@
     </div>
 
     <div class="pic-container">
-        <img onclick="$('#zmdialog').fadeIn(100);" id="zhengmianzhaopian" src="${request.contextPath}/statics/img/renxiangmian.png" alt="点击上传正面照片">
+        <img onclick="$('#zminput').val('');$('#zmdialog').fadeIn(100);" id="zhengmianzhaopian" src="${request.contextPath}/statics/img/renxiangmian.png" alt="点击上传人像面照片">
         <div id="zmmsg" class="msg"></div>
         <input style="display:none"  id="zminput" accept="image/*" type="file" name="f1" onchange="choosePic(this,'zhengmianzhaopian')"/>
     </div>
     <div class="pic-container">
-        <img onclick="$('#bmdialog').fadeIn(100);" id="beimianzhaopian" src="${request.contextPath}/statics/img/guohuimian.png" alt="点击上传背面照片">
+        <img onclick="$('#bminput').val('');$('#bmdialog').fadeIn(100);" id="beimianzhaopian" src="${request.contextPath}/statics/img/guohuimian.png" alt="点击上传国徽面照片">
         <div id="bmmsg" class="msg"></div>
         <input style="display:none"  id="bminput" accept="image/*" type="file" onchange="choosePic(this,'beimianzhaopian')"/>
     </div>
@@ -243,6 +243,8 @@
 
     function choosePic(obj, id) {
         //FileReader
+        if(obj.files[0]==undefined)return;
+
         if(window.FileReader){//验证当前的浏览器是否支持图片预览
             var reader=new FileReader();
             var file=obj.files[0];
