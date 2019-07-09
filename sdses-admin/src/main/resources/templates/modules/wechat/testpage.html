@@ -5,110 +5,31 @@
     <title>OCR认证</title>
     <meta name="author" content="Ye">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-    <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.3/style/weui.min.css">
-    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.1/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="${request.contextPath}/statics/css/weui.css">
+    <link rel="stylesheet" href="https://weui.io/weui.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <style>
-        body{
-            width: 100%;
-            background-color: Azure;
-            margin: 0 auto;
-        }
-
-        .display{
-            width: 100%;
-            margin: auto;
-
-        }
-        .tip{
-            margin:auto;
-            padding-top: 35px;
-            width: 100%;
-            text-align: center;
-        }
-
-        .pic-container{
-            margin-top:35px;
-            margin-bottom:35px;
-            margin-right:auto;
-            margin-left:auto;
-            width: 70%;
-        }
-
-        .msg{
-            margin: auto;
-            width: 100%;
-        }
-
-        .button-container{
-            margin: auto;
-            width: 70%;
-        }
-
-    </style>
 </head>
 
-<body ontouchstart="">
-<div class="display">
-
-
-    <div class="container" id="container">
-        <div class="page home_js_show">
-            <div class="button-container">
-                <a href="javascript:button();" id="showToast" class="weui-btn weui-btn_primary" id="btn">下一步</a>
+<body>
+<div class="page input js_show">
+    <div class="page__bd">
+        <div class="weui-cells__title">表单</div>
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell weui-cell_vcode">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">手机号</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="tel" placeholder="请输入手机号">
+                </div>
+                <div class="weui-cell__ft">
+                    <button class="weui-vcode-btn"></button>
+                </div>
             </div>
         </div>
+        <div class="weui-cells__tips">底部说明文字底部说明文字</div>
     </div>
-
-
-
-    <div id="toast" style="display: none;">
-        <div class="weui-mask_transparent"></div>
-        <div class="weui-toast">
-            <i class="weui-icon-success-no-circle weui-icon_toast"></i>
-            <p class="weui-toast__content">已完成</p>
-        </div>
-    </div>
-    <div id="loadingToast" style="display: none;">
-        <div class="weui-mask_transparent"></div>
-        <div class="weui-toast">
-            <i class="weui-loading weui-icon_toast"></i>
-            <p class="weui-toast__content">上传中</p>
-        </div>
-    </div>
-    <script>
-
-        // toast
-        $(function(){
-            var $toast = $('#toast');
-            $('#showToast').on('click', function(){
-                if ($toast.css('display') != 'none') return;
-
-                $toast.fadeIn(100);
-                setTimeout(function () {
-                    $toast.fadeOut(100);
-                }, 2000);
-            });
-        });
-
-        // loading
-        $(function(){
-            var $loadingToast = $('#loadingToast');
-            $('#showLoadingToast').on('click', function(){
-                if ($loadingToast.css('display') != 'none') return;
-
-                $loadingToast.fadeIn(100);
-                setTimeout(function () {
-                    $loadingToast.fadeOut(100);
-                }, 2000);
-            });
-        });
-    </script>
 </div>
-<script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
-<script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/jquery-weui.min.js"></script>
-<script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/swiper.min.js"></script>
-<script src="https://cdn.bootcss.com/jquery-weui/1.2.1/js/city-picker.min.js"></script>
 </body>
 
 </html>
