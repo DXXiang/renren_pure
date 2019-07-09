@@ -19,18 +19,14 @@
             margin: auto;
 
         }
-
-        .tip{
-            margin:auto;
-            padding-top: 35px;
-            width: 100%;
-            text-align: center;
-        }
         .headpic-area{
             margin:auto;
-            padding-top: 35px;
+            padding-top: 20px;
+            border-radius: 16px;
             width: 100%;
             text-align: center;
+            border: 1px solid #ccc;
+            border-color: black;
         }
         .buttom-sp-area{
             margin:auto;
@@ -42,32 +38,42 @@
 </head>
 <body>
 <div class="display">
-    <div class="tip">
-        请确认您的身份证识别结果，若有错误请修改并进入下一步
+    <div class="page__hd">
+        <a href="javascript:;" class="weui-btn weui-btn_block weui-btn_primary">请确认您的身份证识别结果，<br>若有错误请修改并进入下一步</a>
     </div>
-    <div class="headpic-area">
-        <div>照片</div><br>
-        <div>
-            <img id="cardphoto">
-        </div>
-    </div>
-    <div class="weui-cells weui-cells_form">
-        <div class="weui-cell weui-cell_vcode">
-            <div class="weui-cell__hd">
-                <label class="weui-label">姓名</label>
-            </div>
-            <div class="weui-cell__bd">
-                <input id="nameinput" class="weui-input" type="tel" placeholder=姓名>
+    <div class="page__bd">
+        <div class="headpic-area">
+            <a href="javascript:;" class="weui-btn weui-btn_plain-default">照片</a><br>
+            <div>
+                <img id="cardphoto">
             </div>
         </div>
-        <div class="weui-cell weui-cell_vcode">
-            <div class="weui-cell__hd">
-                <label class="weui-label">身份证号码</label>
+        <div class="weui-cells__title">OCR识别结果</div>
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell weui-cell_vcode">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">姓名</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input id="nameinput" class="weui-input" type="tel" placeholder=姓名>
+                </div>
+                <div class="weui-cell__ft">
+                    <button class="weui-vcode-btn"></button>
+                </div>
             </div>
-            <div class="weui-cell__bd">
-                <input id="idinput" class="weui-input" type="tel" placeholder=身份证号码>
+            <div class="weui-cell weui-cell_vcode">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">身份证号码</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <input id="idinput" class="weui-input" type="tel" placeholder=身份证号码>
+                </div>
+                <div class="weui-cell__ft">
+                    <button class="weui-vcode-btn"></button>
+                </div>
             </div>
         </div>
+        <div class="weui-cells__tips">确认无误后进入下一步</div>
     </div>
     <div class="buttom-sp-area">
         <a href="javascript:confirm();" class="weui-btn weui-btn_primary" id="btn">确认</a>
