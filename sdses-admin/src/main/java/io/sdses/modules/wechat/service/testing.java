@@ -5,10 +5,10 @@ public class testing {
         //测试发送功能
         // TODO Auto-generated method stub
         TemplateMessageMange tests=new TemplateMessageMange();
-        String a ="oYhYl1f1Bx16E6gJInoFQpI7irZI";
+        String a ="oY7my58dQ6P50qDVorOoWX4MjOhQ";
         tests.sendTemplateMessage(a,"abc");
-        String []openId ={"oYhYl1almlP5zuYmA040ikVyb8bc","oYhYl1f1Bx16E6gJInoFQpI7irZI","oYhYl1XkR0OBhgG3q4tTmLTGYI4Q","oYhYl1aQgVnR7W0cPUyZlBbNGPjE","oYhYl1Rw1Y2v3mtD1AMUW6TsJ974"} ;
-        tests.groupSend(openId,"aaa");
+        String []openId ={"oY7my55v3aAko38PBGNImZnyar7Q",a} ;
+        tests.groupSend(openId,"请于7.10前进行认证");
 
     }
 }

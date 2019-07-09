@@ -33,7 +33,7 @@ public class TemplateMessageMange {
         String url="https://api.weixin.qq.com/cgi-bin/message/template/send?access_token="+at;
         String data="      {\r\n" +
                 "           \"touser\":\""+a+"\",\r\n" +
-                "           \"template_id\":\"eBxZ4p8-IwfMt5XJXgpMf3nU81TmHAshOUjc1g0Lbx8\",\r\n" +
+                "           \"template_id\":\"JtOBv_eorHP6BqAdhMLC3mtRTkxZU8M5C6Auy_zty88\",\r\n" +
                 "           \"data\":{\r\n" +
                 "                   \"first\": {\r\n" +
                 "                       \"value\":\""+b+"\",\r\n" +

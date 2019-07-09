@@ -8,8 +8,8 @@ import io.sdses.modules.wechat.utils.Util;
 import java.lang.Exception;
 public class WeixinService {
     private static final String TOKEN ="abc";//test
-    private static final String APPID="wx7afdceb0a37df3cb";//test
-    private static final String APPSECRET="07705a5638a52b778ff70d9c610894db";//test
+    private static final String APPID="wx679677b804f19fcc";//test
+    private static final String APPSECRET="73b6c99b7556e5a590347f6b6e8a7945";//test
     private static final String  GET_TOKEN_URL="https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
    private static AcessTokens at;
 
