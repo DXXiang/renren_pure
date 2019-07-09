@@ -44,9 +44,10 @@
             margin: auto;
             width: 70%;
         }
-    img{
-        width: 100%;
-    }
+        img{
+            width: 100%;
+            border-radius: 16px;
+        }
     </style>
 </head>
 <body>
@@ -109,6 +110,15 @@
                 </div>
             </div>
         </div>
+        <div class="js_dialog" id="nextdialog" style="display: none;">
+            <div class="weui-mask"></div>
+            <div class="weui-dialog">
+                <div class="weui-dialog__bd">请先完成身份证正反面上传!</div>
+                <div class="weui-dialog__ft">
+                    <a href="javascript:$('#nextdialog').fadeOut(100);" class="weui-dialog__btn weui-dialog__btn_primary">知道了</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -158,6 +168,7 @@
                         },1000);
                     }else {
                         zmmsg.innerHTML=data.msg;
+                        if(data.msg=="请传正面照")zmmsg.innerHTML="请选择有效的人像面照";
                         loading.fadeOut(100);
                     }
                 },
@@ -202,6 +213,7 @@
                         },1000);
                     }else {
                         bmmsg.innerHTML=data.msg;
+                        if(data.msg=="请传背面照")bmmsg.innerHTML="请选择有效的国徽面照";
                         loading.fadeOut(100);
                     }
                 },
@@ -220,7 +232,7 @@
             $(window).attr("location","/sdses-admin/wechat/page/confirm.html?openid="+OpenID+"&name="+name+"&cardid="+cardid+"&photo="+cardphoto+"&check="+check);
         }
         else {
-            alert("请先完成身份证正反面上传!")
+            $('#nextdialog').fadeIn(100);
         }
     }
     //url传参
