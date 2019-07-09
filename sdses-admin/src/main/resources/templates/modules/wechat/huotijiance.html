@@ -51,7 +51,7 @@
             <div>请使用前置摄像头</div>
         </div>
         <div class="button">
-            <a href="javascript:fileUpload.click();" class="weui-btn weui-btn_block weui-btn_primary" id="btn">准备好了，开始录制</a>
+            <a href="javascript:$('#dialog').fadeIn(100);" class="weui-btn weui-btn_block weui-btn_primary" id="btn">准备好了，开始录制</a>
         </div>
         <input type="file" accept="video/*" capture="camera" id="fileUpload" style="position:absolute; clip:rect(0 0 0 0);"  onchange="uploadVideo(this)">
         <div id="toast" style="display: none;">
@@ -66,6 +66,21 @@
             <div class="weui-toast">
                 <i class="weui-loading weui-icon_toast"></i>
                 <p class="weui-toast__content">上传中</p>
+            </div>
+        </div>
+    </div>
+    <div id="dialogs">
+        <div class="js_dialog" id="dialog" style="display: none;">
+            <div class="weui-mask"></div>
+            <div class="weui-dialog weui-skin_android">
+                <div class="weui-dialog__hd"><strong class="weui-dialog__title">注意</strong></div>
+                <div class="weui-dialog__bd">
+                    <a class="weui-btn weui-btn_block weui-btn_default">请先确认你已记住下面4位数字</a>
+                    <a id="yzm" class="weui-btn_cell weui-btn_cell-warn">6666</a>
+                </div>
+                <div class="page__ft">
+                    <a href="javascript:$('#dialog').fadeOut(100);fileUpload.click();" class="weui-btn weui-btn_block weui-btn_default">记住了，开始录制</a>
+                </div>
             </div>
         </div>
     </div>
@@ -116,6 +131,7 @@
             success: function(data) {
                 console.log(data);
                 num4.innerHTML = data.num4;
+                yzm.innerHTML = data.num4;
                 Num4 = data.num4;
             }
         })
