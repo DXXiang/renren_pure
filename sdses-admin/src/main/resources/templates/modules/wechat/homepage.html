@@ -15,10 +15,44 @@
         body{
             width: 100%;
             background-color: Azure;
+            position: fixed;
             margin: 0 auto;
-            background-image:url('${request.contextPath}/statics/img/backpic.png');
-            background-size: 100%;
-            padding-top: 99%;
+        }
+        .footer{
+            height: 9%;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+        }
+
+        .buttonarea{
+            width: 90%;
+            margin: auto;
+            text-align: center;
+        }
+
+        .button{
+            width: 100%;
+            margin: auto;
+            text-align: center;
+            border-radius: 10px;
+            color: #FFFFFF;
+            font-size: 20px;
+            padding-top: 13px;
+            padding-bottom: 13px;
+            padding-left: 26px;
+            padding-right: 26px;
+            background-color: #1b74a8;
+        }
+
+        .title{
+            position: fixed;
+            margin: auto;
+            width: 100%;
+            text-align: center;
+            color: #FFFFFF;
+            font-size: 30px;
+            top: 30%;
         }
     </style>
 
@@ -91,10 +125,13 @@
 </script>
 
 <body>
+<img src="${request.contextPath}/statics/img/backpic.jpg">
+<div class="title">待遇资格认证系统</div>
 <div class="container">
-    <div class="page__bd page__bd_spacing">
-        <div class="button-sp-area">
-            <button id="startbtn" class="weui-btn weui-btn_primary">开始认证</button>
+    <div class="footer">
+        <div class="buttonarea">
+            <button id="startbtn" class="button">开始认证</button>
+            <!--a href="javascript:;" class="weui-btn weui-btn_plain-default">按钮</a-->
         </div>
     </div>
 </div>
