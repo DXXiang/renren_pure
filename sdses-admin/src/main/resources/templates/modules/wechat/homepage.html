@@ -5,6 +5,9 @@
     <title>待遇资格认证系统</title>
     <meta name="author" content="Ye">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <link rel="stylesheet" href="${request.contextPath}/statics/css/weui.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
@@ -13,6 +16,9 @@
             width: 100%;
             background-color: Azure;
             margin: 0 auto;
+            background-image:url('${request.contextPath}/statics/img/backpic.png');
+            background-size: 100%;
+            padding-top: 99%;
         }
     </style>
 
@@ -20,13 +26,6 @@
 <script>
 
     var OpenID;
-
-    $(function(){
-
-        $('#test').click(function(){
-
-        });
-    });
 
     function getQueryVariable(variable)
     {
@@ -93,14 +92,9 @@
 
 <body>
 <div class="container">
-    <div class="page__hd">
-        <a href="javascript:;" class="weui-btn weui-btn_block weui-btn_default">待遇资格认证系统</a>
-    </div>
     <div class="page__bd page__bd_spacing">
         <div class="button-sp-area">
             <button id="startbtn" class="weui-btn weui-btn_primary">开始认证</button>
-            <!--a id="test" class="weui-btn weui-btn_primary">测试</a>
-            <a href="/sdses-admin/wechat/page/testpage.html" class="weui-btn weui-btn_default">测试页面</a-->
         </div>
     </div>
 </div>
