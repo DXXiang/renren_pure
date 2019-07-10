@@ -4,6 +4,7 @@ package io.sdses.service.impl;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.UUID;
@@ -44,6 +45,7 @@ import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.hibernate.validator.internal.util.StringHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -158,8 +160,8 @@ public class UploadFileImpl extends ServiceImpl<UserCheckresultDao, ResultEntity
 		//数据库操作
 		Date date = new Date();
 		com.alibaba.fastjson.JSONObject jsonObject1 = com.alibaba.fastjson.JSONObject.parseObject(resultString);
-		String code = jsonObject1.getString("code");
 		String message = jsonObject1.getString("message");
+		String code = jsonObject1.getString("code");
 		if (code.equals("1")) {
 			//测试数据库
 			ResultEntity resultEntity = new ResultEntity();
@@ -174,20 +176,42 @@ public class UploadFileImpl extends ServiceImpl<UserCheckresultDao, ResultEntity
 			resultService.createTest(resultEntity);
 			failemesg = message;
 			return "认证失败";
-		}else if (code.equals("0")) {
-			//测试数据库
-			ResultEntity resultEntity = new ResultEntity();
-			resultEntity.setIdname(idname);
-			resultEntity.setIdnum(idnum);
-			resultEntity.setOpenid(openid);
-			resultEntity.setFailReason("");
-			resultEntity.setResult("认证成功");
-			resultEntity.setPicture(image);
-			resultEntity.setDate(date);
+		}else {
 			
-			resultService.createTest(resultEntity);
-	
-			return "认证成功";
+			com.alibaba.fastjson.JSONObject jsonObject2 = com.alibaba.fastjson.JSONObject.parseObject(message);
+			String code1 = jsonObject2.getString("code");
+			String failmesg = jsonObject2.getString("message");
+			if (code1.equals("1")) {
+				ResultEntity resultEntity = new ResultEntity();
+				resultEntity.setIdname(idname);
+				resultEntity.setIdnum(idnum);
+				resultEntity.setOpenid(openid);
+				resultEntity.setFailReason(failmesg);
+				resultEntity.setResult("认证失败");
+				resultEntity.setPicture(image);
+				resultEntity.setDate(date);
+				resultService.createTest(resultEntity);
+				failemesg = failmesg;
+				return "认证失败";
+			}else {
+				//测试数据库
+				ResultEntity resultEntity = new ResultEntity();
+				resultEntity.setIdname(idname);
+				resultEntity.setIdnum(idnum);
+				resultEntity.setOpenid(openid);
+				resultEntity.setFailReason("");
+				resultEntity.setResult("认证成功");
+				resultEntity.setPicture(image);
+				resultEntity.setDate(date);
+				
+				resultService.createTest(resultEntity);
+		
+				return "认证成功";
+			}
+			
+			
+			
+			
 		}
 		
 		} catch (ClientProtocolException e) {
@@ -209,7 +233,7 @@ public class UploadFileImpl extends ServiceImpl<UserCheckresultDao, ResultEntity
 			map.put("result", result);
 		}else {
 			map.put("result", result);
-			map.put("失败原因:", failemesg);
+			map.put("failreason", failemesg);
 		}
 	
 		return map;

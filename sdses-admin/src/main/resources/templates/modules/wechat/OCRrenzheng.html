@@ -5,6 +5,9 @@
     <title>OCR认证</title>
     <meta name="author" content="Ye">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <link rel="stylesheet" href="${request.contextPath}/statics/css/weui.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
@@ -44,9 +47,10 @@
             margin: auto;
             width: 70%;
         }
-    img{
-        width: 100%;
-    }
+        img{
+            width: 100%;
+            border-radius: 16px;
+        }
     </style>
 </head>
 <body>
@@ -109,6 +113,15 @@
                 </div>
             </div>
         </div>
+        <div class="js_dialog" id="nextdialog" style="display: none;">
+            <div class="weui-mask"></div>
+            <div class="weui-dialog">
+                <div class="weui-dialog__bd">请先完成身份证正反面上传!</div>
+                <div class="weui-dialog__ft">
+                    <a href="javascript:$('#nextdialog').fadeOut(100);" class="weui-dialog__btn weui-dialog__btn_primary">知道了</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -158,6 +171,7 @@
                         },1000);
                     }else {
                         zmmsg.innerHTML=data.msg;
+                        if(data.msg=="请传正面照")zmmsg.innerHTML="请选择有效的人像面照";
                         loading.fadeOut(100);
                     }
                 },
@@ -202,6 +216,7 @@
                         },1000);
                     }else {
                         bmmsg.innerHTML=data.msg;
+                        if(data.msg=="请传背面照")bmmsg.innerHTML="请选择有效的国徽面照";
                         loading.fadeOut(100);
                     }
                 },
@@ -220,7 +235,7 @@
             $(window).attr("location","/sdses-admin/wechat/page/confirm.html?openid="+OpenID+"&name="+name+"&cardid="+cardid+"&photo="+cardphoto+"&check="+check);
         }
         else {
-            alert("请先完成身份证正反面上传!")
+            $('#nextdialog').fadeIn(100);
         }
     }
     //url传参
@@ -241,7 +256,7 @@
         OpenID = _openid;
     }
 
-    function choosePic(obj, id) {
+    function choosePic(obj, id,callback) {
         //FileReader
         if(obj.files[0]==undefined)return;
 
@@ -255,7 +270,18 @@
 
                     var image = new Image();    //新建一个img标签（不嵌入DOM节点，仅做canvas操作)
                     image.src = reader.result;   //让该标签加载base64格式的原图
+                    console.log(image.width);
+                    console.log(image.height);
+
                     image.onload = function() {    //图片加载完毕后再通过canvas压缩图片，否则图片还没加载完就压缩，结果图片是全黑的
+                        if(image.width<image.height)
+                        {
+                            rotateBase64Img(image.src,270,function (result) {
+                                image.src = result;
+                                console.log(image.width);
+                                console.log(image.height);
+                            })
+                        }
                         var canvas = document.createElement('canvas'), //创建一个canvas元素
                             context = canvas.getContext('2d'),    //context相当于画笔，里面有各种可以进行绘图的API
                             imageWidth = 342.4,    //压缩后图片的宽度
@@ -283,11 +309,87 @@
             alert("亲，浏览器该升级了");
             return;
         }
-        if(id=="zhengmianzhaopian"){
-            zmupload();
-        }else if("beimianzhaopian"){
-            bmupload();
+        setTimeout(function () {
+            if(id=="zhengmianzhaopian"){
+                zmupload();
+            }else if("beimianzhaopian"){
+                bmupload();
+            }
+        },400);
+    }
+
+    function rotateBase64Img(src, edg, callback) {
+
+        var canvas = document.createElement("canvas");
+        var ctx = canvas.getContext("2d");
+
+        var imgW;//图片宽度
+        var imgH;//图片高度
+        var size;//canvas初始大小
+
+        if (edg % 90 != 0) {
+            console.error("旋转角度必须是90的倍数!");
+            throw '旋转角度必须是90的倍数!';
         }
+        (edg < 0) && (edg = (edg % 360) + 360)
+        var quadrant = (edg / 90) % 4; //旋转象限
+        var cutCoor = {sx: 0, sy: 0, ex: 0, ey: 0}; //裁剪坐标
+
+        var image = new Image();
+        image.crossOrigin = "anonymous"
+        image.src = src;
+
+        image.onload = function () {
+
+            imgW = image.width;
+            imgH = image.height;
+            size = imgW > imgH ? imgW : imgH;
+
+            canvas.width = size * 2;
+            canvas.height = size * 2;
+            switch (quadrant) {
+                case 0:
+                    cutCoor.sx = size;
+                    cutCoor.sy = size;
+                    cutCoor.ex = size + imgW;
+                    cutCoor.ey = size + imgH;
+                    break;
+                case 1:
+                    cutCoor.sx = size - imgH;
+                    cutCoor.sy = size;
+                    cutCoor.ex = size;
+                    cutCoor.ey = size + imgW;
+                    break;
+                case 2:
+                    cutCoor.sx = size - imgW;
+                    cutCoor.sy = size - imgH;
+                    cutCoor.ex = size;
+                    cutCoor.ey = size;
+                    break;
+                case 3:
+                    cutCoor.sx = size;
+                    cutCoor.sy = size - imgW;
+                    cutCoor.ex = size + imgH;
+                    cutCoor.ey = size + imgW;
+                    break;
+            }
+
+
+            ctx.translate(size, size);
+            ctx.rotate(edg * Math.PI / 180);
+            ctx.drawImage(image, 0, 0);
+
+            var imgData = ctx.getImageData(cutCoor.sx, cutCoor.sy, cutCoor.ex, cutCoor.ey);
+            if (quadrant % 2 == 0) {
+                canvas.width = imgW;
+                canvas.height = imgH;
+            } else {
+                canvas.width = imgH;
+                canvas.height = imgW;
+            }
+            ctx.putImageData(imgData, 0, 0);
+            callback(canvas.toDataURL())
+        };
     }
 
 </script>

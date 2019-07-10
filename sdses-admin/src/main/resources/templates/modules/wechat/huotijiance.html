@@ -5,6 +5,9 @@
     <title>视频活体检测</title>
     <meta name="author" content="Ye">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <link rel="stylesheet" href="${request.contextPath}/statics/css/weui.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <style>
@@ -22,6 +25,10 @@
             width: 70%;
             margin: auto;
             padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 16px;
+            border-color: black;
+            text-align: center;
         }
         img{
             width: 100%;
@@ -30,6 +37,7 @@
             padding: 20px;
             width: 70%;
             margin: auto;
+            color: #1b74a8;
         }
         .button{
             margin: auto;
@@ -51,7 +59,7 @@
             <div>●请使用前置摄像头</div>
         </div>
         <div class="button">
-            <a href="javascript:$('#dialog').fadeIn(100);" class="weui-btn weui-btn_block weui-btn_primary" id="btn">准备好了，开始录制</a>
+            <a href="javascript:$('#fileUpload').val('');$('#dialog').fadeIn(100);" class="weui-btn weui-btn_block weui-btn_primary" id="btn">准备好了，开始录制</a>
         </div>
         <input type="file" accept="video/*" capture="camera" id="fileUpload" style="position:absolute; clip:rect(0 0 0 0);"  onchange="uploadVideo(this)">
         <div id="toast" style="display: none;">
@@ -140,6 +148,8 @@
 
     //上传
     function uploadVideo(obj) {
+        if(fileUpload.files[0]==undefined)return;
+
         var $loadingToast = $('#loadingToast');
         var $toast = $('#toast');
         if ($loadingToast.css('display') != 'none') return;

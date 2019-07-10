@@ -32,6 +32,9 @@
 
     window.onload=function (){
         reason.innerHTML = decodeURI(getQueryVariable("reason"));
+        if (reason.innerHTML == "认证不通过(5XXX)") {
+            reason.innerHTML = "身份证信息输入有误";
+        }
     }
 
     function getQueryVariable(variable)
