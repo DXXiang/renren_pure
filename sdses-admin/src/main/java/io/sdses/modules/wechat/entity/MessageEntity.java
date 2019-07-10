@@ -48,15 +48,6 @@ public class MessageEntity implements Serializable {
 	 */
 	private String pushResults;
 
-	private List<String> openids;
-
-	public List<String> getOpenids() {
-		return openids;
-	}
-
-	public void setOpenids(List<String> openids) {
-		this.openids = openids;
-	}
 
 	/**
 	 * 设置：

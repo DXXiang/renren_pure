@@ -2,31 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8"></meta>
-    <style>
-        .container{
-            width: 100%;
-            height: 100%;
-            display: flex;
-            border: 1px solid lightblue;
-        }
 
-        body {
-            margin: 0;
-            background: lemonchiffon;
-        }
-        .check {
-            flex: 1;
-            border: 1px solid grey;
-
-        }
-
-        .textRange {
-            height:50% ;
-            width:80%;/*自动适应父布局宽度*/
-            overflow:auto;
-            word-break:break-all;}
-
-    </style>
 
     <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"></script>
 
@@ -34,19 +10,30 @@
     <script>
     </script>
     <script src="${request.contextPath}/statics/js/modules/wechat/messagepush.js?_${.now?long}"></script>
-
+    <link rel="stylesheet" href="${request.contextPath}/statics/css/messagepush.css?_${.now?long}">
 
 
 
 </head>
 
 <body>
-<div class="container">
+<div class="wrapper ">
+    <div class="header">
+
+
+                    <button onclick="javascript:but1()" id="b1">返回</button>
+
+                    <button onclick="javascript:but2()"id="b2">推送</button>
+
+
+        </div>
+
+    </div>
 
 
 
-    <div id="c-box" name="c-box" class="check">
-        <h2>第一列</h2>
+    <div  id="c-box" name="c-box" class="left" >
+
         <input type="button" value="全选" onclick="setAll()" />
         <input type="button" value="全不选" onclick="setNo()" />
         <input type="button" value="反选" onclick="setOthers()" />
@@ -58,21 +45,15 @@
 
 
 
-    <div class="check">
-        <h2>第二列</h2>
+    <div class="cont">
+
         <textarea class="textRange" rows=30   name=s1   cols=9  id="text" onpropertychange= "this.style.posHeight=this.scrollHeight ">
         </textarea>
     </div>
 
-    <div class="check">
-        <h2>第三列</h2>
-        <button onclick="javascript:but1()" id="b1">返回</button>
-        <br>
-        <button onclick="javascript:but2()"id="b2">推送</button>
-
     </div>
 
-</div>
+
 </body>
 
 </html>

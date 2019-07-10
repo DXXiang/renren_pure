@@ -1,0 +1,45 @@
+@charset "utf-8";
+.wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    border: 1px solid lightblue;
+}
+.header{
+     position: fixed;
+     left: 0%;
+     top:0%;
+     width: 100%;
+     height: 60%;
+
+
+
+ }
+.left{
+    position: fixed;
+    left: 0%;
+    top:60%;
+    width: 100%;
+    height: 40%;
+
+
+}
+.cont{
+    position: fixed;
+    left: 50%;
+    top:60%;
+    width: 100%;
+    height: 50%;
+
+
+}
+.textRange {
+    height:60% ;
+    width:25%;/*自动适应父布局宽度*/
+    overflow:auto;
+    word-break:break-all;
+}
+body {
+    margin: 0;
+    background: lemonchiffon;
+    }

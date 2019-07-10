@@ -3,13 +3,16 @@ $(function () {
         url: baseURL + 'wechat/message/list',
         datatype: "json",
         colModel: [			
-			{ label: 'messNum', name: 'messNum', index: 'mess_num', width: 50, key: true },
-			{ label: '', name: 'messCont', index: 'mess_cont', width: 80 }, 			
-			{ label: '', name: 'userName', index: 'user_name', width: 80 }, 			
+			{ label: '', name: 'messNum', index: 'mess_num', width: 50, key: true },
+			{ label: '消息内容', name: 'messCont', index: 'mess_cont', width: 80 },
+
 			{ label: '', name: 'openid', index: 'openid', width: 80 }, 			
-			{ label: '', name: 'deliveryTime', index: 'delivery_time', width: 80 }, 			
-			{ label: '', name: 'sendResults', index: 'send_results', width: 80 }, 			
-			{ label: '', name: 'pushResults', index: 'push_results', width: 80 }			
+			{ label: '发送时间', name: 'deliveryTime', index: 'delivery_time', width: 80 },
+			{ label: '发送结果', name: 'pushResults', index: 'push_results', width: 80,
+                formatter : function(cellValue, options, rowObject) {
+                    return cellValue === '0' ? '成功' : '不成功';
+                }
+            }
         ],
 		viewrecords: true,
         height: 385,

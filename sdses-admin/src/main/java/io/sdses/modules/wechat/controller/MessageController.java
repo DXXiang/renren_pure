@@ -38,14 +38,7 @@ public class MessageController {
     private UserOpenidService userOpenidService;
 
 
-//        @ResponseBody
-//    @RequestMapping(value = "/insertMessages" ,method = RequestMethod.POST)
-//    public int sendMessages(@RequestParam(required = false) Map<String, Object> params) {
-//        List<String> openids = (List<String>) params.get("openids");
-//        System.err.println(params);
-//        String content = (String) params.get("content");
-//        return messageService.sendMessages(openids , content);
-//    }
+
 @RequestMapping("/sendMessages")
 @ResponseBody
 public Object getArrayAndStringParam(@RequestBody MessageParams messageParams) {
