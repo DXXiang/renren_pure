@@ -10,7 +10,7 @@
      left: 0%;
      top:0%;
      width: 100%;
-     height: 60%;
+     height: 50%;
 
 
 
@@ -18,23 +18,31 @@
 .left{
     position: fixed;
     left: 0%;
-    top:60%;
-    width: 100%;
-    height: 40%;
+    top:50%;
+    width: 40%;
+    height: 50%;
 
 
 }
 .cont{
     position: fixed;
-    left: 50%;
-    top:60%;
-    width: 100%;
+    left: 40%;
+    top:50%;
+    width: 70%;
     height: 50%;
 
 
 }
+.butt{
+    position: fixed;
+    left: 75%;
+    top:50%;
+    width: 25%;
+    height: 50%;
+
+}
 .textRange {
-    height:60% ;
+    height:50% ;
     width:25%;/*自动适应父布局宽度*/
     overflow:auto;
     word-break:break-all;

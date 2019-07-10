@@ -16,7 +16,7 @@ function but2() {
         alert("plece choose one!!");     }
     else {
 
-    }
+
         objectParams.messCont=mess_cont;
         objectParams.openids=openids;
 
@@ -37,51 +37,56 @@ function but2() {
 
 
 
-
+    }
 
 }
+function but3(){
+   $('#c-box').toggle();
+    $('#c-cont').toggle();
+    $('#c-butt').toggle();
 
+}
 $(function(){
-    // $("#jqGrid").jqGrid({
-    //     url: baseURL + 'wechat/message/list',
-    //     datatype: "json",
-    //     colModel: [
-    //         { label: '', name: 'messNum', index: 'mess_num', width: 50, key: true },
-    //         { label: '消息内容', name: 'messCont', index: 'mess_cont', width: 80 },
-    //
-    //         { label: '', name: 'openid', index: 'openid', width: 80 },
-    //         { label: '', name: 'deliveryTime', index: 'delivery_time', width: 80 },
-    //         { label: '', name: 'pushResults', index: 'push_results', width: 80,
-    //             formatter : function(cellValue, options, rowObject) {
-    //                 return cellValue === '0' ? '成功' : '不成功';
-    //             }
-    //         }
-    //     ],
-    //     viewrecords: true,
-    //     height: 300,
-    //     rowNum: 5,
-    //     rowList : [10,30,50],
-    //     rownumbers: true,
-    //     rownumWidth: 25,
-    //     autowidth:true,
-    //     multiselect: true,
-    //     pager: "#jqGridPager",
-    //     jsonReader : {
-    //         root: "page.list",
-    //         page: "page.currPage",
-    //         total: "page.totalPage",
-    //         records: "page.totalCount"
-    //     },
-    //     prmNames : {
-    //         page:"page",
-    //         rows:"limit",
-    //         order: "order"
-    //     },
-    //     gridComplete:function(){
-    //         //隐藏grid底部滚动条
-    //         $("#jqGrid").closest(".ui-jqgrid-bdiv").css({ "overflow-x" : "hidden" });
-    //     }
-    // });
+    $("#jqGrid").jqGrid({
+        url: baseURL + 'wechat/message/list',
+        datatype: "json",
+        colModel: [
+            { label: '', name: 'messNum', index: 'mess_num', width: 50, key: true },
+            { label: '消息内容', name: 'messCont', index: 'mess_cont', width: 80 },
+
+            { label: '', name: 'openid', index: 'openid', width: 80 },
+            { label: '', name: 'deliveryTime', index: 'delivery_time', width: 80 },
+            { label: '', name: 'pushResults', index: 'push_results', width: 80,
+                formatter : function(cellValue, options, rowObject) {
+                    return cellValue === '0' ? '成功' : '不成功';
+                }
+            }
+        ],
+        viewrecords: true,
+        height: 150,
+        rowNum: 5,
+        rowList : [5,30,50],
+        rownumbers: true,
+        rownumWidth: 20,
+        autowidth:true,
+        multiselect: true,
+        pager: "#jqGridPager",
+        jsonReader : {
+            root: "page.list",
+            page: "page.currPage",
+            total: "page.totalPage",
+            records: "page.totalCount"
+        },
+        prmNames : {
+            page:"page",
+            rows:"limit",
+            order: "order"
+        },
+        gridComplete:function(){
+            //隐藏grid底部滚动条
+            $("#jqGrid").closest(".ui-jqgrid-bdiv").css({ "overflow-x" : "hidden" });
+        }
+    });
     $.ajax({
         type:"get",
         async : false,
@@ -141,3 +146,53 @@ function setAllNo(){
         }
     }
 }
+var vm = new Vue({
+    el:'#rrapp',
+    data:{
+        showList: true,
+        title: null,
+        message: {}
+    },
+    methods: {
+        query: function () {
+            vm.reload();
+        },
+
+        del: function (event) {
+            var messNums = getSelectedRows();
+            if(messNums == null){
+                return ;
+            }
+
+            confirm('确定要删除选中的记录？', function(){
+                $.ajax({
+                    type: "POST",
+                    url: baseURL + "wechat/message/delete",
+                    contentType: "application/json",
+                    data: JSON.stringify(messNums),
+                    success: function(r){
+                        if(r.code == 0){
+                            alert('操作成功', function(index){
+                                $("#jqGrid").trigger("reloadGrid");
+                            });
+                        }else{
+                            alert(r.msg);
+                        }
+                    }
+                });
+            });
+        },
+        getInfo: function(messNum){
+            $.get(baseURL + "wechat/message/info/"+messNum, function(r){
+                vm.message = r.message;
+            });
+        },
+        reload: function (event) {
+            vm.showList = true;
+            var page = $("#jqGrid").jqGrid('getGridParam','page');
+            $("#jqGrid").jqGrid('setGridParam',{
+                page:page
+            }).trigger("reloadGrid");
+        }
+    }
+});

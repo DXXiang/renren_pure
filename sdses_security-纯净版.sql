@@ -446,6 +446,7 @@ INSERT INTO `sys_menu` VALUES (40, 36, '删除', NULL, 'sys:dict:delete', 2, NUL
 INSERT INTO `sys_menu` VALUES (42, 0, '微信公众号管理', NULL, NULL, 0, 'fa fa-weixin', 5);
 INSERT INTO `sys_menu` VALUES (5, 0, '认证数据管理', NULL, NULL, 0, 'fa fa-id-badge', 1);
 INSERT INTO `sys_menu` VALUES (130, 42, '推送日志', NULL, NULL, 0, 'fa fa-id-badge', 10);
+INSERT INTO `sys_menu` VALUES (70, 42, '消息管理', NULL, NULL, 0, 'fa fa-id-badge', 2);
 -- ----------------------------
 -- Table structure for sys_oss
 -- ----------------------------
