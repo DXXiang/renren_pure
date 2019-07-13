@@ -54,6 +54,7 @@ public class WechatWebPageCpntroller {
         String base64 = request.getParameter("photo").split(",")[1];
         String type= request.getParameter("type");
         JSONObject send = JSONObject.fromObject("{photo:'"+base64+"',type:'"+type+"'}");
+        System.out.println("接收："+send.toString());
         String url = "http://47.93.1.226:8081/sdses-api/api/ocr";
         JSONObject jsonObject = HttpUtils.doPost(url,send);
         System.out.println(jsonObject.toString());

@@ -16,7 +16,6 @@
 
 
 
-
     <insert id="insertMessages"  parameterType="java.util.List">
         insert  into  message (
            mess_cont,

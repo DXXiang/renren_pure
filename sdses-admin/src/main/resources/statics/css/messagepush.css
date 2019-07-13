@@ -51,3 +51,10 @@ body {
     margin: 0;
     background: lemonchiffon;
     }
+.query{
+    position: fixed;
+    left: 0%;
+    top:50%;
+    width: 40%;
+    height: 50%;
+}

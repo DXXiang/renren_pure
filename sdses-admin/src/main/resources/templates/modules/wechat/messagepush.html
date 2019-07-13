@@ -26,8 +26,8 @@
                 <#if shiro.hasPermission("wechat:message:delete")>
                  <button  @click="del">删除</button>
                  </#if>
-                <button onclick="javascript:but1()" id="b1">返回</button>
 
+                <button onclick="javascript:but4()" id="b4">搜索</button>
             </div >
             <table id="jqGrid"></table>
             <div id="jqGridPager"></div>
@@ -49,12 +49,14 @@
     <div  id="c-box"  class="left" style="display:none">
         <h4> 用户openid:</h4>
         <br/>
-        <input type="button" value="全选" onclick="setAll()" />
-        <input type="button" value="全不选" onclick="setNo()" />
-        <input type="button" value="反选" onclick="setOthers()" />
+
         <div id="table">
 
         </div>
+        <br>
+        <input type="button" value="全选" onclick="setAll()" />
+        <input type="button" value="全不选" onclick="setNo()" />
+        <input type="button" value="反选" onclick="setOthers()" />
 
     </div>
 
@@ -73,6 +75,44 @@
         <button onclick="javascript:but2()"id="b2">推送</button>
     </div>
 
+<div id="c-query" class="query" style="display:none">
+<div v-show="!showList" class="panel panel-default">
+
+    <form class="form-horizontal">
+        <div class="form-group">
+            <div class="col-sm-2 control-label">消息内容</div>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" v-model="message.messCont" placeholder=""/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-2 control-label">openid</div>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" v-model="message.openid" placeholder=""/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label">推送时间</div>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" v-model="message.deliveryTime" placeholder=""/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-2 control-label">推送结果</div>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" v-model="message.pushResults" placeholder=""/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-2 control-label"></div>
+            <a class="btn btn-primary" @click="query"><i class="fa fa-search"></i>&nbsp;搜索</a>
+            <a class="btn btn-primary" @click="resetSearch"><i class="fa fa-reply"></i>&nbsp;重置</a>
+        </div>
+    </form>
+   </div>
+</div>
 
 </body>
 

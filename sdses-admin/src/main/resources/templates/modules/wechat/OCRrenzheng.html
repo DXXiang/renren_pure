@@ -170,7 +170,7 @@
                             finish.fadeOut(100);
                         },1000);
                     }else {
-                        zmmsg.innerHTML=data.msg;
+                        zmmsg.innerHTML=data.msg +" <a href=javascript:zmupload();>重试</a>";
                         if(data.msg=="请传正面照")zmmsg.innerHTML="请选择有效的人像面照";
                         loading.fadeOut(100);
                     }
@@ -178,7 +178,7 @@
                 error: function (data) {
                     console.log(data)
                     loading.fadeOut(100);
-                    zmmsg.innerHTML="上传失败请重试"
+                    zmmsg.innerHTML="上传失败请<a href=javascript:zmupload();>重试</a>"
                 }
             })
         },200)
@@ -215,7 +215,7 @@
                             finish.fadeOut(100);
                         },1000);
                     }else {
-                        bmmsg.innerHTML=data.msg;
+                        bmmsg.innerHTML=data.msg +" <a href=javascript:bmupload();>重试</a>";
                         if(data.msg=="请传背面照")bmmsg.innerHTML="请选择有效的国徽面照";
                         loading.fadeOut(100);
                     }
@@ -223,7 +223,7 @@
                 error: function (data) {
                     console.log(data)
                     loading.fadeOut(100);
-                    bmmsg.innerHTML="上传失败请重试"
+                    bmmsg.innerHTML="上传失败请<a href=javascript:bmupload();>重试</a>"
                 }
             })
         },200)

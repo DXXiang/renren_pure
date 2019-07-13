@@ -41,9 +41,31 @@ function but2() {
 
 }
 function but3(){
-   $('#c-box').toggle();
-    $('#c-cont').toggle();
-    $('#c-butt').toggle();
+    if($('#c-query').is(':hidden')){
+        $('#c-box').toggle();
+        $('#c-cont').toggle();
+        $('#c-butt').toggle();
+
+
+    }else{
+
+        alert('正在搜索')
+
+    }
+
+
+}
+function but4(){
+
+    if($('#c-box').is(':hidden')){
+        $('#c-query').toggle();
+
+
+    }else{
+
+        alert('正在新增')
+
+    }
 
 }
 $(function(){
@@ -55,8 +77,8 @@ $(function(){
             { label: '消息内容', name: 'messCont', index: 'mess_cont', width: 80 },
 
             { label: '', name: 'openid', index: 'openid', width: 80 },
-            { label: '', name: 'deliveryTime', index: 'delivery_time', width: 80 },
-            { label: '', name: 'pushResults', index: 'push_results', width: 80,
+            { label: '推送时间', name: 'deliveryTime', index: 'delivery_time', width: 80 },
+            { label: '推送结果', name: 'pushResults', index: 'push_results', width: 80,
                 formatter : function(cellValue, options, rowObject) {
                     return cellValue === '0' ? '成功' : '不成功';
                 }
@@ -182,11 +204,11 @@ var vm = new Vue({
                 });
             });
         },
-        getInfo: function(messNum){
-            $.get(baseURL + "wechat/message/info/"+messNum, function(r){
-                vm.message = r.message;
-            });
-        },
+        // getInfo: function(messNum){
+        //     $.get(baseURL + "wechat/message/info/"+messNum, function(r){
+        //         vm.message = r.message;
+        //     });
+        // },
         reload: function (event) {
             vm.showList = true;
             var page = $("#jqGrid").jqGrid('getGridParam','page');
